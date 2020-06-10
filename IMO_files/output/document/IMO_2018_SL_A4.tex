@@ -1,0 +1,2874 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{IMO{\isacharunderscore}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharunderscore}SL{\isacharunderscore}A{\isadigit{4}}}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{IMO 2018 SL - A4%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ IMO{\isacharunderscore}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharunderscore}SL{\isacharunderscore}A{\isadigit{4}}\isanewline
+\isakeyword{imports}\ Complex{\isacharunderscore}Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ is{\isacharunderscore}Max\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharprime}a{\isacharcolon}{\isacharcolon}linorder\ set\ {\isasymRightarrow}\ {\isacharprime}a\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+\ \ {\isachardoublequoteopen}is{\isacharunderscore}Max\ A\ x\ {\isasymlongleftrightarrow}\ x\ {\isasymin}\ A\ {\isasymand}\ {\isacharparenleft}{\isasymforall}\ x{\isacharprime}\ {\isasymin}\ A{\isachardot}\ x{\isacharprime}\ {\isasymle}\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ sum{\isacharunderscore}list{\isacharunderscore}cong{\isacharcolon}\isanewline
+\ \ \isakeyword{assumes}\ {\isachardoublequoteopen}{\isasymAnd}\ x{\isachardot}\ x\ {\isasymin}\ set\ l\ {\isasymLongrightarrow}\ f\ x\ {\isacharequal}\ g\ x{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymSum}\ x\ {\isasymleftarrow}\ l{\isachardot}\ f\ x{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymSum}\ x\ {\isasymleftarrow}\ l{\isachardot}\ g\ x{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ assms\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ map{\isacharunderscore}eq{\isacharunderscore}conv{\isacharparenright}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ Max{\isacharunderscore}ge{\isacharunderscore}Min{\isacharcolon}\isanewline
+\ \ \isakeyword{assumes}\ {\isachardoublequoteopen}finite\ A{\isachardoublequoteclose}\ {\isachardoublequoteopen}A\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \isakeyword{shows}\ {\isachardoublequoteopen}Max\ A\ {\isasymge}\ Min\ A{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ assms\isanewline
+\ \ \isacommand{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{theorem}\isamarkupfalse%
+\ IMO{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}SL{\isacharunderscore}A{\isadigit{4}}{\isacharcolon}\isanewline
+\ \ \isakeyword{shows}\isanewline
+\ \ {\isachardoublequoteopen}is{\isacharunderscore}Max\ {\isacharbraceleft}a\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}\ {\isacharminus}\ a\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}\ {\isacharbar}\ a{\isacharcolon}{\isacharcolon}nat\ {\isasymRightarrow}\ real{\isachardot}\ a\ {\isadigit{0}}\ {\isacharequal}\ {\isadigit{0}}\ {\isasymand}\ a\ {\isadigit{1}}\ {\isacharequal}\ {\isadigit{1}}\ {\isasymand}\ {\isacharparenleft}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ {\isasymexists}\ k{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ k\ {\isasymand}\ k\ {\isasymle}\ n\ {\isasymand}\ a\ n\ {\isacharequal}\ {\isacharparenleft}{\isasymSum}\ i\ {\isasymleftarrow}\ {\isacharbrackleft}n{\isacharminus}k{\isachardot}{\isachardot}{\isacharless}n{\isacharbrackright}{\isachardot}\ a\ i{\isacharparenright}\ {\isacharslash}\ real\ k{\isacharparenright}{\isacharbraceright}\isanewline
+\ \ \ {\isacharparenleft}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{6}}\ {\isacharslash}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharcircum}{\isadigit{2}}{\isacharparenright}{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{is}\ {\isachardoublequoteopen}is{\isacharunderscore}Max\ {\isacharbraceleft}{\isacharquery}f\ a\ {\isacharbar}\ a{\isachardot}\ {\isacharquery}P\ a{\isacharbraceright}\ {\isacharquery}m{\isachardoublequoteclose}{\isacharparenright}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{unfolding}\isamarkupfalse%
+\ is{\isacharunderscore}Max{\isacharunderscore}def\isanewline
+\isacommand{proof}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}m\ {\isasymin}\ {\isacharbraceleft}{\isacharquery}f\ a\ {\isacharbar}\ a{\isachardot}\ {\isacharquery}P\ a{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}a\ {\isacharequal}\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymlambda}\ n{\isachardot}\ if\ n\ {\isacharequal}\ {\isadigit{0}}\ then\ {\isadigit{0}}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else\ if\ n\ {\isacharless}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}\ then\ {\isadigit{1}}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else\ if\ n\ {\isacharequal}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}\ then\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharcircum}{\isadigit{2}}{\isacharparenright}\ {\isacharcolon}{\isacharcolon}\ {\isacharparenleft}nat\ {\isasymRightarrow}\ real{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}P\ {\isacharquery}a{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}a\ {\isadigit{0}}\ {\isacharequal}\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}a\ {\isadigit{1}}\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ n{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}\ {\isasymle}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isanewline
+\ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymexists}\ k{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ k\ {\isasymand}\ k\ {\isasymle}\ n\ {\isasymand}\ {\isacharquery}a\ n\ {\isacharequal}\ {\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}n\ {\isacharminus}\ k{\isachardot}{\isachardot}{\isacharless}\ n{\isacharbrackright}{\isachardot}\ {\isacharquery}a\ i{\isacharparenright}\ {\isacharslash}\ real\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}n\ {\isacharless}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbrackleft}n{\isacharminus}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}n{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}n{\isacharminus}{\isadigit{1}}{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ upt{\isacharunderscore}rec{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}n\ {\isacharless}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isadigit{1}}\ \isakeyword{in}\ exI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}n\ {\isacharequal}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbrackleft}{\isadigit{0}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}{\isadigit{0}}{\isacharbrackright}\ {\isacharat}\ {\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ One{\isacharunderscore}nat{\isacharunderscore}def\ less{\isacharunderscore}numeral{\isacharunderscore}extra{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ numeral{\isacharunderscore}eq{\isacharunderscore}Suc\ plus{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}eq{\isacharunderscore}Suc\ upt{\isacharunderscore}add{\isacharunderscore}eq{\isacharunderscore}append\ upt{\isacharunderscore}rec\ zero{\isacharunderscore}le{\isacharunderscore}one\ zero{\isacharunderscore}less{\isacharunderscore}one{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{0}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardot}\ {\isacharquery}a\ i{\isacharparenright}\ {\isacharequal}\ {\isacharquery}a\ {\isadigit{0}}\ {\isacharplus}\ {\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardot}\ {\isacharquery}a\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{0}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardot}\ {\isacharquery}a\ i{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{0}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{1}}{\isacharbrackright}{\isachardot}\ {\isadigit{0}}{\isacharparenright}\ {\isacharplus}\ {\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardot}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ sum{\isacharunderscore}list{\isacharunderscore}cong{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardoublequoteclose}\ {\isacharquery}a\ {\isachardoublequoteopen}{\isasymlambda}\ k{\isachardot}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{0}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardot}\ {\isacharquery}a\ i{\isacharparenright}\ {\isacharequal}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{6}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ sum{\isacharunderscore}list{\isacharunderscore}triv{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}n\ {\isacharequal}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}n\ {\isacharequal}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}\ {\isacharat}\ {\isacharbrackleft}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ one{\isacharunderscore}le{\isacharunderscore}numeral\ one{\isacharunderscore}plus{\isacharunderscore}numeral\ plus{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}eq{\isacharunderscore}Suc\ semiring{\isacharunderscore}norm{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ semiring{\isacharunderscore}norm{\isacharparenleft}{\isadigit{5}}{\isacharparenright}\ upt{\isacharunderscore}Suc{\isacharunderscore}append{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}{\isachardot}\ {\isacharquery}a\ i{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardot}\ {\isacharquery}a\ i{\isacharparenright}\ {\isacharplus}\ {\isacharquery}a\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ sum{\isacharunderscore}list{\isacharunderscore}append{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharbrackleft}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymSum}i{\isasymleftarrow}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}{\isachardot}\ {\isacharquery}a\ i{\isacharparenright}\ {\isacharequal}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{6}}\ {\isacharplus}\ {\isacharparenleft}{\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ sum{\isacharunderscore}list{\isacharunderscore}cong{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbrackright}{\isachardoublequoteclose}\ {\isacharquery}a\ {\isachardoublequoteopen}{\isasymlambda}\ k{\isachardot}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ sum{\isacharunderscore}list{\isacharunderscore}triv{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}n\ {\isacharequal}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbrackleft}n{\isacharminus}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}n{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}n{\isacharminus}{\isadigit{1}}{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ upt{\isacharunderscore}rec{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymnot}\ n\ {\isacharless}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}n\ {\isasymnoteq}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}n\ {\isasymnoteq}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isadigit{1}}\ \isakeyword{in}\ exI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{moreover}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}f\ {\isacharquery}a\ {\isacharequal}\ {\isacharquery}m{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{ultimately}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}smt\ mem{\isacharunderscore}Collect{\isacharunderscore}eq{\isacharparenright}\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ x{\isacharprime}\ {\isasymin}\ {\isacharbraceleft}{\isacharquery}f\ a\ {\isacharbar}\ a{\isachardot}\ {\isacharquery}P\ a{\isacharbraceright}{\isachardot}\ x{\isacharprime}\ {\isasymle}\ {\isacharquery}m{\isachardoublequoteclose}\isanewline
+\ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ a\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}nat\ {\isasymRightarrow}\ real{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}S\ {\isacharequal}\ {\isachardoublequoteopen}{\isasymlambda}\ n\ k{\isachardot}\ {\isacharparenleft}{\isasymSum}\ i\ {\isasymleftarrow}\ {\isacharbrackleft}n{\isacharminus}k{\isachardot}{\isachardot}{\isacharless}n{\isacharbrackright}{\isachardot}\ a\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ {\isadigit{0}}\ {\isacharequal}\ {\isadigit{0}}{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ {\isadigit{1}}\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}\ \isakeyword{and}\ {\isacharasterisk}{\isacharcolon}\ {\isachardoublequoteopen}\ {\isasymforall}n{\isasymge}{\isadigit{2}}{\isachardot}\ {\isasymexists}k{\isasymge}{\isadigit{1}}{\isachardot}\ k\ {\isasymle}\ n\ {\isasymand}\ a\ n\ {\isacharequal}\ {\isacharquery}S\ n\ k\ {\isacharslash}\ real\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}A\ {\isacharequal}\ {\isachardoublequoteopen}{\isasymlambda}\ n{\isachardot}\ {\isacharbraceleft}{\isacharquery}S\ n\ k\ {\isacharslash}\ k\ {\isacharbar}\ k{\isachardot}\ k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}n{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}max\ {\isacharequal}\ {\isachardoublequoteopen}{\isasymlambda}\ n{\isachardot}\ Max\ {\isacharparenleft}{\isacharquery}A\ n{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}min\ {\isacharequal}\ {\isachardoublequoteopen}{\isasymlambda}\ n{\isachardot}\ Min\ {\isacharparenleft}{\isacharquery}A\ n{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}{\isasymDelta}\ {\isacharequal}\ {\isachardoublequoteopen}{\isasymlambda}\ n{\isachardot}\ {\isacharquery}max\ n\ {\isacharminus}\ {\isacharquery}min\ n{\isachardoublequoteclose}\isanewline
+\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ A{\isacharcolon}\ {\isachardoublequoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{1}}{\isachardot}\ finite\ {\isacharparenleft}{\isacharquery}A\ n{\isacharparenright}\ {\isasymand}\ {\isacharquery}A\ n\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ {\isacharquery}{\isasymDelta}\ n\ {\isasymge}\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ n{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}\ {\isasymle}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}max\ n\ {\isasymge}\ {\isacharquery}min\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Max{\isacharunderscore}ge{\isacharunderscore}Min{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharquery}A\ n{\isachardoublequoteclose}{\isacharbrackright}\ A{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ n{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}{\isasymDelta}\ n\ {\isasymge}\ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ {\isacharquery}min\ n\ {\isasymle}\ a\ n\ {\isasymand}\ a\ n\ {\isasymle}\ {\isacharquery}max\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ n{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}n\ {\isasymge}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ n\ {\isasymin}\ {\isacharquery}A\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharasterisk}\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}min\ n\ {\isasymle}\ a\ n{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ n\ {\isasymle}\ {\isacharquery}max\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ A{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ OF\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}{\isacharbrackright}\ \isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Min{\isacharunderscore}le{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharquery}A\ n{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ n{\isachardoublequoteclose}{\isacharbrackright}\ Max{\isacharunderscore}ge{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharquery}A\ n{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ n{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ blast{\isacharplus}\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymin}\ {\isacharquery}A\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ n{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbrackleft}n{\isacharminus}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}n{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}n{\isacharminus}{\isadigit{1}}{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ upt{\isacharunderscore}rec\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharquery}S\ n\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymexists}\ k{\isachardot}\ a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharquery}S\ n\ k\ {\isacharslash}\ k\ {\isasymand}\ k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}n{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ {\isacharquery}min\ n\ {\isasymle}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymand}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharquery}max\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ n{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}n\ {\isasymge}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymin}\ {\isacharquery}A\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymin}\ {\isacharquery}A\ n{\isacharbackquoteclose}\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}min\ n\ {\isasymle}\ a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharquery}max\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ A{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ OF\ {\isacharbackquoteopen}n\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}{\isacharbrackright}\ \isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Min{\isacharunderscore}le{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharquery}A\ n{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\ Max{\isacharunderscore}ge{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharquery}A\ n{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ blast{\isacharplus}\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}f\ a\ {\isasymle}\ {\isacharquery}{\isasymDelta}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ {\isacharquery}min\ n\ {\isasymle}\ a\ n\ {\isasymand}\ a\ n\ {\isasymle}\ {\isacharquery}max\ n{\isacharbackquoteclose}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ {\isacharquery}min\ n\ {\isasymle}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymand}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharquery}max\ n{\isacharbackquoteclose}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ Claim{\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymforall}\ n\ {\isachargreater}\ {\isadigit{2}}{\isachardot}\ {\isacharquery}{\isasymDelta}\ n\ {\isasymle}\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharslash}n\ {\isacharasterisk}\ {\isacharquery}{\isasymDelta}\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ n{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}\ {\isacharless}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{1}}\ {\isasymle}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{obtain}\isamarkupfalse%
+\ k\ \isakeyword{where}\ {\isachardoublequoteopen}{\isacharquery}max\ n\ {\isacharequal}\ {\isacharquery}S\ n\ k\ {\isacharslash}\ k{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isadigit{1}}\ {\isasymle}\ k{\isachardoublequoteclose}\ {\isachardoublequoteopen}k\ {\isasymle}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ A{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ OF\ {\isacharbackquoteopen}{\isadigit{1}}\ {\isasymle}\ n{\isacharbackquoteclose}{\isacharbrackright}\ Max{\isacharunderscore}in{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharquery}A\ n{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \ \ \isacommand{obtain}\isamarkupfalse%
+\ l\ \isakeyword{where}\ {\isachardoublequoteopen}{\isacharquery}min\ n\ {\isacharequal}\ {\isacharquery}S\ n\ l\ {\isacharslash}\ l{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isadigit{1}}\ {\isasymle}\ l{\isachardoublequoteclose}\ {\isachardoublequoteopen}l\ {\isasymle}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ A{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ OF\ {\isacharbackquoteopen}{\isadigit{1}}\ {\isasymle}\ n{\isacharbackquoteclose}{\isacharbrackright}\ Min{\isacharunderscore}in{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharquery}A\ n{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbrackleft}n\ {\isacharminus}\ k{\isachardot}{\isachardot}{\isacharless}n{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}n\ {\isacharminus}\ {\isadigit{1}}\ {\isacharminus}\ {\isacharparenleft}k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardot}{\isachardot}{\isacharless}n\ {\isacharminus}\ {\isadigit{1}}{\isacharbrackright}\ {\isacharat}\ {\isacharbrackleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ \ {\isacharbackquoteopen}{\isadigit{1}}\ {\isasymle}\ k{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isasymle}\ n{\isacharbackquoteclose}\ {\isacartoucheopen}{\isadigit{1}}\ {\isasymle}\ n{\isacartoucheclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ Nat{\isachardot}diff{\isacharunderscore}diff{\isacharunderscore}eq\ diff{\isacharunderscore}le{\isacharunderscore}self\ le{\isacharunderscore}add{\isacharunderscore}diff{\isacharunderscore}inverse\ plus{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}eq{\isacharunderscore}Suc\ upt{\isacharunderscore}Suc{\isacharunderscore}append{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ n\ k\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}k{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharplus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbrackleft}n\ {\isacharminus}\ l{\isachardot}{\isachardot}{\isacharless}n{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}n\ {\isacharminus}\ {\isadigit{1}}\ {\isacharminus}\ {\isacharparenleft}l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardot}{\isachardot}{\isacharless}n\ {\isacharminus}\ {\isadigit{1}}{\isacharbrackright}\ {\isacharat}\ {\isacharbrackleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{1}}\ {\isasymle}\ l{\isacharbackquoteclose}\ {\isacharbackquoteopen}l\ {\isasymle}\ n{\isacharbackquoteclose}\ {\isacartoucheopen}{\isadigit{1}}\ {\isasymle}\ n{\isacartoucheclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ Nat{\isachardot}diff{\isacharunderscore}diff{\isacharunderscore}eq\ diff{\isacharunderscore}le{\isacharunderscore}self\ le{\isacharunderscore}add{\isacharunderscore}diff{\isacharunderscore}inverse\ plus{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}eq{\isacharunderscore}Suc\ upt{\isacharunderscore}Suc{\isacharunderscore}append{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ n\ l\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}l{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharplus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}real\ {\isacharparenleft}k\ {\isacharminus}\ Suc\ {\isadigit{0}}{\isacharparenright}\ {\isacharequal}\ real\ k\ {\isacharminus}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}k{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharquery}max\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}k\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}n{\isacharminus}{\isadigit{1}}\ {\isasymge}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}n\ {\isachargreater}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}k{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharquery}max\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}rule\ Max{\isacharunderscore}ge{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}finite\ {\isacharparenleft}{\isacharquery}A\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ A{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ OF\ {\isacharbackquoteopen}n{\isacharminus}{\isadigit{1}}\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}k{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymnoteq}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isasymle}\ n{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}k{\isacharminus}{\isadigit{1}}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isasymnoteq}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}l{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymge}\ {\isacharparenleft}l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharquery}min\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}l\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}n{\isacharminus}{\isadigit{1}}\ {\isasymge}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}n\ {\isachargreater}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}l{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymge}\ {\isacharquery}min\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}rule\ Min{\isacharunderscore}le{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}finite\ {\isacharparenleft}{\isacharquery}A\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ A{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ OF\ {\isacharbackquoteopen}n{\isacharminus}{\isadigit{1}}\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}l{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}l\ {\isasymnoteq}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}l\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}l\ {\isasymle}\ n{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\ {\isacharparenleft}rule{\isacharunderscore}tac\ x{\isacharequal}{\isachardoublequoteopen}l{\isacharminus}{\isadigit{1}}{\isachardoublequoteclose}\ \isakeyword{in}\ exI{\isacharcomma}\ auto{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}l\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}l\ {\isasymnoteq}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}min\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharquery}max\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ n\ {\isasymge}\ {\isadigit{2}}{\isachardot}\ {\isacharquery}min\ n\ {\isasymle}\ a\ n\ {\isasymand}\ a\ n\ {\isasymle}\ {\isacharquery}max\ n{\isacharbackquoteclose}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ {\isachardoublequoteopen}n{\isacharminus}{\isadigit{1}}{\isachardoublequoteclose}{\isacharbrackright}\ {\isacharbackquoteopen}n\ {\isachargreater}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp{\isacharunderscore}all\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{{\isacharbraceleft}}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ x{\isadigit{1}}\ x{\isadigit{2}}{\isacharcolon}{\isacharcolon}real\isanewline
+\ \ \ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{0}}\ {\isacharless}\ x{\isadigit{1}}{\isachardoublequoteclose}\ {\isachardoublequoteopen}x{\isadigit{1}}\ {\isasymle}\ x{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}x{\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ x{\isadigit{1}}\ {\isasymle}\ {\isacharparenleft}x{\isadigit{2}}\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ x{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ {\isacharparenleft}no{\isacharunderscore}types{\isacharcomma}\ hide{\isacharunderscore}lams{\isacharparenright}\ diff{\isacharunderscore}divide{\isacharunderscore}distrib\ diff{\isacharunderscore}mono\ divide{\isacharunderscore}self{\isacharunderscore}if\ frac{\isacharunderscore}le\ leD\ order{\isacharunderscore}refl\ zero{\isacharunderscore}le{\isacharunderscore}one{\isacharparenright}\ \ \ \ \ \ \ \ \ \ \isanewline
+\ \ \ \ \ \ \isacommand{{\isacharbraceright}}\isamarkupfalse%
+\ \isacommand{note}\isamarkupfalse%
+\ mono\ {\isacharequal}\ this\isanewline
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}k{\isacharasterisk}{\isacharparenleft}{\isacharquery}max\ n\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharquery}S\ n\ k\ {\isacharminus}\ k\ {\isacharasterisk}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}max\ n\ {\isacharequal}\ {\isacharquery}S\ n\ k\ {\isacharslash}\ k{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ algebra{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}k{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharparenleft}real\ k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}S\ n\ k\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}k{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharplus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isasymle}\ {\isacharparenleft}k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharquery}max\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharparenleft}real\ k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}k{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharquery}max\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isacharequal}\ {\isacharparenleft}real\ k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}{\isacharquery}max\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ simp\ add{\isacharcolon}\ right{\isacharunderscore}diff{\isacharunderscore}distrib{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}k{\isacharasterisk}{\isacharparenleft}{\isacharquery}max\ n\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}real\ k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}{\isacharquery}max\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{{\isachardot}}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}max\ n\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}real\ k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ k\ {\isacharasterisk}\ {\isacharparenleft}{\isacharquery}max\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}real\ k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ k\ {\isacharasterisk}\ {\isacharparenleft}{\isacharquery}max\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isasymle}\ \isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}real\ n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ n\ {\isacharasterisk}\ {\isacharparenleft}{\isacharquery}max\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}real\ k\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ k\ {\isasymle}\ {\isacharparenleft}real\ n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ mono{\isacharbrackleft}of\ {\isachardoublequoteopen}real\ k{\isachardoublequoteclose}\ {\isachardoublequoteopen}real\ n{\isachardoublequoteclose}{\isacharbrackright}\ {\isacharbackquoteopen}k\ {\isasymle}\ n{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharquery}max\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}smt\ mult{\isacharunderscore}cancel{\isacharunderscore}right\ real{\isacharunderscore}mult{\isacharunderscore}le{\isacharunderscore}cancel{\isacharunderscore}iff{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{finally}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{1}}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharquery}max\ n\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}real\ n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ n\ {\isacharasterisk}\ {\isacharparenleft}{\isacharquery}max\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{{\isachardot}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}l\ {\isacharasterisk}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ n{\isacharparenright}\ {\isacharequal}\ l\ {\isacharasterisk}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}S\ n\ l{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}min\ n\ {\isacharequal}\ {\isacharquery}S\ n\ l\ {\isacharslash}\ l{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ algebra{\isacharunderscore}simps{\isacharparenright}\ \isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isacharequal}\ {\isacharparenleft}real\ l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}l{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}S\ n\ l\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}l{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharplus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isasymle}\ {\isacharparenleft}real\ l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharparenleft}l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharquery}min\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}S\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}l{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isasymge}\ {\isacharparenleft}l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharquery}min\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isacharequal}\ {\isacharparenleft}real\ l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}l\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}auto\ simp\ add{\isacharcolon}\ right{\isacharunderscore}diff{\isacharunderscore}distrib{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}l{\isacharasterisk}{\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ n{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}real\ l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{{\isachardot}}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ n\ {\isasymle}\ {\isacharparenleft}real\ l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ l\ {\isacharasterisk}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}l\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}real\ l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ l\ {\isacharasterisk}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isasymle}\ \isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}real\ n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ n\ {\isacharasterisk}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}real\ l\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ l\ {\isasymle}\ {\isacharparenleft}real\ n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ mono{\isacharbrackleft}of\ {\isachardoublequoteopen}real\ l{\isachardoublequoteclose}\ {\isachardoublequoteopen}real\ n{\isachardoublequoteclose}{\isacharbrackright}\ {\isacharbackquoteopen}l\ {\isasymle}\ n{\isacharbackquoteclose}\ {\isacharbackquoteopen}l\ {\isasymge}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}a\ {\isacharparenleft}n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymge}\ {\isacharquery}min\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}smt\ mult{\isacharunderscore}cancel{\isacharunderscore}right\ real{\isacharunderscore}mult{\isacharunderscore}le{\isacharunderscore}cancel{\isacharunderscore}iff{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{finally}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isadigit{2}}{\isacharcolon}\ {\isachardoublequoteopen}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ n\ {\isasymle}\ {\isacharparenleft}real\ n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ n\ {\isacharasterisk}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{{\isachardot}}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}{\isasymDelta}\ n\ {\isacharequal}\ {\isacharparenleft}{\isacharquery}max\ n\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharplus}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ n{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isasymle}\ {\isacharparenleft}real\ n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ n\ {\isacharasterisk}\ {\isacharparenleft}{\isacharparenleft}{\isacharquery}max\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharplus}\ {\isacharparenleft}a\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharminus}\ {\isacharquery}min\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isadigit{1}}\ {\isadigit{2}}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ right{\isacharunderscore}diff{\isacharunderscore}distrib{\isacharprime}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}{\isasymDelta}\ n\ {\isasymle}\ {\isacharparenleft}real\ n\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ n\ {\isacharasterisk}\ {\isacharquery}{\isasymDelta}\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \isacommand{obtain}\isamarkupfalse%
+\ {\isasymDelta}\ \isakeyword{where}\ {\isachardoublequoteopen}{\isasymDelta}\ {\isacharequal}\ {\isacharquery}{\isasymDelta}{\isachardoublequoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ Claim{\isadigit{1}}{\isacharprime}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymforall}\ n\ {\isachargreater}\ {\isadigit{2}}{\isachardot}\ {\isasymDelta}\ n\ {\isasymle}\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharslash}n\ {\isacharasterisk}\ {\isasymDelta}\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Claim{\isadigit{1}}\isanewline
+\ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \ \ \isanewline
+\ \ \ \ \isacommand{have}\isamarkupfalse%
+\ Claim{\isadigit{1}}{\isacharunderscore}iter{\isacharprime}{\isacharcolon}\ {\isachardoublequoteopen}{\isasymAnd}\ N\ q{\isachardot}\ {\isasymlbrakk}{\isadigit{2}}\ {\isasymle}\ q{\isacharsemicolon}\ q\ {\isasymle}\ N{\isasymrbrakk}\ {\isasymLongrightarrow}\ {\isasymDelta}\ {\isacharparenleft}N{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isasymDelta}\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ N\ q\ {\isacharcolon}{\isacharcolon}\ nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isachardoublequoteclose}\ {\isachardoublequoteopen}q\ {\isasymle}\ N{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymDelta}\ {\isacharparenleft}N{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isasymDelta}\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}induction\ N{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isadigit{0}}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ {\isacharparenleft}Suc\ N{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}case\isanewline
+\ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}q\ {\isasymle}\ N{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymDelta}\ {\isacharparenleft}N\ {\isacharplus}\ {\isadigit{2}}{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}{\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}{\isacharparenleft}N\ {\isacharplus}\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharasterisk}\ {\isasymDelta}\ {\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Claim{\isadigit{1}}{\isacharprime}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ {\isachardoublequoteopen}Suc\ N\ {\isacharplus}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharbrackright}\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\ {\isacharbackquoteopen}q\ {\isasymle}\ N{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{moreover}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymDelta}\ {\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isasymDelta}\ {\isacharparenleft}q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ True\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\ Suc{\isacharparenleft}{\isadigit{1}}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}{\isacharparenleft}N\ {\isacharplus}\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharasterisk}\ {\isasymDelta}\ {\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}{\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}{\isacharparenleft}N\ {\isacharplus}\ {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}{\isasymDelta}\ {\isacharparenleft}q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}N\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}subst\ real{\isacharunderscore}mult{\isacharunderscore}le{\isacharunderscore}cancel{\isacharunderscore}iff{\isadigit{2}}{\isacharcomma}\ simp{\isacharunderscore}all{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{ultimately}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}q\ {\isacharequal}\ N{\isacharplus}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Suc{\isacharparenleft}{\isadigit{3}}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \isacommand{{\isacharbraceleft}}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ q{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ n{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isacharless}\ q\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ k{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ k\ {\isasymand}\ k\ {\isacharless}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ q\ k\ {\isacharequal}\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ k{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{1}}\ {\isasymle}\ k{\isachardoublequoteclose}\ {\isachardoublequoteopen}k\ {\isacharless}\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\isasymSum}\ i\ {\isasymleftarrow}\ {\isacharbrackleft}q{\isacharminus}k{\isachardot}{\isachardot}{\isacharless}q{\isacharbrackright}{\isachardot}\ a\ i{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymSum}\ i\ {\isasymleftarrow}\ {\isacharbrackleft}q{\isacharminus}k{\isachardot}{\isachardot}{\isacharless}q{\isacharbrackright}{\isachardot}\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ sum{\isacharunderscore}list{\isacharunderscore}cong{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharbrackleft}q{\isacharminus}k{\isachardot}{\isachardot}{\isacharless}q{\isacharbrackright}{\isachardoublequoteclose}\ a\ {\isachardoublequoteopen}{\isasymlambda}\ i{\isachardot}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ n{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isacharless}\ q\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isacharless}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ fastforce\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ q\ k\ {\isacharequal}\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{1}}\ {\isasymle}\ k{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isacharless}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ sum{\isacharunderscore}list{\isacharunderscore}triv{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{{\isacharbraceright}}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{note}\isamarkupfalse%
+\ all{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}Sqk\ {\isacharequal}\ this\isanewline
+\isanewline
+\ \ \ \ \isacommand{{\isacharbraceleft}}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ q{\isacharcolon}{\isacharcolon}nat\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ n{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isacharless}\ q\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ q\ q\ {\isacharequal}\ q\ {\isacharminus}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbrackleft}q{\isacharminus}q{\isachardot}{\isachardot}{\isacharless}q{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}{\isadigit{0}}{\isacharbrackright}\ {\isacharat}\ {\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ upt{\isacharunderscore}rec\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ q\ q\ {\isacharequal}\ {\isacharparenleft}{\isasymSum}\ i\ {\isasymleftarrow}\ {\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharbrackright}{\isachardot}\ a\ i{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}a\ {\isadigit{0}}\ {\isacharequal}\ {\isadigit{0}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isacharequal}\ {\isacharparenleft}{\isasymSum}\ i\ {\isasymleftarrow}\ {\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharbrackright}{\isachardot}\ {\isadigit{1}}{\isacharcolon}{\isacharcolon}real{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ sum{\isacharunderscore}list{\isacharunderscore}cong{\isacharbrackleft}of\ {\isachardoublequoteopen}{\isacharbrackleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharbrackright}{\isachardoublequoteclose}\ a\ {\isachardoublequoteopen}{\isasymlambda}\ i{\isachardot}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ n{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isacharless}\ q\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ sum{\isacharunderscore}list{\isacharunderscore}triv{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isacommand{{\isacharbraceright}}\isamarkupfalse%
+\ \isacommand{note}\isamarkupfalse%
+\ all{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}Sqq\ {\isacharequal}\ this\isanewline
+\isanewline
+\ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}f\ a\ {\isasymle}\ {\isacharquery}m{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}{\isasymforall}\ n{\isachardot}\ {\isadigit{2}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}n{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isacharless}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}a\ {\isadigit{1}}\ {\isacharequal}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ Suc{\isacharunderscore}leI\ add{\isacharunderscore}le{\isacharunderscore}cancel{\isacharunderscore}left\ le{\isacharunderscore}eq{\isacharunderscore}less{\isacharunderscore}or{\isacharunderscore}eq\ one{\isacharunderscore}add{\isacharunderscore}one\ one{\isacharunderscore}plus{\isacharunderscore}numeral\ plus{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}eq{\isacharunderscore}Suc\ semiring{\isacharunderscore}norm{\isacharparenleft}{\isadigit{4}}{\isacharparenright}\ semiring{\isacharunderscore}norm{\isacharparenleft}{\isadigit{5}}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ k{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ k\ {\isasymand}\ k\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}\ {\isasymlongrightarrow}\ {\isacharquery}S\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}\ k\ {\isasymle}\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ all{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}Sqk{\isacharbrackleft}of\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}\ all{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}Sqq{\isacharbrackleft}of\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}smt\ Suc{\isacharunderscore}leI\ le{\isacharunderscore}eq{\isacharunderscore}less{\isacharunderscore}or{\isacharunderscore}eq\ of{\isacharunderscore}nat{\isacharunderscore}{\isadigit{1}}\ of{\isacharunderscore}nat{\isacharunderscore}diff\ one{\isacharunderscore}add{\isacharunderscore}one\ one{\isacharunderscore}less{\isacharunderscore}numeral{\isacharunderscore}iff\ plus{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}eq{\isacharunderscore}Suc\ semiring{\isacharunderscore}norm{\isacharparenleft}{\isadigit{7}}{\isadigit{6}}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}\ {\isasymle}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharasterisk}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}Q\ {\isacharequal}\ {\isachardoublequoteopen}{\isacharbraceleft}q{\isachardot}\ {\isadigit{2}}\ {\isasymle}\ q\ {\isasymand}\ q\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}\ {\isasymand}\ a\ q\ {\isasymnoteq}\ {\isadigit{1}}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{let}\isamarkupfalse%
+\ {\isacharquery}q\ {\isacharequal}\ {\isachardoublequoteopen}Min\ {\isacharquery}Q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}Q\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ False\ {\isacharbackquoteopen}a\ {\isadigit{1}}\ {\isacharequal}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}\ {\isasymle}\ {\isacharquery}q{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isacharquery}q\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ {\isacharquery}q\ {\isasymnoteq}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Min{\isacharunderscore}in{\isacharbrackleft}of\ {\isacharquery}Q{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ n{\isachardot}\ {\isadigit{2}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isacharless}\ {\isacharquery}q\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}rule\ ccontr{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymnot}\ {\isacharquery}thesis{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{obtain}\isamarkupfalse%
+\ n\ \isakeyword{where}\ {\isachardoublequoteopen}{\isadigit{2}}\ {\isasymle}\ n{\isachardoublequoteclose}\ {\isachardoublequoteopen}n\ {\isacharless}\ {\isacharquery}q{\isachardoublequoteclose}\ {\isachardoublequoteopen}a\ n\ {\isasymnoteq}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}n\ {\isasymin}\ {\isacharquery}Q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}q\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Min{\isacharunderscore}le{\isacharbrackleft}of\ {\isacharquery}Q\ n{\isacharbrackright}\ {\isacharbackquoteopen}{\isacharquery}Q\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}{\isacharbackquoteclose}\ {\isacharbackquoteopen}a\ n\ {\isasymnoteq}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}n\ {\isacharless}\ {\isacharquery}q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{obtain}\isamarkupfalse%
+\ q\ \isakeyword{where}\ {\isachardoublequoteopen}q\ {\isacharequal}\ {\isacharquery}q{\isachardoublequoteclose}\ {\isachardoublequoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isachardoublequoteclose}\ {\isachardoublequoteopen}q\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isachardoublequoteclose}\ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ {\isacharquery}q{\isacharbackquoteclose}\ {\isacharbackquoteopen}{\isacharquery}q\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbackquoteclose}\ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ n{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isacharless}\ q\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ n{\isachardot}\ {\isadigit{2}}\ {\isasymle}\ n\ {\isasymand}\ n\ {\isacharless}\ {\isacharquery}q\ {\isasymlongrightarrow}\ a\ n\ {\isacharequal}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}a\ {\isadigit{1}}\ {\isacharequal}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ Suc{\isacharunderscore}{\isadigit{1}}\ Suc{\isacharunderscore}leI\ le{\isacharunderscore}eq{\isacharunderscore}less{\isacharunderscore}or{\isacharunderscore}eq{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ k{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ k\ {\isasymand}\ k\ {\isacharless}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ q\ k\ {\isacharequal}\ k{\isachardoublequoteclose}\ \ {\isachardoublequoteopen}{\isacharquery}S\ q\ q\ {\isacharequal}\ q\ {\isacharminus}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ all{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}Sqk{\isacharbrackleft}of\ q{\isacharbrackright}\ all{\isacharunderscore}{\isadigit{1}}{\isacharunderscore}Sqq{\isacharbrackleft}of\ q{\isacharbrackright}\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp{\isacharunderscore}all\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ k{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ k\ {\isasymand}\ k\ {\isasymle}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ q\ k\ {\isasymle}\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ le{\isacharunderscore}eq{\isacharunderscore}less{\isacharunderscore}or{\isacharunderscore}eq\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ q\ {\isasymle}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharasterisk}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ OF\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ q\ {\isacharless}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}q\ {\isacharequal}\ {\isacharquery}q{\isacharbackquoteclose}\ {\isacharbackquoteopen}a\ {\isacharquery}q\ {\isasymnoteq}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ q\ {\isacharequal}\ {\isacharquery}S\ q\ q\ {\isacharslash}\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharasterisk}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ OF\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}{\isacharbrackright}\ {\isacharbackquoteopen}a\ q\ {\isacharless}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}{\isasymforall}\ k{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ k\ {\isasymand}\ k\ {\isacharless}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ q\ k\ {\isacharequal}\ k{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ div{\isacharunderscore}by{\isacharunderscore}{\isadigit{1}}\ less{\isacharunderscore}le\ of{\isacharunderscore}nat{\isacharunderscore}{\isadigit{1}}\ of{\isacharunderscore}nat{\isacharunderscore}le{\isacharunderscore}iff\ one{\isacharunderscore}eq{\isacharunderscore}divide{\isacharunderscore}iff\ order{\isacharunderscore}class{\isachardot}order{\isachardot}antisym\ zero{\isacharunderscore}le{\isacharunderscore}one{\isacharparenright}\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}a\ q\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}S\ q\ q\ {\isacharequal}\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ i{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ i\ {\isasymand}\ i\ {\isasymle}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ i\ {\isacharequal}\ i\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ safe\isanewline
+\ \ \ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ i\isanewline
+\ \ \ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{1}}\ {\isasymle}\ i{\isachardoublequoteclose}\ {\isachardoublequoteopen}i\ {\isasymle}\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ i\ {\isacharequal}\ i\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}i\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}a\ q\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ i\ {\isacharequal}\ a\ q\ {\isacharplus}\ {\isacharquery}S\ q\ {\isacharparenleft}i{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{1}}\ {\isasymle}\ i{\isacharbackquoteclose}\ {\isacharbackquoteopen}i\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{moreover}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ q\ {\isacharparenleft}i{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}i{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ k{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ k\ {\isasymand}\ k\ {\isacharless}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ q\ k\ {\isacharequal}\ k{\isacharbackquoteclose}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ {\isachardoublequoteopen}i{\isacharminus}{\isadigit{1}}{\isachardoublequoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{1}}\ {\isasymle}\ i{\isacharbackquoteclose}\ {\isacharbackquoteopen}i\ {\isasymle}\ q{\isacharbackquoteclose}\ {\isacharbackquoteopen}i\ {\isasymnoteq}\ {\isadigit{1}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Suc{\isacharunderscore}le{\isacharunderscore}eq\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{ultimately}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}a\ q\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}\ {\isacharbackquoteopen}{\isadigit{1}}\ {\isasymle}\ i{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ a\ q\ {\isacharplus}\ {\isacharquery}S\ q\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}S\ q\ q\ {\isacharequal}\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}a\ q\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ qq{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}\ {\isacharslash}\ real\ q{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}real\ q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ real\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}real\ q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}{\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}\ {\isacharslash}\ real\ q{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}real\ q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}real\ q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharasterisk}\ {\isacharparenleft}{\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ real\ q{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}subst\ {\isacharparenleft}asm{\isacharparenright}\ mult{\isacharunderscore}left{\isacharunderscore}cancel{\isacharcomma}\ simp{\isacharunderscore}all{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}min\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}real\ q{\isachardoublequoteclose}\ \ {\isacharparenleft}\isakeyword{is}\ {\isachardoublequoteopen}{\isacharquery}lhs\ {\isacharequal}\ {\isacharquery}mn{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}subst\ Min{\isacharunderscore}eq{\isacharunderscore}iff{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}finite\ {\isacharparenleft}{\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}mn\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isasymand}\ {\isacharparenleft}{\isasymforall}\ m{\isacharprime}\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isachardot}\ m{\isacharprime}\ {\isasymge}\ {\isacharquery}mn{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}mn\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}mn\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ i{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ i\ {\isasymand}\ i\ {\isasymle}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ i\ {\isacharequal}\ i\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ {\isadigit{1}}{\isacharbrackright}\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}mn\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ m{\isacharprime}\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isachardot}\ m{\isacharprime}\ {\isasymge}\ {\isacharquery}mn{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ m{\isacharprime}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{obtain}\isamarkupfalse%
+\ k\ \isakeyword{where}\ {\isachardoublequoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isachardoublequoteclose}\ {\isachardoublequoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ k\ {\isacharslash}\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isasymge}\ {\isacharquery}mn{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}k\ {\isasymle}\ q{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharparenleft}k\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharparenright}\ {\isacharslash}\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbackquoteclose}\ {\isacharbackquoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ k\ {\isacharslash}\ k{\isacharbackquoteclose}\ \isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ i{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ i\ {\isasymand}\ i\ {\isasymle}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ i\ {\isacharequal}\ i\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}{\isacharparenleft}q{\isacharasterisk}k{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbackquoteclose}\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}mn\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbackquoteclose}\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}k\ {\isacharequal}\ q{\isacharplus}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ real\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ k\ {\isacharslash}\ k{\isacharbackquoteclose}\ {\isacharbackquoteopen}{\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ qq\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ of{\isacharunderscore}nat{\isacharunderscore}{\isadigit{1}}\ of{\isacharunderscore}nat{\isacharunderscore}add{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{moreover}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}max\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}real\ q{\isacharparenright}{\isacharcircum}{\isadigit{2}}\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}{\isacharparenleft}real\ q{\isacharparenright}{\isacharcircum}{\isadigit{2}}{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{is}\ {\isachardoublequoteopen}{\isacharquery}lhs\ {\isacharequal}\ {\isacharquery}mx{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}subst\ Max{\isacharunderscore}eq{\isacharunderscore}iff{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}finite\ {\isacharparenleft}{\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isasymnoteq}\ {\isacharbraceleft}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}mx\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isasymand}\ {\isacharparenleft}{\isasymforall}\ m{\isacharprime}\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isachardot}\ m{\isacharprime}\ {\isasymle}\ {\isacharquery}mx{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}mx\ {\isacharequal}\ {\isacharparenleft}{\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ q{\isacharparenright}\ {\isacharslash}\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ i{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ i\ {\isasymand}\ i\ {\isasymle}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ i\ {\isacharequal}\ i\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}{\isacharbrackleft}rule{\isacharunderscore}format{\isacharcomma}\ of\ q{\isacharbrackright}\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps\ power{\isadigit{2}}{\isacharunderscore}eq{\isacharunderscore}square{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{moreover}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}q\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q\ {\isacharplus}\ {\isadigit{1}}\ {\isacharplus}\ {\isadigit{1}}{\isacharbraceright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{ultimately}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}mx\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}\ m{\isacharprime}\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isachardot}\ m{\isacharprime}\ {\isasymle}\ {\isacharquery}mx{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ \isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{fix}\isamarkupfalse%
+\ m{\isacharprime}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isasymin}\ {\isacharquery}A\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{obtain}\isamarkupfalse%
+\ k\ \isakeyword{where}\ {\isachardoublequoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isachardoublequoteclose}\ {\isachardoublequoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ k\ {\isacharslash}\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isasymle}\ {\isacharquery}mx{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+\ {\isacharparenleft}cases\ {\isachardoublequoteopen}k\ {\isasymle}\ q{\isachardoublequoteclose}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharparenleft}k\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharparenright}\ {\isacharslash}\ k{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbackquoteclose}\ {\isacharbackquoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ k\ {\isacharslash}\ k{\isacharbackquoteclose}\ \isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymforall}\ i{\isachardot}\ {\isadigit{1}}\ {\isasymle}\ i\ {\isasymand}\ i\ {\isasymle}\ q\ {\isasymlongrightarrow}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ i\ {\isacharequal}\ i\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}{\isacharparenleft}q{\isacharasterisk}k{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbackquoteclose}\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{moreover}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}mx\ {\isacharequal}\ {\isadigit{1}}\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}{\isacharparenleft}q{\isacharasterisk}q{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps\ power{\isadigit{2}}{\isacharunderscore}eq{\isacharunderscore}square{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{ultimately}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymle}\ q{\isacharbackquoteclose}\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\ {\isacharbackquoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}k\ {\isacharequal}\ q{\isacharplus}{\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}k\ {\isasymin}\ {\isacharbraceleft}{\isadigit{1}}{\isachardot}{\isachardot}{\isacharless}q{\isacharplus}{\isadigit{1}}{\isacharplus}{\isadigit{1}}{\isacharbraceright}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ real\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}m{\isacharprime}\ {\isacharequal}\ {\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ k\ {\isacharslash}\ k{\isacharbackquoteclose}\ {\isacharbackquoteopen}{\isacharquery}S\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharslash}q{\isacharbackquoteclose}\ qq\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ of{\isacharunderscore}nat{\isacharunderscore}{\isadigit{1}}\ of{\isacharunderscore}nat{\isacharunderscore}add{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{moreover}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}q\ {\isasymle}\ q{\isacharcircum}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\ power{\isadigit{2}}{\isacharunderscore}nat{\isacharunderscore}le{\isacharunderscore}imp{\isacharunderscore}le{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{ultimately}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \isanewline
+\ \ \ \ \ \ \isacommand{ultimately}\isamarkupfalse%
+\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharquery}{\isasymDelta}\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}real\ q{\isacharparenright}{\isacharcircum}{\isadigit{2}}\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}{\isacharparenleft}real\ q{\isacharparenright}{\isacharcircum}{\isadigit{2}}\ {\isacharminus}\ {\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}real\ q{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isacharequal}\ {\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}{\isacharparenleft}real\ q{\isacharparenright}{\isacharcircum}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ power{\isadigit{2}}{\isacharunderscore}eq{\isacharunderscore}square\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ del{\isacharcolon}\ {\isachardoublequoteopen}{\isasymDelta}\ {\isacharparenleft}q{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}{\isacharslash}{\isacharparenleft}real\ q{\isacharparenright}{\isacharcircum}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isasymDelta}\ {\isacharequal}\ {\isacharquery}{\isasymDelta}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymDelta}\ {\isacharparenleft}{\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isasymle}\ {\isacharparenleft}real\ q\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}real\ q{\isacharparenright}\isactrlsup {\isadigit{2}}\ {\isacharasterisk}\ real\ {\isacharparenleft}q\ {\isacharplus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ Claim{\isadigit{1}}{\isacharunderscore}iter{\isacharprime}{\isacharbrackleft}OF\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\ {\isacharbackquoteopen}q\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbackquoteclose}{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}real\ q{\isacharcircum}{\isadigit{2}}\ {\isacharminus}\ {\isadigit{1}}{\isacharparenright}\ {\isacharslash}\ {\isacharparenleft}real\ q{\isacharparenright}\isactrlsup {\isadigit{2}}{\isacharparenright}\ {\isacharslash}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps\ power{\isadigit{2}}{\isacharunderscore}eq{\isacharunderscore}square{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isacharequal}\ {\isacharparenleft}{\isadigit{1}}\ {\isacharminus}\ {\isacharparenleft}{\isadigit{1}}\ {\isacharslash}\ {\isacharparenleft}real\ q{\isacharparenright}\isactrlsup {\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharslash}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}q\ {\isasymge}\ {\isadigit{2}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{also}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isachardot}{\isachardot}{\isachardot}\ {\isasymle}\ {\isacharparenleft}{\isadigit{1}}\ {\isacharminus}\ {\isacharparenleft}{\isadigit{1}}\ {\isacharslash}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharcircum}{\isadigit{2}}{\isacharparenright}{\isacharparenright}\ {\isacharslash}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}q{\isacharcircum}{\isadigit{2}}\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharcircum}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\ {\isacharbackquoteopen}q\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ power{\isacharunderscore}mono\ \isacommand{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \ \ \ \ \ \ \isacommand{then}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}real\ q{\isacharparenright}{\isacharcircum}{\isadigit{2}}\ {\isasymle}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{7}}{\isacharcircum}{\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}metis\ of{\isacharunderscore}nat{\isacharunderscore}le{\isacharunderscore}iff\ of{\isacharunderscore}nat{\isacharunderscore}numeral\ of{\isacharunderscore}nat{\isacharunderscore}power{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isadigit{2}}\ {\isasymle}\ q{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}simp\ add{\isacharcolon}\ field{\isacharunderscore}simps\ power{\isadigit{2}}{\isacharunderscore}eq{\isacharunderscore}square{\isacharparenright}\isanewline
+\ \ \ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isacommand{finally}\isamarkupfalse%
+\ \isacommand{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymDelta}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}\ {\isasymle}\ {\isacharquery}m{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\isanewline
+\ \ \ \ \ \ \isacommand{thus}\isamarkupfalse%
+\ {\isacharquery}thesis\isanewline
+\ \ \ \ \ \ \ \ \isacommand{using}\isamarkupfalse%
+\ {\isacharbackquoteopen}{\isacharquery}f\ a\ {\isasymle}\ {\isacharquery}{\isasymDelta}\ {\isadigit{2}}{\isadigit{0}}{\isadigit{1}}{\isadigit{8}}{\isacharbackquoteclose}\ {\isacharbackquoteopen}{\isasymDelta}\ {\isacharequal}\ {\isacharquery}{\isasymDelta}{\isacharbackquoteclose}\isanewline
+\ \ \ \ \ \ \ \ \isacommand{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\ \ \isacommand{qed}\isamarkupfalse%
+\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Documents/git/IMO/IMO_files/solutions/IMO_2018_SL_A4.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%35=5%:%
+%:%38=6%:%
+%:%39=7%:%
+%:%40=7%:%
+%:%41=8%:%
+%:%42=9%:%
+%:%43=10%:%
+%:%44=10%:%
+%:%45=11%:%
+%:%46=12%:%
+%:%49=13%:%
+%:%53=13%:%
+%:%54=13%:%
+%:%55=14%:%
+%:%56=14%:%
+%:%61=14%:%
+%:%64=15%:%
+%:%65=16%:%
+%:%66=16%:%
+%:%67=17%:%
+%:%68=18%:%
+%:%71=19%:%
+%:%75=19%:%
+%:%76=19%:%
+%:%77=20%:%
+%:%78=20%:%
+%:%83=20%:%
+%:%86=21%:%
+%:%87=22%:%
+%:%88=22%:%
+%:%89=23%:%
+%:%90=24%:%
+%:%91=25%:%
+%:%94=26%:%
+%:%98=26%:%
+%:%99=26%:%
+%:%100=27%:%
+%:%101=27%:%
+%:%102=28%:%
+%:%103=28%:%
+%:%104=29%:%
+%:%105=29%:%
+%:%106=30%:%
+%:%107=30%:%
+%:%110=33%:%
+%:%111=34%:%
+%:%112=34%:%
+%:%113=35%:%
+%:%114=35%:%
+%:%115=36%:%
+%:%116=36%:%
+%:%117=37%:%
+%:%118=37%:%
+%:%119=38%:%
+%:%120=38%:%
+%:%121=39%:%
+%:%122=39%:%
+%:%123=40%:%
+%:%124=40%:%
+%:%125=41%:%
+%:%126=41%:%
+%:%127=42%:%
+%:%128=42%:%
+%:%129=43%:%
+%:%130=43%:%
+%:%131=44%:%
+%:%132=45%:%
+%:%133=45%:%
+%:%134=46%:%
+%:%135=46%:%
+%:%136=47%:%
+%:%137=47%:%
+%:%138=48%:%
+%:%139=48%:%
+%:%140=49%:%
+%:%141=49%:%
+%:%142=50%:%
+%:%143=50%:%
+%:%144=51%:%
+%:%145=51%:%
+%:%146=52%:%
+%:%147=52%:%
+%:%148=53%:%
+%:%149=53%:%
+%:%150=54%:%
+%:%151=54%:%
+%:%152=55%:%
+%:%153=55%:%
+%:%154=56%:%
+%:%155=56%:%
+%:%156=57%:%
+%:%157=57%:%
+%:%158=58%:%
+%:%159=58%:%
+%:%160=59%:%
+%:%161=59%:%
+%:%162=60%:%
+%:%163=60%:%
+%:%164=61%:%
+%:%165=61%:%
+%:%166=61%:%
+%:%167=62%:%
+%:%168=62%:%
+%:%169=63%:%
+%:%170=63%:%
+%:%171=64%:%
+%:%172=64%:%
+%:%173=65%:%
+%:%174=65%:%
+%:%175=66%:%
+%:%176=66%:%
+%:%177=67%:%
+%:%178=67%:%
+%:%179=68%:%
+%:%180=68%:%
+%:%181=68%:%
+%:%182=69%:%
+%:%183=69%:%
+%:%184=70%:%
+%:%185=70%:%
+%:%186=71%:%
+%:%187=71%:%
+%:%188=72%:%
+%:%189=72%:%
+%:%190=73%:%
+%:%191=73%:%
+%:%192=74%:%
+%:%193=74%:%
+%:%194=75%:%
+%:%195=75%:%
+%:%196=76%:%
+%:%197=76%:%
+%:%198=77%:%
+%:%199=77%:%
+%:%200=78%:%
+%:%201=78%:%
+%:%202=78%:%
+%:%203=79%:%
+%:%204=79%:%
+%:%205=80%:%
+%:%206=80%:%
+%:%207=81%:%
+%:%208=81%:%
+%:%209=81%:%
+%:%210=82%:%
+%:%211=82%:%
+%:%212=83%:%
+%:%213=83%:%
+%:%214=84%:%
+%:%215=84%:%
+%:%216=85%:%
+%:%217=85%:%
+%:%218=86%:%
+%:%219=86%:%
+%:%220=87%:%
+%:%221=87%:%
+%:%222=88%:%
+%:%223=88%:%
+%:%224=89%:%
+%:%225=89%:%
+%:%226=90%:%
+%:%227=90%:%
+%:%228=91%:%
+%:%229=91%:%
+%:%230=92%:%
+%:%231=92%:%
+%:%232=93%:%
+%:%233=93%:%
+%:%234=94%:%
+%:%235=94%:%
+%:%236=95%:%
+%:%237=95%:%
+%:%238=96%:%
+%:%239=96%:%
+%:%240=97%:%
+%:%241=97%:%
+%:%242=98%:%
+%:%243=98%:%
+%:%244=99%:%
+%:%245=99%:%
+%:%246=100%:%
+%:%247=100%:%
+%:%248=101%:%
+%:%249=101%:%
+%:%250=102%:%
+%:%251=102%:%
+%:%252=103%:%
+%:%253=103%:%
+%:%254=104%:%
+%:%255=104%:%
+%:%256=105%:%
+%:%257=105%:%
+%:%258=106%:%
+%:%259=106%:%
+%:%260=107%:%
+%:%261=107%:%
+%:%262=108%:%
+%:%263=108%:%
+%:%264=109%:%
+%:%265=109%:%
+%:%266=110%:%
+%:%267=110%:%
+%:%268=111%:%
+%:%269=111%:%
+%:%270=112%:%
+%:%271=112%:%
+%:%272=113%:%
+%:%273=113%:%
+%:%274=114%:%
+%:%275=114%:%
+%:%276=115%:%
+%:%277=115%:%
+%:%278=116%:%
+%:%279=117%:%
+%:%280=117%:%
+%:%281=118%:%
+%:%282=118%:%
+%:%283=119%:%
+%:%284=120%:%
+%:%285=120%:%
+%:%286=121%:%
+%:%287=121%:%
+%:%288=122%:%
+%:%289=122%:%
+%:%290=123%:%
+%:%291=123%:%
+%:%292=124%:%
+%:%293=124%:%
+%:%294=124%:%
+%:%295=125%:%
+%:%296=125%:%
+%:%297=126%:%
+%:%298=126%:%
+%:%299=127%:%
+%:%300=127%:%
+%:%301=128%:%
+%:%302=128%:%
+%:%303=129%:%
+%:%304=129%:%
+%:%305=130%:%
+%:%306=131%:%
+%:%307=131%:%
+%:%308=132%:%
+%:%309=132%:%
+%:%310=133%:%
+%:%311=133%:%
+%:%312=134%:%
+%:%313=134%:%
+%:%314=135%:%
+%:%315=135%:%
+%:%316=136%:%
+%:%317=136%:%
+%:%318=137%:%
+%:%319=137%:%
+%:%320=138%:%
+%:%321=138%:%
+%:%322=139%:%
+%:%323=139%:%
+%:%324=140%:%
+%:%325=140%:%
+%:%326=140%:%
+%:%327=141%:%
+%:%328=141%:%
+%:%329=142%:%
+%:%330=142%:%
+%:%331=143%:%
+%:%332=143%:%
+%:%333=144%:%
+%:%334=144%:%
+%:%335=145%:%
+%:%336=146%:%
+%:%337=146%:%
+%:%338=147%:%
+%:%339=147%:%
+%:%340=148%:%
+%:%341=148%:%
+%:%342=149%:%
+%:%343=149%:%
+%:%344=150%:%
+%:%345=150%:%
+%:%346=150%:%
+%:%347=151%:%
+%:%348=151%:%
+%:%349=151%:%
+%:%350=152%:%
+%:%351=152%:%
+%:%352=152%:%
+%:%353=153%:%
+%:%354=153%:%
+%:%355=154%:%
+%:%356=154%:%
+%:%357=154%:%
+%:%358=155%:%
+%:%359=155%:%
+%:%360=156%:%
+%:%361=156%:%
+%:%362=157%:%
+%:%363=157%:%
+%:%364=158%:%
+%:%365=159%:%
+%:%366=159%:%
+%:%367=160%:%
+%:%368=160%:%
+%:%369=161%:%
+%:%370=161%:%
+%:%371=162%:%
+%:%372=162%:%
+%:%373=163%:%
+%:%374=163%:%
+%:%375=163%:%
+%:%376=164%:%
+%:%377=164%:%
+%:%378=165%:%
+%:%379=165%:%
+%:%380=166%:%
+%:%381=166%:%
+%:%382=167%:%
+%:%383=167%:%
+%:%384=168%:%
+%:%385=168%:%
+%:%386=168%:%
+%:%387=169%:%
+%:%388=169%:%
+%:%389=170%:%
+%:%390=170%:%
+%:%391=171%:%
+%:%392=171%:%
+%:%393=172%:%
+%:%394=172%:%
+%:%395=173%:%
+%:%396=174%:%
+%:%397=174%:%
+%:%398=175%:%
+%:%399=175%:%
+%:%400=176%:%
+%:%401=176%:%
+%:%402=177%:%
+%:%403=177%:%
+%:%404=178%:%
+%:%405=179%:%
+%:%406=179%:%
+%:%407=180%:%
+%:%408=180%:%
+%:%409=181%:%
+%:%410=181%:%
+%:%411=182%:%
+%:%412=182%:%
+%:%413=183%:%
+%:%414=183%:%
+%:%415=183%:%
+%:%416=184%:%
+%:%417=184%:%
+%:%418=185%:%
+%:%419=185%:%
+%:%420=186%:%
+%:%421=186%:%
+%:%422=187%:%
+%:%423=187%:%
+%:%424=188%:%
+%:%425=188%:%
+%:%426=189%:%
+%:%427=189%:%
+%:%428=190%:%
+%:%429=190%:%
+%:%430=191%:%
+%:%431=192%:%
+%:%432=192%:%
+%:%433=193%:%
+%:%434=193%:%
+%:%435=194%:%
+%:%436=194%:%
+%:%437=195%:%
+%:%438=195%:%
+%:%439=195%:%
+%:%440=196%:%
+%:%441=196%:%
+%:%442=197%:%
+%:%443=198%:%
+%:%444=198%:%
+%:%445=199%:%
+%:%446=199%:%
+%:%447=200%:%
+%:%448=200%:%
+%:%449=201%:%
+%:%450=201%:%
+%:%451=201%:%
+%:%452=202%:%
+%:%453=202%:%
+%:%454=203%:%
+%:%455=204%:%
+%:%456=204%:%
+%:%457=205%:%
+%:%458=205%:%
+%:%459=206%:%
+%:%460=206%:%
+%:%461=207%:%
+%:%462=208%:%
+%:%463=208%:%
+%:%464=209%:%
+%:%465=209%:%
+%:%466=210%:%
+%:%467=210%:%
+%:%468=211%:%
+%:%469=211%:%
+%:%470=212%:%
+%:%471=212%:%
+%:%472=213%:%
+%:%473=213%:%
+%:%474=214%:%
+%:%475=214%:%
+%:%476=215%:%
+%:%477=215%:%
+%:%478=216%:%
+%:%479=216%:%
+%:%480=217%:%
+%:%481=217%:%
+%:%482=218%:%
+%:%483=218%:%
+%:%484=219%:%
+%:%485=219%:%
+%:%486=220%:%
+%:%487=220%:%
+%:%488=221%:%
+%:%489=221%:%
+%:%490=222%:%
+%:%491=222%:%
+%:%492=223%:%
+%:%493=223%:%
+%:%494=224%:%
+%:%495=224%:%
+%:%496=225%:%
+%:%497=225%:%
+%:%498=226%:%
+%:%499=226%:%
+%:%500=227%:%
+%:%501=227%:%
+%:%502=228%:%
+%:%503=228%:%
+%:%504=229%:%
+%:%505=229%:%
+%:%506=230%:%
+%:%507=230%:%
+%:%508=231%:%
+%:%509=231%:%
+%:%510=232%:%
+%:%511=233%:%
+%:%512=233%:%
+%:%513=234%:%
+%:%514=234%:%
+%:%515=235%:%
+%:%516=235%:%
+%:%517=236%:%
+%:%518=236%:%
+%:%519=237%:%
+%:%520=237%:%
+%:%521=238%:%
+%:%522=238%:%
+%:%523=239%:%
+%:%524=239%:%
+%:%525=240%:%
+%:%526=240%:%
+%:%527=241%:%
+%:%528=241%:%
+%:%529=242%:%
+%:%530=242%:%
+%:%531=243%:%
+%:%532=243%:%
+%:%533=244%:%
+%:%534=244%:%
+%:%535=245%:%
+%:%536=245%:%
+%:%537=246%:%
+%:%538=246%:%
+%:%539=247%:%
+%:%540=247%:%
+%:%541=248%:%
+%:%542=248%:%
+%:%543=249%:%
+%:%544=249%:%
+%:%545=250%:%
+%:%546=250%:%
+%:%547=251%:%
+%:%548=251%:%
+%:%549=252%:%
+%:%550=252%:%
+%:%551=253%:%
+%:%552=253%:%
+%:%553=254%:%
+%:%554=254%:%
+%:%555=255%:%
+%:%556=255%:%
+%:%557=256%:%
+%:%558=256%:%
+%:%559=257%:%
+%:%560=258%:%
+%:%561=258%:%
+%:%562=259%:%
+%:%563=259%:%
+%:%564=260%:%
+%:%565=260%:%
+%:%566=261%:%
+%:%567=262%:%
+%:%568=262%:%
+%:%569=263%:%
+%:%570=263%:%
+%:%571=264%:%
+%:%572=264%:%
+%:%573=265%:%
+%:%574=265%:%
+%:%575=265%:%
+%:%576=266%:%
+%:%577=266%:%
+%:%578=267%:%
+%:%579=267%:%
+%:%580=267%:%
+%:%581=268%:%
+%:%582=269%:%
+%:%583=270%:%
+%:%584=270%:%
+%:%585=271%:%
+%:%586=271%:%
+%:%587=272%:%
+%:%588=272%:%
+%:%589=273%:%
+%:%590=273%:%
+%:%591=273%:%
+%:%592=274%:%
+%:%593=274%:%
+%:%594=275%:%
+%:%595=275%:%
+%:%596=276%:%
+%:%597=276%:%
+%:%598=276%:%
+%:%599=277%:%
+%:%600=277%:%
+%:%601=278%:%
+%:%602=278%:%
+%:%603=279%:%
+%:%604=279%:%
+%:%605=279%:%
+%:%606=280%:%
+%:%607=280%:%
+%:%608=281%:%
+%:%609=281%:%
+%:%610=282%:%
+%:%611=282%:%
+%:%612=282%:%
+%:%613=283%:%
+%:%614=283%:%
+%:%615=284%:%
+%:%616=284%:%
+%:%617=285%:%
+%:%618=285%:%
+%:%619=286%:%
+%:%620=286%:%
+%:%621=287%:%
+%:%622=287%:%
+%:%623=287%:%
+%:%624=288%:%
+%:%625=289%:%
+%:%626=289%:%
+%:%627=290%:%
+%:%628=290%:%
+%:%629=291%:%
+%:%630=291%:%
+%:%631=292%:%
+%:%632=292%:%
+%:%633=293%:%
+%:%634=293%:%
+%:%635=294%:%
+%:%636=294%:%
+%:%637=295%:%
+%:%638=295%:%
+%:%639=296%:%
+%:%640=296%:%
+%:%641=297%:%
+%:%642=297%:%
+%:%643=298%:%
+%:%644=298%:%
+%:%645=299%:%
+%:%646=299%:%
+%:%647=300%:%
+%:%648=301%:%
+%:%649=301%:%
+%:%650=302%:%
+%:%651=302%:%
+%:%652=303%:%
+%:%653=303%:%
+%:%654=304%:%
+%:%655=304%:%
+%:%656=304%:%
+%:%657=305%:%
+%:%658=305%:%
+%:%659=306%:%
+%:%660=306%:%
+%:%661=307%:%
+%:%662=307%:%
+%:%663=307%:%
+%:%664=308%:%
+%:%665=308%:%
+%:%666=309%:%
+%:%667=309%:%
+%:%668=310%:%
+%:%669=310%:%
+%:%670=310%:%
+%:%671=311%:%
+%:%672=311%:%
+%:%673=312%:%
+%:%674=312%:%
+%:%675=313%:%
+%:%676=313%:%
+%:%677=313%:%
+%:%678=314%:%
+%:%679=314%:%
+%:%680=315%:%
+%:%681=315%:%
+%:%682=316%:%
+%:%683=316%:%
+%:%684=317%:%
+%:%685=317%:%
+%:%686=318%:%
+%:%687=318%:%
+%:%688=318%:%
+%:%689=319%:%
+%:%690=320%:%
+%:%691=320%:%
+%:%692=321%:%
+%:%693=321%:%
+%:%694=322%:%
+%:%695=322%:%
+%:%696=323%:%
+%:%697=323%:%
+%:%698=324%:%
+%:%699=324%:%
+%:%700=325%:%
+%:%701=325%:%
+%:%702=326%:%
+%:%703=326%:%
+%:%704=327%:%
+%:%705=327%:%
+%:%706=328%:%
+%:%707=328%:%
+%:%708=329%:%
+%:%709=329%:%
+%:%710=330%:%
+%:%711=330%:%
+%:%712=331%:%
+%:%713=332%:%
+%:%714=332%:%
+%:%715=333%:%
+%:%716=333%:%
+%:%717=334%:%
+%:%718=334%:%
+%:%719=334%:%
+%:%720=335%:%
+%:%721=335%:%
+%:%722=336%:%
+%:%723=336%:%
+%:%724=337%:%
+%:%725=337%:%
+%:%726=337%:%
+%:%727=338%:%
+%:%728=338%:%
+%:%729=339%:%
+%:%730=339%:%
+%:%731=340%:%
+%:%732=341%:%
+%:%733=341%:%
+%:%734=341%:%
+%:%735=342%:%
+%:%736=342%:%
+%:%737=343%:%
+%:%738=343%:%
+%:%739=344%:%
+%:%740=344%:%
+%:%741=345%:%
+%:%742=346%:%
+%:%743=346%:%
+%:%744=347%:%
+%:%745=347%:%
+%:%746=348%:%
+%:%747=348%:%
+%:%748=349%:%
+%:%749=349%:%
+%:%750=350%:%
+%:%751=350%:%
+%:%752=350%:%
+%:%753=351%:%
+%:%754=351%:%
+%:%755=352%:%
+%:%756=352%:%
+%:%757=353%:%
+%:%758=353%:%
+%:%759=353%:%
+%:%760=354%:%
+%:%761=354%:%
+%:%762=355%:%
+%:%763=355%:%
+%:%764=356%:%
+%:%765=356%:%
+%:%766=357%:%
+%:%767=357%:%
+%:%768=358%:%
+%:%769=358%:%
+%:%770=359%:%
+%:%771=359%:%
+%:%772=360%:%
+%:%773=360%:%
+%:%774=361%:%
+%:%775=361%:%
+%:%776=362%:%
+%:%777=362%:%
+%:%778=363%:%
+%:%779=363%:%
+%:%780=364%:%
+%:%781=364%:%
+%:%782=365%:%
+%:%783=365%:%
+%:%784=366%:%
+%:%785=366%:%
+%:%786=367%:%
+%:%787=367%:%
+%:%788=368%:%
+%:%789=368%:%
+%:%790=369%:%
+%:%791=369%:%
+%:%792=370%:%
+%:%793=370%:%
+%:%794=371%:%
+%:%795=371%:%
+%:%796=372%:%
+%:%797=372%:%
+%:%798=373%:%
+%:%799=373%:%
+%:%800=374%:%
+%:%801=374%:%
+%:%802=375%:%
+%:%803=375%:%
+%:%804=376%:%
+%:%805=376%:%
+%:%806=377%:%
+%:%807=377%:%
+%:%808=378%:%
+%:%809=378%:%
+%:%810=379%:%
+%:%811=379%:%
+%:%812=380%:%
+%:%813=380%:%
+%:%814=381%:%
+%:%815=381%:%
+%:%816=382%:%
+%:%817=383%:%
+%:%818=383%:%
+%:%819=384%:%
+%:%820=384%:%
+%:%821=385%:%
+%:%822=385%:%
+%:%823=386%:%
+%:%824=387%:%
+%:%825=387%:%
+%:%826=388%:%
+%:%827=388%:%
+%:%828=389%:%
+%:%829=389%:%
+%:%830=390%:%
+%:%831=390%:%
+%:%832=391%:%
+%:%833=391%:%
+%:%834=392%:%
+%:%835=392%:%
+%:%836=393%:%
+%:%837=393%:%
+%:%838=394%:%
+%:%839=394%:%
+%:%840=395%:%
+%:%841=395%:%
+%:%842=396%:%
+%:%843=396%:%
+%:%844=397%:%
+%:%845=397%:%
+%:%846=398%:%
+%:%847=398%:%
+%:%848=399%:%
+%:%849=399%:%
+%:%850=400%:%
+%:%851=400%:%
+%:%852=401%:%
+%:%853=402%:%
+%:%854=402%:%
+%:%855=403%:%
+%:%856=403%:%
+%:%857=404%:%
+%:%858=404%:%
+%:%859=405%:%
+%:%860=405%:%
+%:%861=406%:%
+%:%862=406%:%
+%:%863=407%:%
+%:%864=407%:%
+%:%865=408%:%
+%:%866=408%:%
+%:%867=409%:%
+%:%868=409%:%
+%:%869=410%:%
+%:%870=410%:%
+%:%871=410%:%
+%:%872=411%:%
+%:%873=411%:%
+%:%874=411%:%
+%:%875=412%:%
+%:%876=412%:%
+%:%877=413%:%
+%:%878=413%:%
+%:%879=414%:%
+%:%880=414%:%
+%:%881=414%:%
+%:%882=415%:%
+%:%883=415%:%
+%:%884=416%:%
+%:%885=416%:%
+%:%886=417%:%
+%:%887=417%:%
+%:%888=418%:%
+%:%889=418%:%
+%:%890=418%:%
+%:%891=419%:%
+%:%892=419%:%
+%:%893=420%:%
+%:%894=420%:%
+%:%895=421%:%
+%:%896=421%:%
+%:%897=421%:%
+%:%898=422%:%
+%:%899=423%:%
+%:%900=423%:%
+%:%901=424%:%
+%:%902=424%:%
+%:%903=425%:%
+%:%904=425%:%
+%:%905=426%:%
+%:%906=426%:%
+%:%907=426%:%
+%:%908=427%:%
+%:%909=427%:%
+%:%910=428%:%
+%:%911=428%:%
+%:%912=429%:%
+%:%913=429%:%
+%:%914=429%:%
+%:%915=430%:%
+%:%916=430%:%
+%:%917=431%:%
+%:%918=431%:%
+%:%919=432%:%
+%:%920=432%:%
+%:%921=432%:%
+%:%922=433%:%
+%:%923=433%:%
+%:%924=434%:%
+%:%925=434%:%
+%:%926=435%:%
+%:%927=435%:%
+%:%928=436%:%
+%:%929=436%:%
+%:%930=437%:%
+%:%931=437%:%
+%:%932=438%:%
+%:%933=438%:%
+%:%934=439%:%
+%:%935=439%:%
+%:%936=440%:%
+%:%937=440%:%
+%:%938=441%:%
+%:%939=441%:%
+%:%940=442%:%
+%:%941=442%:%
+%:%942=443%:%
+%:%943=443%:%
+%:%944=444%:%
+%:%945=444%:%
+%:%946=445%:%
+%:%947=445%:%
+%:%948=445%:%
+%:%949=446%:%
+%:%950=446%:%
+%:%951=447%:%
+%:%952=447%:%
+%:%953=448%:%
+%:%954=449%:%
+%:%955=449%:%
+%:%956=450%:%
+%:%957=450%:%
+%:%958=451%:%
+%:%959=451%:%
+%:%960=452%:%
+%:%961=452%:%
+%:%962=452%:%
+%:%963=453%:%
+%:%964=453%:%
+%:%965=454%:%
+%:%966=454%:%
+%:%967=455%:%
+%:%968=455%:%
+%:%969=456%:%
+%:%970=456%:%
+%:%971=457%:%
+%:%972=457%:%
+%:%973=458%:%
+%:%974=458%:%
+%:%975=459%:%
+%:%976=459%:%
+%:%977=460%:%
+%:%978=460%:%
+%:%979=461%:%
+%:%980=462%:%
+%:%981=462%:%
+%:%982=462%:%
+%:%983=462%:%
+%:%984=463%:%
+%:%985=463%:%
+%:%986=464%:%
+%:%987=464%:%
+%:%988=465%:%
+%:%989=465%:%
+%:%990=466%:%
+%:%991=466%:%
+%:%992=466%:%
+%:%993=467%:%
+%:%994=467%:%
+%:%995=468%:%
+%:%996=468%:%
+%:%997=469%:%
+%:%998=469%:%
+%:%999=469%:%
+%:%1000=470%:%
+%:%1001=470%:%
+%:%1002=471%:%
+%:%1003=471%:%
+%:%1004=472%:%
+%:%1005=472%:%
+%:%1006=472%:%
+%:%1007=473%:%
+%:%1008=473%:%
+%:%1009=474%:%
+%:%1010=474%:%
+%:%1011=475%:%
+%:%1012=475%:%
+%:%1013=475%:%
+%:%1014=476%:%
+%:%1015=476%:%
+%:%1016=477%:%
+%:%1017=477%:%
+%:%1018=478%:%
+%:%1019=479%:%
+%:%1020=479%:%
+%:%1021=480%:%
+%:%1022=480%:%
+%:%1023=481%:%
+%:%1024=481%:%
+%:%1025=482%:%
+%:%1026=483%:%
+%:%1027=483%:%
+%:%1028=484%:%
+%:%1029=484%:%
+%:%1030=485%:%
+%:%1031=485%:%
+%:%1032=486%:%
+%:%1033=486%:%
+%:%1034=487%:%
+%:%1035=488%:%
+%:%1036=488%:%
+%:%1037=489%:%
+%:%1038=489%:%
+%:%1039=490%:%
+%:%1040=490%:%
+%:%1041=491%:%
+%:%1042=491%:%
+%:%1043=492%:%
+%:%1044=492%:%
+%:%1045=493%:%
+%:%1046=493%:%
+%:%1047=494%:%
+%:%1048=494%:%
+%:%1049=495%:%
+%:%1050=495%:%
+%:%1051=496%:%
+%:%1052=496%:%
+%:%1053=497%:%
+%:%1054=497%:%
+%:%1055=498%:%
+%:%1056=498%:%
+%:%1057=499%:%
+%:%1058=499%:%
+%:%1059=500%:%
+%:%1060=500%:%
+%:%1061=500%:%
+%:%1062=501%:%
+%:%1063=501%:%
+%:%1064=502%:%
+%:%1065=502%:%
+%:%1066=503%:%
+%:%1067=503%:%
+%:%1068=504%:%
+%:%1069=504%:%
+%:%1070=505%:%
+%:%1071=505%:%
+%:%1072=506%:%
+%:%1073=506%:%
+%:%1074=507%:%
+%:%1075=507%:%
+%:%1076=508%:%
+%:%1077=508%:%
+%:%1078=509%:%
+%:%1079=509%:%
+%:%1080=510%:%
+%:%1081=510%:%
+%:%1082=511%:%
+%:%1083=511%:%
+%:%1084=512%:%
+%:%1085=512%:%
+%:%1086=513%:%
+%:%1087=513%:%
+%:%1088=514%:%
+%:%1089=514%:%
+%:%1090=515%:%
+%:%1091=516%:%
+%:%1092=516%:%
+%:%1093=517%:%
+%:%1094=517%:%
+%:%1095=518%:%
+%:%1096=518%:%
+%:%1097=519%:%
+%:%1098=519%:%
+%:%1099=520%:%
+%:%1100=520%:%
+%:%1101=521%:%
+%:%1102=521%:%
+%:%1103=522%:%
+%:%1104=522%:%
+%:%1105=523%:%
+%:%1106=523%:%
+%:%1107=524%:%
+%:%1108=524%:%
+%:%1109=525%:%
+%:%1110=526%:%
+%:%1111=526%:%
+%:%1112=527%:%
+%:%1113=527%:%
+%:%1114=528%:%
+%:%1115=528%:%
+%:%1116=529%:%
+%:%1117=529%:%
+%:%1118=530%:%
+%:%1119=530%:%
+%:%1120=531%:%
+%:%1121=531%:%
+%:%1122=532%:%
+%:%1123=532%:%
+%:%1124=533%:%
+%:%1125=533%:%
+%:%1126=534%:%
+%:%1127=535%:%
+%:%1128=535%:%
+%:%1129=536%:%
+%:%1130=536%:%
+%:%1131=537%:%
+%:%1132=537%:%
+%:%1133=538%:%
+%:%1134=538%:%
+%:%1135=539%:%
+%:%1136=539%:%
+%:%1137=540%:%
+%:%1138=540%:%
+%:%1139=541%:%
+%:%1140=541%:%
+%:%1141=542%:%
+%:%1142=542%:%
+%:%1143=543%:%
+%:%1144=543%:%
+%:%1145=544%:%
+%:%1146=544%:%
+%:%1147=545%:%
+%:%1148=545%:%
+%:%1149=546%:%
+%:%1150=546%:%
+%:%1151=547%:%
+%:%1152=547%:%
+%:%1153=548%:%
+%:%1154=548%:%
+%:%1155=549%:%
+%:%1156=549%:%
+%:%1157=549%:%
+%:%1158=550%:%
+%:%1159=550%:%
+%:%1160=551%:%
+%:%1161=551%:%
+%:%1162=552%:%
+%:%1163=552%:%
+%:%1164=552%:%
+%:%1165=553%:%
+%:%1166=553%:%
+%:%1167=554%:%
+%:%1168=554%:%
+%:%1169=555%:%
+%:%1170=555%:%
+%:%1171=556%:%
+%:%1172=556%:%
+%:%1173=557%:%
+%:%1174=557%:%
+%:%1175=558%:%
+%:%1176=558%:%
+%:%1177=558%:%
+%:%1178=559%:%
+%:%1179=559%:%
+%:%1180=560%:%
+%:%1181=560%:%
+%:%1182=561%:%
+%:%1183=561%:%
+%:%1184=562%:%
+%:%1185=562%:%
+%:%1186=563%:%
+%:%1187=563%:%
+%:%1188=564%:%
+%:%1189=564%:%
+%:%1190=565%:%
+%:%1191=565%:%
+%:%1192=566%:%
+%:%1193=566%:%
+%:%1194=567%:%
+%:%1195=567%:%
+%:%1196=568%:%
+%:%1197=568%:%
+%:%1198=569%:%
+%:%1199=569%:%
+%:%1200=570%:%
+%:%1201=570%:%
+%:%1202=571%:%
+%:%1203=571%:%
+%:%1204=572%:%
+%:%1205=572%:%
+%:%1206=573%:%
+%:%1207=573%:%
+%:%1208=574%:%
+%:%1209=574%:%
+%:%1210=575%:%
+%:%1211=575%:%
+%:%1212=576%:%
+%:%1213=576%:%
+%:%1214=577%:%
+%:%1215=577%:%
+%:%1216=578%:%
+%:%1217=578%:%
+%:%1218=579%:%
+%:%1219=579%:%
+%:%1220=580%:%
+%:%1221=580%:%
+%:%1222=581%:%
+%:%1223=581%:%
+%:%1224=582%:%
+%:%1225=582%:%
+%:%1226=583%:%
+%:%1227=583%:%
+%:%1228=584%:%
+%:%1229=584%:%
+%:%1230=585%:%
+%:%1231=585%:%
+%:%1232=586%:%
+%:%1233=586%:%
+%:%1234=587%:%
+%:%1235=587%:%
+%:%1236=588%:%
+%:%1237=589%:%
+%:%1238=589%:%
+%:%1239=590%:%
+%:%1240=591%:%
+%:%1241=591%:%
+%:%1242=592%:%
+%:%1243=592%:%
+%:%1244=593%:%
+%:%1245=593%:%
+%:%1246=594%:%
+%:%1247=594%:%
+%:%1248=595%:%
+%:%1249=595%:%
+%:%1250=596%:%
+%:%1251=596%:%
+%:%1252=597%:%
+%:%1253=597%:%
+%:%1254=598%:%
+%:%1255=598%:%
+%:%1256=599%:%
+%:%1257=599%:%
+%:%1258=600%:%
+%:%1259=600%:%
+%:%1260=601%:%
+%:%1261=601%:%
+%:%1262=602%:%
+%:%1263=602%:%
+%:%1264=603%:%
+%:%1265=603%:%
+%:%1266=604%:%
+%:%1267=604%:%
+%:%1268=605%:%
+%:%1269=605%:%
+%:%1270=606%:%
+%:%1271=606%:%
+%:%1272=607%:%
+%:%1273=607%:%
+%:%1274=608%:%
+%:%1275=608%:%
+%:%1276=609%:%
+%:%1277=609%:%
+%:%1278=610%:%
+%:%1279=610%:%
+%:%1280=611%:%
+%:%1281=611%:%
+%:%1282=612%:%
+%:%1283=613%:%
+%:%1284=613%:%
+%:%1285=614%:%
+%:%1286=614%:%
+%:%1287=615%:%
+%:%1288=615%:%
+%:%1289=616%:%
+%:%1290=616%:%
+%:%1291=617%:%
+%:%1292=617%:%
+%:%1293=617%:%
+%:%1294=618%:%
+%:%1295=618%:%
+%:%1296=619%:%
+%:%1297=619%:%
+%:%1298=620%:%
+%:%1299=620%:%
+%:%1300=621%:%
+%:%1301=621%:%
+%:%1302=622%:%
+%:%1303=622%:%
+%:%1304=623%:%
+%:%1305=623%:%
+%:%1306=624%:%
+%:%1307=624%:%
+%:%1308=625%:%
+%:%1309=625%:%
+%:%1310=626%:%
+%:%1311=626%:%
+%:%1312=627%:%
+%:%1313=627%:%
+%:%1314=628%:%
+%:%1315=628%:%
+%:%1316=629%:%
+%:%1317=629%:%
+%:%1318=630%:%
+%:%1319=630%:%
+%:%1320=631%:%
+%:%1321=631%:%
+%:%1322=632%:%
+%:%1323=632%:%
+%:%1324=633%:%
+%:%1325=633%:%
+%:%1326=634%:%
+%:%1327=634%:%
+%:%1328=635%:%
+%:%1329=635%:%
+%:%1330=636%:%
+%:%1331=636%:%
+%:%1332=637%:%
+%:%1333=637%:%
+%:%1334=638%:%
+%:%1335=638%:%
+%:%1336=639%:%
+%:%1337=639%:%
+%:%1338=640%:%
+%:%1339=640%:%
+%:%1340=641%:%
+%:%1341=641%:%
+%:%1342=642%:%
+%:%1343=642%:%
+%:%1344=643%:%
+%:%1345=643%:%
+%:%1346=644%:%
+%:%1347=644%:%
+%:%1348=645%:%
+%:%1349=645%:%
+%:%1350=646%:%
+%:%1351=646%:%
+%:%1352=647%:%
+%:%1353=647%:%
+%:%1354=648%:%
+%:%1355=648%:%
+%:%1356=649%:%
+%:%1357=649%:%
+%:%1358=650%:%
+%:%1359=650%:%
+%:%1360=651%:%
+%:%1361=651%:%
+%:%1362=652%:%
+%:%1363=652%:%
+%:%1364=653%:%
+%:%1365=653%:%
+%:%1366=654%:%
+%:%1367=654%:%
+%:%1368=655%:%
+%:%1369=655%:%
+%:%1370=656%:%
+%:%1371=657%:%
+%:%1372=657%:%
+%:%1373=658%:%
+%:%1374=659%:%
+%:%1375=659%:%
+%:%1376=660%:%
+%:%1377=660%:%
+%:%1378=661%:%
+%:%1379=661%:%
+%:%1380=661%:%
+%:%1381=662%:%
+%:%1382=662%:%
+%:%1383=663%:%
+%:%1384=663%:%
+%:%1385=664%:%
+%:%1386=664%:%
+%:%1387=664%:%
+%:%1388=665%:%
+%:%1389=665%:%
+%:%1390=666%:%
+%:%1391=666%:%
+%:%1392=667%:%
+%:%1393=667%:%
+%:%1394=667%:%
+%:%1395=668%:%
+%:%1396=668%:%
+%:%1397=669%:%
+%:%1398=669%:%
+%:%1399=670%:%
+%:%1400=670%:%
+%:%1401=670%:%
+%:%1402=671%:%
+%:%1403=671%:%
+%:%1404=672%:%
+%:%1405=672%:%
+%:%1406=672%:%
+%:%1407=673%:%
+%:%1408=673%:%
+%:%1409=674%:%
+%:%1410=674%:%
+%:%1411=675%:%
+%:%1412=675%:%
+%:%1413=675%:%
+%:%1414=676%:%
+%:%1415=676%:%
+%:%1416=677%:%
+%:%1417=677%:%
+%:%1418=678%:%
+%:%1419=678%:%
+%:%1420=679%:%
+%:%1421=679%:%
+%:%1422=679%:%
+%:%1423=680%:%
+%:%1424=680%:%
+%:%1425=680%:%
+%:%1426=681%:%
+%:%1427=681%:%
+%:%1428=682%:%
+%:%1429=682%:%
+%:%1430=683%:%
+%:%1431=683%:%
+%:%1432=684%:%
+%:%1433=684%:%
+%:%1434=685%:%
+%:%1435=685%:%
+%:%1436=686%:%
+%:%1437=686%:%
+%:%1438=686%:%
+%:%1439=687%:%
+%:%1440=687%:%
+%:%1441=688%:%
+%:%1442=689%:%
+%:%1443=689%:%
+%:%1444=690%:%
+%:%1445=690%:%
+%:%1446=691%:%
+%:%1447=691%:%
+%:%1448=692%:%
+%:%1449=692%:%
+%:%1450=693%:%
+%:%1451=693%:%
+%:%1452=694%:%
+%:%1458=694%:%
+%:%1463=695%:%
+%:%1468=696%:%
