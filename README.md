@@ -20,8 +20,7 @@ Step 2:
 
 Step 3:
 
-A pdf file is generated using Isabelle command:
+- A pdf file is generated using Isabelle command:
 $ISABELLE_HOME/bin/isabelle build -D IMO_files
 
-and it is located at:
-IMO_files/output/document.pdf
+- It is located at: IMO_files/output/document.pdf
