@@ -31,11 +31,11 @@ proof
   show "\<exists> a. ?p1 a \<and> ?p2 a \<and> ?eq a"
   proof (rule_tac x="?a" in exI, safe)
     show "?p1 ?a"
-      using `3 dvd n`
+      using \<open>3 dvd n\<close>
       by auto
   next
     show "?p2 ?a"
-      using `3 dvd n`
+      using \<open>3 dvd n\<close>
       by auto
   next
     fix i
@@ -51,26 +51,26 @@ next
 
   let ?a = "\<lambda> i. a (i mod n)"
   have "?p1 ?a" "?p2 ?a"
-    using `?p1 a` `n \<ge> 3` n_plus_1_mod_n n_plus_2_mod_n
+    using \<open>?p1 a\<close> \<open>n \<ge> 3\<close> n_plus_1_mod_n n_plus_2_mod_n
     by auto
 
   have eq: "\<forall>i. ?a i * ?a (i + 1) + 1 = ?a (i + 2)"
   proof safe
     fix i
     have "a ((i + 1) mod n) = a (i mod n + 1)"
-      using `?p1 a`
+      using \<open>?p1 a\<close>
       by (simp add: mod_Suc)
 
     moreover
 
     have "a ((i + 2) mod n) = a (i mod n + 2)"
-      using `?p1 a` `?p2 a`
+      using \<open>?p1 a\<close> \<open>?p2 a\<close>
       by (metis One_nat_def Suc_eq_plus1 add_Suc_right mod_Suc one_add_one)
 
     ultimately
 
     show "a (i mod n) * a ((i + 1) mod n) + 1 = a ((i + 2) mod n)"
-      using `?eq a`
+      using \<open>?eq a\<close>
       using assms
       by auto
   qed
@@ -99,15 +99,15 @@ next
         show ?case
         proof (cases "i + 1 \<le> j")
           case False
-          hence "i + 1 = Suc j"
+          then have "i + 1 = Suc j"
             using Suc(2)
             by auto
-          thus ?thesis
-            using `?a i > 0` `?a (i + 1) > 0` *
+          then show ?thesis
+            using \<open>?a i > 0\<close> \<open>?a (i + 1) > 0\<close> *
             by auto
         next
           case True
-          thus ?thesis
+          then show ?thesis
             using Suc(1) *
             by (smt Suc_eq_plus1 add_Suc_right one_add_one)
         qed
@@ -122,11 +122,11 @@ next
       fix j
       assume "i + 2 \<le> j"
       then have "?a j > 1" "?a (j + 1) > 1"
-        using `\<forall> j \<ge> i + 2. ?a j > 1` `i + 2 \<le> j`
+        using \<open>\<forall> j \<ge> i + 2. ?a j > 1\<close> \<open>i + 2 \<le> j\<close>
         by auto
       then have "?a (j + 1) < ?a j * ?a (j + 1)"
         by simp
-      thus "?a (j + 2) > ?a (j + 1)"
+      then show "?a (j + 2) > ?a (j + 1)"
         using eq
         by smt
     qed
@@ -145,7 +145,7 @@ next
         show ?case
         proof (cases "i + 3 < j")
           case True
-          hence "?a (i + 3) < ?a j"
+          then have "?a (i + 3) < ?a j"
             using Suc
             by simp
           also have "?a j < ?a (j + 1)"
@@ -157,7 +157,7 @@ next
             by simp
         next
           case False
-          hence "i + 3 = j"
+          then have "i + 3 = j"
             using Suc(2)
             by simp
           then show ?thesis
@@ -186,14 +186,14 @@ next
     assume "\<not> ?thesis"
     then obtain i where "?a i = 0"
       by auto
-    hence "?a (i + n) = 0"
+    then have "?a (i + n) = 0"
       by auto
     have "?a (i + n + 2) = 1" 
-      using `?a (i + n) = 0` eq
+      using \<open>?a (i + n) = 0\<close> eq
       by (metis add.commute mult_zero_left nat_arith.rule0)
     moreover
     have "?a (i + n + 1) = 1"
-      using `?a (i + n) = 0` eq[rule_format, of "i+n-1"] `n \<ge> 3`
+      using \<open>?a (i + n) = 0\<close> eq[rule_format, of "i+n-1"] \<open>n \<ge> 3\<close>
       by simp
     ultimately
     show False
@@ -222,15 +222,15 @@ next
         by (simp add: numeral_3_eq_3 numeral_Bit0)
       moreover
       have "?a (i+2) * ?a (i + 3) < 0"
-        using `?a (i + 3) < 0` `?a (i + 2) > 1`
+        using \<open>?a (i + 3) < 0\<close> \<open>?a (i + 2) > 1\<close>
         by (simp add: mult_pos_neg)
       ultimately
       show ?thesis
         by simp
     qed
 
-    hence "?a (i + 4) < ?a (i + 2)"
-      using `?a (i + 2) > 1`
+    then have "?a (i + 4) < ?a (i + 2)"
+      using \<open>?a (i + 2) > 1\<close>
       by simp
 
     have "?a (i+5) - ?a (i+4) = (?a (i+3) * ?a (i+4) + 1) - (?a (i+3) * ?a (i+2) + 1)"
@@ -239,11 +239,11 @@ next
     also have "... = ?a (i+3) * (?a (i+4) - ?a (i+2))"
       by (simp add: field_simps)
     finally have "?a (i+5) - ?a (i+4) > 0"
-      using `?a (i + 4) < ?a (i + 2)` `?a (i + 3) < 0`
+      using \<open>?a (i + 4) < ?a (i + 2)\<close> \<open>?a (i + 3) < 0\<close>
       by (smt mult_neg_neg)
-    hence "?a (i + 5) > ?a (i + 4)"
+    then have "?a (i + 5) > ?a (i + 4)"
       by auto
-    hence "?a (i + 4) < 0"
+    then have "?a (i + 4) < 0"
       using no_pos_pos no_zero
       by (smt Suc_eq_plus1 add_Suc_right numeral_eq_Suc pred_numeral_simps(3))
 
@@ -255,7 +255,7 @@ next
   have "\<exists> i. ?a i < 0 \<and> ?a (i + 1) < 0"
   proof (rule ccontr)
     assume "\<not> ?thesis"
-    hence alt: "\<forall> i. ?a i < 0 \<longleftrightarrow> ?a (i + 1) > 0"
+    then have alt: "\<forall> i. ?a i < 0 \<longleftrightarrow> ?a (i + 1) > 0"
       using no_zero no_pos_pos
       by smt
 
@@ -291,10 +291,10 @@ next
         using alt
         by (simp add: numeral_3_eq_3)
       have "?a i * ?a (i+1) + 1 < ?a (i+1) * ?a (i+2) + 1"
-        using `?a (i+2) < 0` `?a (i+3) > 0` eq
+        using \<open>?a (i+2) < 0\<close> \<open>?a (i+3) > 0\<close> eq
         by (simp add: numeral_eq_Suc)
       then show "?a i < ?a (i + 2)"
-        using `?a (i + 1) > 0`
+        using \<open>?a (i + 1) > 0\<close>
         by (smt Groups.mult_ac(2) Suc_eq_plus1 add_2_eq_Suc' alt eq mult_less_cancel_left1)
     qed
 
@@ -316,21 +316,21 @@ next
         proof (cases "k = 0")
           case True
           then show ?thesis
-            using inc `?a i < 0`
+            using inc \<open>?a i < 0\<close>
             by auto
         next
           case False
           then show ?thesis
-            using `?a i < 0`
+            using \<open>?a i < 0\<close>
             using Suc(1) inc[rule_format, of "i + 2*k"] neg[rule_format, of i k]
             by simp
         qed
       qed
     qed
-    hence "?a i < ?a (i + 2*n)"
-      using `n \<ge> 3`
+    then have "?a i < ?a (i + 2*n)"
+      using \<open>n \<ge> 3\<close>
       by (simp add: numeral_eq_Suc)
-    thus False
+    then show False
       by simp
   qed
 
@@ -344,7 +344,7 @@ next
     proof (induction k)
       case 0
       then show ?case
-        using `?a i < 0` `?a (i + 1) < 0` after_neg_neg[of i]
+        using \<open>?a i < 0\<close> \<open>?a (i + 1) < 0\<close> after_neg_neg[of i]
         by simp
     next
       case (Suc k)
@@ -362,7 +362,7 @@ next
     then show ?thesis
     proof
       assume "n mod 3 = 0"
-      thus ?thesis
+      then show ?thesis
         by auto
     next
       assume "n mod 3 = 1 \<or> n mod 3 = 2"
@@ -373,7 +373,7 @@ next
           by (metis add_diff_cancel_left' add_diff_cancel_right' add_eq_if assms dvd_minus_mod dvd_mult_div_cancel not_numeral_le_zero plus_1_eq_Suc)
         then have "?a (i + 1) = ?a (i + 2 + 3*k)"
           by (metis add.assoc add_Suc_right mod_add_self2 one_add_one plus_1_eq_Suc)
-        thus False
+        then show False
           using neg_neg_pos[rule_format, of 0] neg_neg_pos[rule_format, of k]
           by simp
       next
@@ -382,11 +382,11 @@ next
           by (metis One_nat_def Suc_1 add.commute add_Suc_shift add_diff_cancel_left' assms dvd_minus_mod dvd_mult_div_cancel le_iff_add numeral_3_eq_3)
         then have "?a i = ?a (i + 2 + 3*k)"
           by (metis add.assoc add_Suc_right mod_add_self2 one_add_one plus_1_eq_Suc)
-        thus False
+        then show False
           using neg_neg_pos[rule_format, of 0] neg_neg_pos[rule_format, of k]
           by simp
       qed
-      thus ?thesis
+      then show ?thesis
         by simp
     qed
   qed

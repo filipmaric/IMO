@@ -96,7 +96,7 @@ proof (induction horst_strategy queenie_strategy k board rule: valid_game.induct
   proof-
     have "card (free_squares empty_board) = files * ranks"
       by (simp add: empty_board_def free_squares_def)
-    thus ?thesis
+    then show ?thesis
       using div4
       by presburger
   qed
@@ -107,7 +107,7 @@ next
     "square' \<in> squares" "board' square' = None" "board'' = board' (square' := Some Queen)"
     unfolding valid_horst_move_def valid_horst_move'_def valid_queenie_move_def
     by auto
-  hence "free_squares board = free_squares board'' \<union> {square, square'}"
+  then have "free_squares board = free_squares board'' \<union> {square, square'}"
         "square \<notin> free_squares board''" "square' \<notin> free_squares board''"
     unfolding free_squares_def
     by (auto split: if_split_asm)
@@ -120,7 +120,7 @@ next
     using card_Un_disjoint[of "free_squares board''" "{square, square'}"]
     by auto
   then show ?case
-    using `card (free_squares board) mod 2 = 0`
+    using \<open>card (free_squares board) mod 2 = 0\<close>
     by simp
 qed
 
@@ -174,7 +174,7 @@ proof-
             by (cases wsq, auto)
           moreover
           have "?invf wsq \<in> ?black_squares"
-            using `wsq \<in> ?white_squares` div4
+            using \<open>wsq \<in> ?white_squares\<close> div4
             by (cases wsq, auto simp add: squares_def) presburger+
           ultimately
           show "wsq \<in> ?f ` ?black_squares"
@@ -182,15 +182,15 @@ proof-
         qed
       qed
     qed
-    thus ?thesis
+    then show ?thesis
       using bij_betw_same_card by blast
   qed
   ultimately
   have "2 * card ?black_squares = card squares"
     by (metis (no_types, lifting) card.infinite card_Un_disjoint finite_Un mult_2 mult_eq_0_iff)
-  hence "2 * card ?black_squares = files * ranks"
+  then have "2 * card ?black_squares = files * ranks"
     by auto
-  thus ?thesis
+  then show ?thesis
     unfolding black_squares_def
     by simp
 qed
@@ -208,7 +208,7 @@ proof-
         free_black_squares board = free_black_squares ?board' \<union> {square}"
     unfolding free_black_squares_def Let_def
     by auto
-  thus ?thesis
+  then show ?thesis
     by (metis One_nat_def add.right_neutral add_Suc_right card.infinite card_Un_le card_empty card_insert_if finite_Un finite_insert insert_absorb insert_not_empty le_add1 trans_le_add2)
 qed
 
@@ -250,7 +250,7 @@ proof-
     unfolding knights_def
     by auto
   then show ?thesis
-    using `board square = None`
+    using \<open>board square = None\<close>
     unfolding knights_def
     by auto
 qed
@@ -263,7 +263,7 @@ proof-
     using assms
     unfolding valid_queenie_move_def knights_def
     by force
-  thus ?thesis
+  then show ?thesis
     by simp
 qed
 
@@ -347,17 +347,17 @@ proof-
   proof safe
     fix f r x y z
     assume "(f, r) \<in> squares" "(x, y, z) = cycle (f, r)"
-    hence "0 \<le> f \<and> f < files" "0 \<le> r \<and> r < ranks"
+    then have "0 \<le> f \<and> f < files" "0 \<le> r \<and> r < ranks"
       by (auto simp add: squares_def)
-    hence "0 \<le> f div 4 \<and> f div 4 < files div 4"  "0 \<le> r div 4 \<and> r div 4 < ranks div 4"
+    then have "0 \<le> f div 4 \<and> f div 4 < files div 4"  "0 \<le> r div 4 \<and> r div 4 < ranks div 4"
       using div4
       by presburger+
     then show "x \<in> {0..<files div 4}" "y \<in> {0..<ranks div 4}"
-      using `(x, y, z) = cycle (f, r)`
+      using \<open>(x, y, z) = cycle (f, r)\<close>
       by auto
     show "z \<in> {0..<4}"
       using cycle_lt_4[rule_format, of "f mod 4" "r mod 4"]
-      using `(x, y, z) = cycle (f, r)`
+      using \<open>(x, y, z) = cycle (f, r)\<close>
       by simp
   next
     fix x y z :: int
@@ -366,9 +366,9 @@ proof-
     have "(?f, ?r) \<in> squares" "cycle (?f, ?r) = (x, y, z)"
       using *
       by (auto simp add: squares_def)
-    hence "\<exists> square \<in> squares. cycle square = (x, y, z)"
+    then have "\<exists> square \<in> squares. cycle square = (x, y, z)"
       by blast
-    thus "(x, y, z) \<in> cycle ` squares"
+    then show "(x, y, z) \<in> cycle ` squares"
       by (metis imageI)
   qed
   also have "... = {0..<files div 4} \<times> {0..<ranks div 4} \<times> {0..<4}"
@@ -409,7 +409,7 @@ proof safe
 
   have **: "f1 div 4 = f2 div 4" "r1 div 4 = r2 div 4"
             "cycle4 (f1 mod 4, r1 mod 4) = cycle4 (f2 mod 4, r2 mod 4)"
-    using `cycle sq1 = cycle sq2` sq1 sq2
+    using \<open>cycle sq1 = cycle sq2\<close> sq1 sq2
     by simp_all
 
   have "\<not> attacks_knight (f1, r1) board" "(f2, r2) \<noteq> cycle_opposite (f1, r1)"
@@ -419,7 +419,7 @@ proof safe
     by auto
   
   have "f2 \<noteq> 4 * (f1 div 4) + (3 - f1 mod 4) \<or> r2 \<noteq> 4 * (r1 div 4) + (3 - r1 mod 4)"
-    using `(f2, r2) \<noteq> cycle_opposite (f1, r1)`
+    using \<open>(f2, r2) \<noteq> cycle_opposite (f1, r1)\<close>
     by auto
 
   then have "f2 mod 4 \<noteq> 3 - f1 mod 4 \<or> r2 mod 4 \<noteq> 3 - r1 mod 4"
@@ -430,7 +430,7 @@ proof safe
     by simp
 
   have "(\<bar>f1 - f2\<bar> = 1 \<longrightarrow> \<bar>r1 - r2\<bar> \<noteq> 2) \<and> (\<bar>f1 - f2\<bar> = 2 \<longrightarrow> \<bar>r1 - r2\<bar> \<noteq> 1)"
-    using `\<not> attacks_knight (f1, r1) board`
+    using \<open>\<not> attacks_knight (f1, r1) board\<close>
     using assms attacks_knight.simps sq1 sq2
     by blast
 
@@ -449,7 +449,7 @@ proof safe
     by (metis mult_div_mod_eq prod.inject)+
 
   then show False
-    using sq1 sq2 `sq1 \<noteq> sq2`
+    using sq1 sq2 \<open>sq1 \<noteq> sq2\<close>
     by simp
 qed
 
@@ -493,14 +493,14 @@ proof safe
       then show "\<exists> board. valid_game ?horst_strategy queenie_strategy k board"
       proof (induction k)
         case 0
-        thus ?case
+        then show ?case
           by (rule_tac x=empty_board in exI, simp add: valid_game.intros)
       next
         case (Suc k)
         then obtain board where "valid_game ?horst_strategy queenie_strategy k board"
           by auto
         then have *: "(files * ranks) div 2 - 2 * k \<le> card (free_black_squares board)"
-          using `Suc k \<le> (files * ranks) div 4`
+          using \<open>Suc k \<le> (files * ranks) div 4\<close>
         proof (induction ?horst_strategy queenie_strategy k board rule: valid_game.induct)
           case 1
           then show ?case
@@ -508,7 +508,7 @@ proof safe
             by (simp add: empty_board_def black_squares_def free_black_squares_def)
         next
           case (2 queenie_strategy k board board' board'')
-          hence "(files * ranks) div 2 - 2 * k \<le> card (free_black_squares board)"
+          then have "(files * ranks) div 2 - 2 * k \<le> card (free_black_squares board)"
             by auto
           also have "... \<le> card (free_black_squares board') + 1"
             using 2
@@ -519,11 +519,11 @@ proof safe
             using free_black_squares_valid_queenie_move[of board' board'']
             by simp
           finally show ?case
-            using `Suc (k + 1) \<le> (files * ranks) div 4`
+            using \<open>Suc (k + 1) \<le> (files * ranks) div 4\<close>
             by (simp add: le_diff_conv)
         qed
-        hence "card (free_black_squares board) > 0"
-          using `Suc k \<le> (files * ranks) div 4`
+        then have "card (free_black_squares board) > 0"
+          using \<open>Suc k \<le> (files * ranks) div 4\<close>
           by auto
         then obtain square where "square \<in> free_black_squares board"
           by (metis Collect_empty_eq Collect_mem_eq card.infinite card_0_eq not_less0)
@@ -534,32 +534,32 @@ proof safe
             by (cases square)
           assume "\<not> ?thesis"
           then obtain x' y' where "(x', y') \<in> squares" "board (x', y') = Some Knight" "\<bar>x - x'\<bar> = 1 \<and> \<bar>y - y'\<bar> = 2 \<or> \<bar>x - x'\<bar> = 2 \<and> \<bar>y - y'\<bar> = 1"
-            using `square = (x, y)`
+            using \<open>square = (x, y)\<close>
             by auto
           then have "black (x', y')"
-            using 1[rule_format, OF `valid_game ?horst_strategy queenie_strategy k board`]
+            using 1[rule_format, OF \<open>valid_game ?horst_strategy queenie_strategy k board\<close>]
             by auto
 
           have "black (x, y)"
-            using `square \<in> free_black_squares board` `square = (x, y)`
+            using \<open>square \<in> free_black_squares board\<close> \<open>square = (x, y)\<close>
             by (simp add: free_black_squares_def)
 
           show False
-            using `black (x, y)` `black (x', y')` `\<bar>x - x'\<bar> = 1 \<and> \<bar>y - y'\<bar> = 2 \<or> \<bar>x - x'\<bar> = 2 \<and> \<bar>y - y'\<bar> = 1`
+            using \<open>black (x, y)\<close> \<open>black (x', y')\<close> \<open>\<bar>x - x'\<bar> = 1 \<and> \<bar>y - y'\<bar> = 2 \<or> \<bar>x - x'\<bar> = 2 \<and> \<bar>y - y'\<bar> = 1\<close>
             unfolding black.simps
             by presburger
         qed
           
         let ?board1 = "board (square := Some Knight)"
         have "valid_horst_move board ?board1"
-          using `square \<in> free_black_squares board` `\<not> attacks_knight square board`
+          using \<open>square \<in> free_black_squares board\<close> \<open>\<not> attacks_knight square board\<close>
           unfolding valid_horst_move_def valid_horst_move'_def
           by (rule_tac x=square in exI, cases square, simp add: free_black_squares_def)
 
         moreover
 
         have "?horst_strategy board ?board1"
-          using `valid_horst_move board ?board1` `square \<in> free_black_squares board`
+          using \<open>valid_horst_move board ?board1\<close> \<open>square \<in> free_black_squares board\<close>
           unfolding valid_horst_move_def free_black_squares_def
           by (rule_tac x=square in exI, cases square)
              (metis (mono_tags, lifting) map_upd_Some_unfold mem_Collect_eq option.discI valid_horst_move'_def)
@@ -573,23 +573,23 @@ proof safe
             using valid_game_free_squares_card_even 
             by blast
           have "free_squares board = free_squares ?board1 \<union> {square}" "square \<notin> free_squares ?board1"
-            using `square \<in> free_black_squares board`
+            using \<open>square \<in> free_black_squares board\<close>
             unfolding free_black_squares_def free_squares_def
             by auto
-          hence "card (free_squares board) = card (free_squares ?board1) + 1"
+          then have "card (free_squares board) = card (free_squares ?board1) + 1"
             by auto
-          hence "card (free_squares ?board1) mod 2 = 1"
-            using `card (free_squares board) mod 2 = 0`
+          then have "card (free_squares ?board1) mod 2 = 1"
+            using \<open>card (free_squares board) mod 2 = 0\<close>
             by presburger
-          hence "free_squares ?board1 \<noteq> {}"
+          then have "free_squares ?board1 \<noteq> {}"
             by auto
-          thus ?thesis
+          then show ?thesis
             unfolding free_squares_def
             by blast
         qed
 
         then obtain board2 where "valid_queenie_move ?board1 board2" "queenie_strategy ?board1 board2"
-          using `valid_queenie_strategy queenie_strategy`
+          using \<open>valid_queenie_strategy queenie_strategy\<close>
           unfolding valid_queenie_strategy_def
           using \<open>valid_game ?horst_strategy queenie_strategy k board\<close> calculation(1) calculation(2) valid_horst_move'_def 
           by blast
@@ -601,7 +601,7 @@ proof safe
           by (metis (no_types, lifting) Suc_eq_plus1  valid_game.intros(2))
       qed
     qed
-    thus "\<exists> board. valid_game ?horst_strategy queenie_strategy ?l board"
+    then show "\<exists> board. valid_game ?horst_strategy queenie_strategy ?l board"
       using pos
       by simp
   qed
@@ -621,7 +621,7 @@ next
   have "\<not> attacks_knight square board'"
   proof (cases "board square = Some Knight")
     case True
-    hence "\<not> attacks_knight square board"
+    then have "\<not> attacks_knight square board"
       using 2
       by simp
     show ?thesis
@@ -636,46 +636,46 @@ next
       obtain square' where 
         "square' \<in> squares" "\<not> attacks_knight square' board"
         "board square' = None" "board' = board (square' := Some Knight)"
-        using `valid_horst_move board board'`
+        using \<open>valid_horst_move board board'\<close>
         unfolding valid_horst_move_def valid_horst_move'_def
         by auto
       have "square' = (x', y')"
         using \<open>\<bar>x - x'\<bar> = 1 \<and> \<bar>y - y'\<bar> = 2 \<or> \<bar>x - x'\<bar> = 2 \<and> \<bar>y - y'\<bar> = 1\<close>
         using \<open>\<not> attacks_knight square board\<close> \<open>board' (x', y') = Some Knight\<close> \<open>board' = board(square' \<mapsto> Knight)\<close> \<open>(x', y') \<in> squares\<close> \<open>square = (x, y)\<close>
         by (metis (full_types)  attacks_knight.simps fun_upd_other)
-      hence "attacks_knight square' board"
-        using `square' \<in> squares`  \<open>\<bar>x - x'\<bar> = 1 \<and> \<bar>y - y'\<bar> = 2 \<or> \<bar>x - x'\<bar> = 2 \<and> \<bar>y - y'\<bar> = 1\<close>
-              `board square = Some Knight` `square = (x, y)`
-        using `square \<in> squares` `board square = Some Knight`
+      then have "attacks_knight square' board"
+        using \<open>square' \<in> squares\<close>  \<open>\<bar>x - x'\<bar> = 1 \<and> \<bar>y - y'\<bar> = 2 \<or> \<bar>x - x'\<bar> = 2 \<and> \<bar>y - y'\<bar> = 1\<close>
+              \<open>board square = Some Knight\<close> \<open>square = (x, y)\<close>
+        using \<open>square \<in> squares\<close> \<open>board square = Some Knight\<close>
         by (smt attacks_knight.simps)
-      thus False
-        using `\<not> attacks_knight square' board`
+      then show False
+        using \<open>\<not> attacks_knight square' board\<close>
         by simp
     qed
   next
     case False
     have "board' square = Some Knight"
-      using `square \<in> squares` `board'' square = Some Knight` `valid_queenie_move board' board''`
+      using \<open>square \<in> squares\<close> \<open>board'' square = Some Knight\<close> \<open>valid_queenie_move board' board''\<close>
       by (metis map_upd_Some_unfold piece.distinct(1) valid_queenie_move_def)
 
     obtain square' where *: "square' \<in> squares"
       "board square' = None" "\<not> attacks_knight square' board" 
       "board' = board(square' \<mapsto> Knight)"
-      using `valid_horst_move board board'`
+      using \<open>valid_horst_move board board'\<close>
       unfolding valid_horst_move_def valid_horst_move'_def
       by blast
     then have "square = square'"
-      using `board square \<noteq> Some Knight`
-      using `board' square = Some Knight`
+      using \<open>board square \<noteq> Some Knight\<close>
+      using \<open>board' square = Some Knight\<close>
       by (metis fun_upd_apply)
     then have "\<not> attacks_knight square board"
-      using `\<not> attacks_knight square' board`
+      using \<open>\<not> attacks_knight square' board\<close>
       by simp
     then show ?thesis
       by (cases square) (simp add: "*"(4) \<open>square = square'\<close>)
   qed
   then show ?case
-    using `valid_queenie_move board' board''`
+    using \<open>valid_queenie_move board' board''\<close>
     by (smt attacks_knight.elims(2) attacks_knight.elims(3) fun_upd_apply option.inject piece.simps(1) prod.simps(1) valid_queenie_move_def)
 qed
 
@@ -692,7 +692,7 @@ proof safe
   show "k \<le> (files * ranks) div 4"
   proof (rule ccontr)
     assume "\<not> ?thesis"
-    hence "k > (files * ranks) div 4"
+    then have "k > (files * ranks) div 4"
       by simp
 
     let ?queenie_strategy = "\<lambda> board board'. (\<exists> square \<in> squares. board square = Some Knight \<and> board (cycle_opposite square) = None \<and> board' (cycle_opposite square) = Some Queen)"
@@ -719,16 +719,16 @@ proof safe
               using 2
               by blast
             then have "board' (cycle_opposite square) = Some Queen"
-              using `valid_horst_move board board'`
+              using \<open>valid_horst_move board board'\<close>
               unfolding valid_horst_move_def valid_horst_move'_def
               by (metis fun_upd_apply option.distinct(1))
-            thus ?thesis
-              using `valid_queenie_move board' board''`
+            then show ?thesis
+              using \<open>valid_queenie_move board' board''\<close>
               using valid_queenie_move_def
               by auto
           next
             case False
-            from `valid_queenie_move board' board''` `?queenie_strategy board' board''`
+            from \<open>valid_queenie_move board' board''\<close> \<open>?queenie_strategy board' board''\<close>
             obtain square' where 
               "square' \<in> squares"
               "board' square' = Some Knight"
@@ -747,12 +747,12 @@ proof safe
                 by simp
               then have "board' (cycle_opposite square') = Some Queen"
                 by (metis \<open>board' (cycle_opposite square') = None\<close> \<open>valid_horst_move board board'\<close> fun_upd_def valid_horst_move'_def valid_horst_move_def)
-              thus False
+              then show False
                 using \<open>board' (cycle_opposite square') = None\<close>
                 by simp
             qed
-            thus ?thesis
-              using `board'' (cycle_opposite square') = Some Queen`
+            then show ?thesis
+              using \<open>board'' (cycle_opposite square') = Some Queen\<close>
               by simp
           qed
         next
@@ -764,45 +764,45 @@ proof safe
               using 2
               by auto
             then have "board' square = Some Knight"
-              using `valid_horst_move board board'`
+              using \<open>valid_horst_move board board'\<close>
               unfolding valid_horst_move_def valid_horst_move'_def valid_queenie_move_def
               by auto
-            thus ?thesis
-              using `valid_queenie_move board' board''`
+            then show ?thesis
+              using \<open>valid_queenie_move board' board''\<close>
               unfolding valid_queenie_move_def
               by auto
           next
             case False
-            hence "board' (cycle_opposite square) \<noteq> Some Queen"
-              using `valid_horst_move board board'`
+            then have "board' (cycle_opposite square) \<noteq> Some Queen"
+              using \<open>valid_horst_move board board'\<close>
               unfolding valid_horst_move_def valid_horst_move'_def valid_queenie_move_def
               by (meson map_upd_Some_unfold piece.simps(2))
             obtain square' where "square' \<in> squares" 
               "board' (cycle_opposite square') = None" 
               "board'' (cycle_opposite square') = Some Queen"
               "board' square' = Some Knight"
-              using `?queenie_strategy board' board''`
+              using \<open>?queenie_strategy board' board''\<close>
               by auto
             moreover
             obtain square'' where "board' square'' = None" 
               "board'' = board' (square'' := Some Queen)"
-              using `valid_queenie_move board' board''`
+              using \<open>valid_queenie_move board' board''\<close>
               unfolding valid_queenie_move_def
               by auto
             ultimately
             have "cycle_opposite square' = square''"
               by (auto split: if_split_asm)
             then have "cycle_opposite square' = cycle_opposite square"
-              using `board'' (cycle_opposite square) = Some Queen`
-              using `board' (cycle_opposite square) \<noteq> Some Queen`
-              using `board'' = board' (square'' := Some Queen)`
+              using \<open>board'' (cycle_opposite square) = Some Queen\<close>
+              using \<open>board' (cycle_opposite square) \<noteq> Some Queen\<close>
+              using \<open>board'' = board' (square'' := Some Queen)\<close>
               by (auto split: if_split_asm)
             then have "cycle_opposite (cycle_opposite square') = cycle_opposite (cycle_opposite square)"
               by simp
             then have "square' = square"
               by simp
             then have "board' square = Some Knight"
-              using `board' square' = Some Knight`
+              using \<open>board' square' = Some Knight\<close>
               by simp
             then show ?thesis
               using \<open>board'' = board'(square'' \<mapsto> Queen)\<close>
@@ -825,16 +825,16 @@ proof safe
         unfolding valid_horst_move_def valid_horst_move'_def
         by auto
       have "board (cycle_opposite square) \<noteq> Some Queen" "board (cycle_opposite square) \<noteq> Some Knight"
-        using 1[rule_format, OF `valid_game horst_strategy ?queenie_strategy k board`, of square]
-        using 1[rule_format, OF `valid_game horst_strategy ?queenie_strategy k board`, of "cycle_opposite square"]
-        using `square \<in> squares` `board square = None`
+        using 1[rule_format, OF \<open>valid_game horst_strategy ?queenie_strategy k board\<close>, of square]
+        using 1[rule_format, OF \<open>valid_game horst_strategy ?queenie_strategy k board\<close>, of "cycle_opposite square"]
+        using \<open>square \<in> squares\<close> \<open>board square = None\<close>
         by auto
       then have "board (cycle_opposite square) = None"
         by (metis (full_types) option.exhaust_sel piece.exhaust)
 
       let ?board = "board' (cycle_opposite square := Some Queen)"
       have "?queenie_strategy board' ?board"
-        using * `board (cycle_opposite square) = None` `square \<in> squares`
+        using * \<open>board (cycle_opposite square) = None\<close> \<open>square \<in> squares\<close>
         by (rule_tac x=square in bexI, simp_all)
 
       moreover
@@ -842,7 +842,7 @@ proof safe
       obtain f' r' where "cycle_opposite square = (f', r')"
         by (cases "cycle_opposite square")
       then have "valid_queenie_move board' ?board"
-        using  `board (cycle_opposite square) = None` cycle_opposite_squares[of square]
+        using  \<open>board (cycle_opposite square) = None\<close> cycle_opposite_squares[of square]
         unfolding valid_queenie_move_def
         by (metis "*"(1) "*"(4) cycle_opposite_different fun_upd_other)
 
@@ -858,7 +858,7 @@ proof safe
       by auto
 
     have "card (knights board) > (files * ranks) div 4"
-      using valid_game_knights_card[rule_format, OF **] `k > (files * ranks) div 4`
+      using valid_game_knights_card[rule_format, OF **] \<open>k > (files * ranks) div 4\<close>
       by auto
 
     have "card (cycle ` (knights board)) > (files * ranks) div 4"
@@ -869,14 +869,14 @@ proof safe
         fix square1 square2
         assume "square1 \<in> knights board" "square2 \<in> knights board" "cycle square1 = cycle square2"
         then show "square1 = square2"
-          using 1[rule_format, OF `valid_game horst_strategy ?queenie_strategy k board`]
-          using valid_game_not_attacks_knight[rule_format, OF `valid_game horst_strategy ?queenie_strategy k board`]
+          using 1[rule_format, OF \<open>valid_game horst_strategy ?queenie_strategy k board\<close>]
+          using valid_game_not_attacks_knight[rule_format, OF \<open>valid_game horst_strategy ?queenie_strategy k board\<close>]
           using cycle_exhausted[of board]
           unfolding knights_def
           by blast
       qed
-      thus ?thesis
-        using `card (knights board) > (files * ranks) div 4`
+      then show ?thesis
+        using \<open>card (knights board) > (files * ranks) div 4\<close>
         by (simp add: card_image)
     qed
 

@@ -16,7 +16,7 @@ proof-
     have "triangle r0 c0 n \<subseteq> {0..<r0 + n} \<times> {0..<c0 + n}"
       unfolding triangle_def
       by auto
-    thus ?thesis
+    then show ?thesis
       using finite_atLeastLessThan infinite_super
       by blast
 qed
@@ -27,7 +27,7 @@ proof (induction n arbitrary: r0 c0)
   case 0
   have *: "{(i, j). r0 \<le> i \<and> i < r0 \<and> c0 \<le> j \<and> j \<le> c0 + i - r0} = {}"
     by auto
-  thus ?case
+  then show ?case
     using 0
     unfolding triangle_def
     by (simp add: *)
@@ -53,10 +53,10 @@ next
     have "inj_on (\<lambda> j. (r0 + n, j)) {c0..<c0 + Suc n}"
       unfolding inj_on_def
       by auto
-    hence "card ((\<lambda> j. (r0 + n, j)) ` {c0..<c0 + Suc n}) = card {c0..<c0 + Suc n}"
+    then have "card ((\<lambda> j. (r0 + n, j)) ` {c0..<c0 + Suc n}) = card {c0..<c0 + Suc n}"
       using card_image
       by blast
-    hence "card ((\<lambda> j. (r0 + n, j)) ` {c0..<c0 + Suc n}) = Suc n"
+    then have "card ((\<lambda> j. (r0 + n, j)) ` {c0..<c0 + Suc n}) = Suc n"
       by auto
     ultimately
     show ?thesis
@@ -66,7 +66,7 @@ next
   have "card (triangle r0 c0 (Suc n)) = (n * (n + 1)) div 2 + Suc n"
     using Suc
     by simp
-  thus ?case
+  then show ?case
     by auto
 qed
 
@@ -107,7 +107,7 @@ lemma sorted_distinct_strict_increase:
   using assms
 proof (induction xs arbitrary: x rule: rev_induct)
   case Nil
-  thus ?case
+  then show ?case
     by simp
 next
   case (snoc x' xs)
@@ -122,7 +122,7 @@ lemma sum_list_sorted_distinct_lb:
   using assms            
 proof (induction xs rule: rev_induct)
   case Nil
-  thus ?case
+  then show ?case
     by simp
 next
   case (snoc x xs)
@@ -152,12 +152,12 @@ lemma consecutive_nats_sorted:
   using assms
 proof (induction xs arbitrary: n rule: rev_induct)
   case Nil
-  thus ?case
+  then show ?case
     by simp
 next
   case (snoc x xs)
   have "n > 0"
-    using `length (xs @ [x]) = n`
+    using \<open>length (xs @ [x]) = n\<close>
     by simp
   have "xs = [1..<(n-1)+1]"
   proof (rule snoc(1))
@@ -170,7 +170,7 @@ next
         using snoc(2-4) snoc(6)
       proof (induction xs arbitrary: x n rule: rev_induct)
         case Nil
-        thus ?case
+        then show ?case
           by simp
       next
         case (snoc x' xs')
@@ -191,38 +191,38 @@ next
           using snoc(5)
           by simp
         also have "... \<le> n * (n + 1) div 2 - n"
-          using `n \<le> x`
+          using \<open>n \<le> x\<close>
           by simp
         also have "... = n * (n - 1) div 2"
           by (simp add: diff_mult_distrib2)
         finally
         show ?thesis
-          using `n > 0`
+          using \<open>n > 0\<close>
           by (auto simp add: mult.commute)
       qed
     qed
   qed
-  hence "xs = [1..<n]"
-    using `n > 0`
+  then have "xs = [1..<n]"
+    using \<open>n > 0\<close>
     by simp
-  hence "x \<ge> n"
+  then have "x \<ge> n"
     using snoc(2) snoc(4) snoc(6)
     by (auto simp add: sorted_append)
   have "x = n"
   proof (rule ccontr)
     assume "\<not> ?thesis"
-    hence "x > n"
-      using `x \<ge> n`
+    then have "x > n"
+      using \<open>x \<ge> n\<close>
       by simp
-    hence "sum_list (xs @ [x]) > n * (n - 1) div 2 + n"
-      using `xs = [1..<n]` gauss[of n]
+    then have "sum_list (xs @ [x]) > n * (n - 1) div 2 + n"
+      using \<open>xs = [1..<n]\<close> gauss[of n]
       by simp
-    thus False
+    then show False
       using snoc(5)
       by (smt Suc_diff_1 \<open>0 < n\<close> add.commute add_Suc_right distrib_left div_mult_self2 less_le_trans mult_2 mult_2_right nat_neq_iff one_add_one plus_1_eq_Suc zero_neq_numeral)
   qed
-  thus ?case
-    using `xs = [1..<n]`
+  then show ?case
+    using \<open>xs = [1..<n]\<close>
     by (simp add: Suc_leI \<open>0 < n\<close>)
 qed
   
@@ -233,7 +233,7 @@ proof-
   have "sort xs = [1..<n+1]"
     using consecutive_nats_sorted[of "sort xs" n] assms
     by simp 
-  thus ?thesis
+  then show ?thesis
     by (metis set_sort set_upt)
 qed
 
@@ -264,7 +264,7 @@ proof (induction xs)
     by simp
 next
   case (Cons x xs)  
-  thus ?case
+  then show ?case
     using sum_list_mono
     by fastforce
 qed
@@ -300,7 +300,7 @@ proof (rule ccontr)
     then show "?P r0 c0 n"
     proof (induction n)
       case 0
-      thus ?case
+      then show ?case
         by auto
     next
       case (Suc n)
@@ -308,7 +308,7 @@ proof (rule ccontr)
       show ?case
       proof (cases "n = 0")
         case True
-        thus ?thesis
+        then show ?thesis
           by auto
       next
         case False
@@ -327,30 +327,30 @@ proof (rule ccontr)
             by auto
 
           have ap': "\<forall>r c. r0 \<le> r \<and> r \<le> r0 + n \<and> c0 \<le> c \<and> c < c0 + (r - r0) \<longrightarrow> f (r - 1) c = \<bar>f r c - f r (c + 1)\<bar>"
-            using `antipascal f 2018` `n \<noteq> 0` Suc(3-4)
+            using \<open>antipascal f 2018\<close> \<open>n \<noteq> 0\<close> Suc(3-4)
             unfolding antipascal_def
             by auto
           have ap: "f (r0 + n - 1) (b (r0 + n - 1)) = \<bar>f (r0 + n) (b (r0 + n - 1)) - f (r0 + n) (b (r0 + n - 1) + 1)\<bar>"
           proof (cases "n = 1")
             case True
-            thus ?thesis
+            then show ?thesis
               using *(2) ap'[rule_format, of "r0 + 1"]
               by simp
           next
             case False
-            hence "n > 1"
-              using `n \<noteq> 0`
+            then have "n > 1"
+              using \<open>n \<noteq> 0\<close>
               by simp
             show ?thesis
             proof (subst ap')
               have "r0 < r0 + n - 1"
-                using `n > 1`
+                using \<open>n > 1\<close>
                 by simp
-              hence "b (r0 + n - Suc 0) \<le> c0 + n - Suc 0"
-                using *(3)[rule_format, of "r0 + n - 1"] `n > 1`
+              then have "b (r0 + n - Suc 0) \<le> c0 + n - Suc 0"
+                using *(3)[rule_format, of "r0 + n - 1"] \<open>n > 1\<close>
                 by simp
               then show "r0 \<le> r0 + n \<and> r0 + n \<le> r0 + n \<and> c0 \<le> b (r0 + n - 1) \<and> b (r0 + n - 1) < c0 + (r0 + n - r0)"
-                using *(3)[rule_format, of "r0 + n - 1"] `n > 1`
+                using *(3)[rule_format, of "r0 + n - 1"] \<open>n > 1\<close>
                 by simp
             qed simp
           qed
@@ -361,7 +361,7 @@ proof (rule ccontr)
           let ?b = "b (r0 + n := ?bn)"
 
           have "?a r0 = c0" "?b r0 = c0"
-            using `n \<noteq> 0` `a r0 = c0` `b r0 = c0`
+            using \<open>n \<noteq> 0\<close> \<open>a r0 = c0\<close> \<open>b r0 = c0\<close>
             by simp_all
             
           moreover
@@ -373,23 +373,23 @@ proof (rule ccontr)
             show "f r (?b r) = (\<Sum> r' \<leftarrow> [r0..<r+1]. f r' (?a r'))"
             proof (cases "r < r0 + n")
               case True
-              hence "f r (?b r) = (\<Sum> r' \<leftarrow> [r0..<r+1]. f r' (a r'))"
-                using *(4) `r0 \<le> r`
+              then have "f r (?b r) = (\<Sum> r' \<leftarrow> [r0..<r+1]. f r' (a r'))"
+                using *(4) \<open>r0 \<le> r\<close>
                 by simp
               also have "... = (\<Sum> r' \<leftarrow> [r0..<r+1]. f r' (?a r'))"
               proof (rule sum_list_cong, safe)
                 fix r'
                 assume "r' \<in> set [r0..<r + 1]"
-                thus "f r' (a r') = f r' (?a r')"
-                  using True `r0 \<le> r`
+                then show "f r' (a r') = f r' (?a r')"
+                  using True \<open>r0 \<le> r\<close>
                   by auto
               qed
               finally show ?thesis
                 by simp
             next
               case False
-              hence "r = r0 + n"
-                using `r < r0 + Suc n`
+              then have "r = r0 + n"
+                using \<open>r < r0 + Suc n\<close>
                 by simp
               show ?thesis
               proof (cases "f (r0 + n) (b (r0 + n - 1)) < f (r0 + n) (b (r0 + n - 1) + 1)")
@@ -397,41 +397,41 @@ proof (rule ccontr)
                 have "f (r0 + n) (b (r0 + n - 1) + 1) = f (r0 + n - 1) (b (r0 + n - 1)) + f (r0 + n) (b (r0 + n - 1))"
                   using True ap
                   by simp
-                hence "f (r0 + n) (b (r0 + n - 1) + 1) = ((\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (a r'))) + f (r0 + n) (b (r0 + n - 1))"
-                  using *(4) `n \<noteq> 0`
+                then have "f (r0 + n) (b (r0 + n - 1) + 1) = ((\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (a r'))) + f (r0 + n) (b (r0 + n - 1))"
+                  using *(4) \<open>n \<noteq> 0\<close>
                   by simp
                 also have "... = (\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (if r' = r0 + n then b (r0 + n - 1) else (a r'))) + f (r0 + n) (if r0 + n = r0 + n then b (r0 + n - 1) else (a (r0 + n)))"
                 proof-
                   have "(\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (a r')) = (\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (if r' = r0 + n then b (r0 + n - 1) else (a r')))"
                     by (rule sum_list_cong, simp)
-                  thus ?thesis
+                  then show ?thesis
                     by simp
                 qed
                 also have "... = (\<Sum>r'\<leftarrow>[r0..<r0 + n + 1]. f r' (if r' = r0 + n then b (r0 + n - 1) else (a r')))"
                   by (subst sum_list_last, simp_all)
                 finally show ?thesis
-                  using True `r = r0 + n` 
+                  using True \<open>r = r0 + n\<close> 
                   by simp (metis One_nat_def)
               next
                 case False
-                hence "f (r0 + n) (b (r0 + n - 1)) = f (r0 + n - 1) (b (r0 + n - 1)) + f (r0 + n) (b (r0 + n - 1) + 1)"
+                then have "f (r0 + n) (b (r0 + n - 1)) = f (r0 + n - 1) (b (r0 + n - 1)) + f (r0 + n) (b (r0 + n - 1) + 1)"
                   using ap
                   by simp
-                hence "f (r0 + n) (b (r0 + n - 1)) = ((\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (a r'))) + f (r0 + n) (b (r0 + n - 1) + 1)"
-                  using *(4) `n \<noteq> 0`
+                then have "f (r0 + n) (b (r0 + n - 1)) = ((\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (a r'))) + f (r0 + n) (b (r0 + n - 1) + 1)"
+                  using *(4) \<open>n \<noteq> 0\<close>
                   by simp
                 also have "... = (\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (if r' = r0 + n then b (r0 + n - 1) + 1 else (a r'))) + f (r0 + n) (if r0 + n = r0 + n then b (r0 + n - 1) + 1 else (a (r0 + n)))"
                 proof-
                   have "(\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (a r')) = (\<Sum>r'\<leftarrow>[r0..<r0 + n]. f r' (if r' = r0 + n then b (r0 + n - 1) + 1 else (a r')))"
                     by (rule sum_list_cong, simp)
-                  thus ?thesis
+                  then show ?thesis
                     by simp
                 qed
                 also have "... = (\<Sum>r'\<leftarrow>[r0..<r0 + n + 1]. f r' (if r' = r0 + n then b (r0 + n - 1) + 1 else (a r')))"
                   by (subst sum_list_last, simp_all)
                 finally
                 show ?thesis
-                  using False `r = r0 + n`
+                  using False \<open>r = r0 + n\<close>
                   by simp (metis One_nat_def Suc_eq_plus1)
               qed
             qed
@@ -457,15 +457,15 @@ proof (rule ccontr)
             show "c0 \<le> ?a r"
             proof (cases "r < r0 + n")
               case True
-              thus ?thesis
-                using * `r0 < r`
+              then show ?thesis
+                using * \<open>r0 < r\<close>
                 by auto
             next
               case False
-              hence "r = r0 + n"
-                using `r < r0 + Suc n`
+              then have "r = r0 + n"
+                using \<open>r < r0 + Suc n\<close>
                 by simp
-              thus ?thesis
+              then show ?thesis
                 using *(2) *(3)[rule_format, of "r0 + n - 1"]
                 by (smt Suc_diff_1 Suc_eq_plus1 Suc_leD Suc_le_mono \<open>r0 < r\<close> add_gr_0 diff_less fun_upd_same less_antisym less_or_eq_imp_le zero_less_one)
             qed
@@ -475,15 +475,15 @@ proof (rule ccontr)
             show "?a r \<le> c0 + (r - r0)"
             proof (cases "r < r0 + n")
               case True
-              thus ?thesis
-                using * `r0 < r`
+              then show ?thesis
+                using * \<open>r0 < r\<close>
                 by auto
             next
               case False
-              hence "r = r0 + n"
-                using `r < r0 + Suc n`
+              then have "r = r0 + n"
+                using \<open>r < r0 + Suc n\<close>
                 by simp
-              thus ?thesis
+              then show ?thesis
                 using *(2) *(3)[rule_format, of "r0 + n - 1"]
                 by (smt Suc_diff_Suc \<open>r0 < r\<close> add_Suc_right add_diff_cancel_left' add_diff_cancel_right' fun_upd_same le_Suc_eq less_Suc_eq less_or_eq_imp_le nat_add_left_cancel_le plus_1_eq_Suc)
             qed
@@ -493,15 +493,15 @@ proof (rule ccontr)
             show "c0 \<le> ?b r"
             proof (cases "r < r0 + n")
               case True
-              thus ?thesis
-                using * `r0 < r`
+              then show ?thesis
+                using * \<open>r0 < r\<close>
                 by auto
             next
               case False
-              hence "r = r0 + n"
-                using `r < r0 + Suc n`
+              then have "r = r0 + n"
+                using \<open>r < r0 + Suc n\<close>
                 by simp
-              thus ?thesis
+              then show ?thesis
                 using *(2) *(3)[rule_format, of "r0 + n - 1"]
                 by (smt Suc_diff_1 Suc_eq_plus1 Suc_leD Suc_le_mono \<open>r0 < r\<close> add_gr_0 diff_less fun_upd_same less_antisym less_or_eq_imp_le zero_less_one)
             qed
@@ -511,15 +511,15 @@ proof (rule ccontr)
             show "?b r \<le> c0 + (r - r0)"
             proof (cases "r < r0 + n")
               case True
-              thus ?thesis
-                using * `r0 < r`
+              then show ?thesis
+                using * \<open>r0 < r\<close>
                 by auto
             next
               case False
-              hence "r = r0 + n"
-                using `r < r0 + Suc n`
+              then have "r = r0 + n"
+                using \<open>r < r0 + Suc n\<close>
                 by simp
-              thus ?thesis
+              then show ?thesis
                 using *(2) *(3)[rule_format, of "r0 + n - 1"]
                 by (smt Suc_diff_Suc \<open>r0 < r\<close> add_Suc_right add_diff_cancel_left' add_diff_cancel_right' fun_upd_same le_Suc_eq less_Suc_eq less_or_eq_imp_le nat_add_left_cancel_le plus_1_eq_Suc)
             qed
@@ -568,8 +568,8 @@ proof (rule ccontr)
     show "max (a (r - 1)) (b (r - 1)) \<le> max (a r) (b r)"
     proof (cases "r = 1")
       case True
-      thus ?thesis
-        using `a 0 = 0` `b 0 = 0`
+      then show ?thesis
+        using \<open>a 0 = 0\<close> \<open>b 0 = 0\<close>
         by simp
     next
       case False
@@ -601,7 +601,7 @@ proof (rule ccontr)
     assume "r1 \<in> set [0..<2018]" "r2 \<in> set [0..<2018]"
       "f r1 (a r1) = f r2 (a r2)"
     have "(r1, a r1) \<in> triangle 0 0 2018" "(r2, a r2) \<in> triangle 0 0 2018"
-      using `r1 \<in> set [0..<2018]` `r2 \<in> set [0..<2018]` *(4) *(1)
+      using \<open>r1 \<in> set [0..<2018]\<close> \<open>r2 \<in> set [0..<2018]\<close> *(4) *(1)
       using le_eq_less_or_eq triangle_def
       by auto
     moreover
@@ -609,12 +609,12 @@ proof (rule ccontr)
       by auto
     ultimately
     show "r1 = r2"
-      using `inj_on (uncurry f) (triangle 0 0 2018)` `f r1 (a r1) = f r2 (a r2)`
+      using \<open>inj_on (uncurry f) (triangle 0 0 2018)\<close> \<open>f r1 (a r1) = f r2 (a r2)\<close>
       by (metis inj_onD prod.inject)
   qed
 
   have "distinct ?fa"
-    using `inj_on (\<lambda> r. f r (a r)) (set [0..<2018])`
+    using \<open>inj_on (\<lambda> r. f r (a r)) (set [0..<2018])\<close>
     by (simp add: distinct_map)
 
   have "\<forall> x \<in> set ?fa. x > 0"
@@ -625,7 +625,7 @@ proof (rule ccontr)
       by auto
 
     have "(r, a r) \<in> triangle 0 0 2018"
-      using *(4) *(1) `r < 2018`
+      using *(4) *(1) \<open>r < 2018\<close>
       by (cases "r = 0", auto simp add: triangle_def)
     moreover
     have "(uncurry f) (r, a r) = f r (a r)"
@@ -634,7 +634,7 @@ proof (rule ccontr)
     have "f r (a r) \<in> (uncurry f) ` triangle 0 0 2018"
       by (metis rev_image_eqI)
     then show "x > 0"
-      using f(2) `x = f r (a r)`
+      using f(2) \<open>x = f r (a r)\<close>
       by auto
   qed
 
@@ -649,12 +649,12 @@ proof (rule ccontr)
         by fact
     next
       show "inj_on nat (set ?fa)"
-        using `\<forall> x \<in> set ?fa. x > 0` inj_on_def
+        using \<open>\<forall> x \<in> set ?fa. x > 0\<close> inj_on_def
         by force
     qed
   next
     show "\<forall> x \<in> set (map nat ?fa). x > 0"
-      using `\<forall> x \<in> set ?fa. x > 0`
+      using \<open>\<forall> x \<in> set ?fa. x > 0\<close>
       by simp
   next
     show "sum_list (map nat ?fa) \<le> 2018 * (2018 + 1) div 2"
@@ -676,7 +676,7 @@ proof (rule ccontr)
         show ?thesis
           by force
       qed
-      hence "(\<Sum> x \<leftarrow> ?fa. x) \<le> 2018*(2018 + 1) div 2"
+      then have "(\<Sum> x \<leftarrow> ?fa. x) \<le> 2018*(2018 + 1) div 2"
         using f(2)
         by auto
       moreover
@@ -702,14 +702,14 @@ proof (rule ccontr)
           by (metis (no_types, hide_lams) atLeastLessThan_upt map_idI map_map nat_int o_apply set_map)
         ultimately
         show ?thesis
-          using `set (map nat ?fa) = {1..<2018+1}`
+          using \<open>set (map nat ?fa) = {1..<2018+1}\<close>
           by simp
       qed
     next
       show "inj_on nat (set ?fa \<union> set (map int [1..<2018 + 1]))"
       proof-
         have "set ?fa \<union> set (map int [1..<2018 + 1]) \<subseteq> {x::int. x > 0}"
-          using `\<forall> x \<in> set ?fa. x > 0`
+          using \<open>\<forall> x \<in> set ?fa. x > 0\<close>
           by auto
         moreover
         have "inj_on nat {x::int. x > 0}"
@@ -720,7 +720,7 @@ proof (rule ccontr)
       qed
     qed
     
-    hence "mset ?fa = mset (map int [1..<2018+1])"
+    then have "mset ?fa = mset (map int [1..<2018+1])"
     proof (subst set_eq_iff_mset_eq_distinct[symmetric])
       show "distinct ?fa"
         by fact
@@ -729,7 +729,7 @@ proof (rule ccontr)
         by (simp add: distinct_map)
     qed simp
 
-    thus ?thesis
+    then show ?thesis
       using mset_eq_perm
       by blast
   qed
@@ -753,36 +753,36 @@ proof (rule ccontr)
         by auto
       moreover
       have "(r, c) \<in> triangle 0 0 2018"
-        using `triangle r0 c0 n \<subseteq> triangle 0 0 2018` `(r, c) \<in> triangle r0 c0 n`
+        using \<open>triangle r0 c0 n \<subseteq> triangle 0 0 2018\<close> \<open>(r, c) \<in> triangle r0 c0 n\<close>
         by auto
       then have "f r c \<ge> 1"
         using \<open>(uncurry f) ` (triangle 0 0 2018) = {1..<2018*(2018 + 1) div 2 + 1}\<close>
         by force
       then have "nat (f r c) \<in> {1..<2018+1}"
-        using `f r c \<le> 2018`
+        using \<open>f r c \<le> 2018\<close>
         by auto      
       then have "f r c \<in> set (map int [1..<2018+1])"
         by (smt \<open>1 \<le> f r c\<close> atLeastLessThan_upt image_eqI int_nat_eq set_map)
       then have "f r c \<in> set ?fa"
-        using `?fa <~~> map int [1..<2018+1]`
+        using \<open>?fa <~~> map int [1..<2018+1]\<close>
         using perm_set_eq
         by blast
       then obtain r' where "r' < 2018" "f r' (a r') = f r c"
         by auto
       have "(r', a r') \<in> triangle 0 0 2018"
-        using `r' < 2018` *(1) *(4)
+        using \<open>r' < 2018\<close> *(1) *(4)
         by (cases "r' = 0") (auto simp add: triangle_def)
-      hence "r = r'" "c = a r'"
-        using `f r' (a r') = f r c` `inj_on (uncurry f) (triangle 0 0 2018)` `(r, c) \<in> triangle 0 0 2018`
+      then have "r = r'" "c = a r'"
+        using \<open>f r' (a r') = f r c\<close> \<open>inj_on (uncurry f) (triangle 0 0 2018)\<close> \<open>(r, c) \<in> triangle 0 0 2018\<close>
         unfolding inj_on_def
         by force+
 
       then have "(r', a r') \<in> triangle r0 c0 n"
-        using `(r, c) \<in> triangle r0 c0 n`
+        using \<open>(r, c) \<in> triangle r0 c0 n\<close>
         by simp
 
-      thus False
-        using `r' < 2018` `\<forall> r < 2018. (r, a r) \<notin> triangle r0 c0 n`
+      then show False
+        using \<open>r' < 2018\<close> \<open>\<forall> r < 2018. (r, a r) \<notin> triangle r0 c0 n\<close>
         by auto
     qed
 
@@ -796,7 +796,7 @@ proof (rule ccontr)
       "\<forall>r. r0 \<le> r \<and> r < r0 + n \<longrightarrow>
                      f r (br r) =
                      (\<Sum>r'\<leftarrow>[r0..<r+1]. f r' (ar r'))"
-      using `r0 + n \<le> 2018` `c0 \<le> r0` `n \<ge> 1008`
+      using \<open>r0 + n \<le> 2018\<close> \<open>c0 \<le> r0\<close> \<open>n \<ge> 1008\<close>
       using path[rule_format, of r0 c0 n]
       by auto
 
@@ -810,27 +810,27 @@ proof (rule ccontr)
         by (cases "r = r0") auto
     qed
     then have "\<forall> r. r0 \<le> r \<and> r < r0 + n \<longrightarrow> f r (ar r) > 2018"
-      using `\<forall> p \<in> triangle r0 c0 n. (uncurry f) p > 2018`
+      using \<open>\<forall> p \<in> triangle r0 c0 n. (uncurry f) p > 2018\<close>
       by force
 
     have "(r0 + n - 1, br (r0 + n - 1)) \<in> triangle r0 c0 n"
       using r(3)[rule_format, of "r0 + n - 1"]
-      using `r0 + n \<le> 2018` `n \<ge> 1008`
+      using \<open>r0 + n \<le> 2018\<close> \<open>n \<ge> 1008\<close>
       by (simp add: triangle_def)
-    hence "(r0 + n - 1, br (r0 + n - 1)) \<in> triangle 0 0 2018"
+    then have "(r0 + n - 1, br (r0 + n - 1)) \<in> triangle 0 0 2018"
       using \<open>triangle r0 c0 n \<subseteq> triangle 0 0 2018\<close>
       by blast
-    hence "(uncurry f) (r0 + n - 1, br (r0 + n - 1)) \<in> {1..<2018 * (2018 + 1) div 2 + 1}"
+    then have "(uncurry f) (r0 + n - 1, br (r0 + n - 1)) \<in> {1..<2018 * (2018 + 1) div 2 + 1}"
       using f(2)
       by blast
-    hence "f (r0 + n - 1) (br (r0 + n - 1)) \<le> 2018*(2018+1) div 2"
+    then have "f (r0 + n - 1) (br (r0 + n - 1)) \<le> 2018*(2018+1) div 2"
       by simp
 
     moreover
 
     have "f (r0 + n - 1) (br (r0 + n - 1)) = (\<Sum>r'\<leftarrow>[r0..<(r0 + n - 1) + 1]. f r' (ar r'))"
       using r(4)[rule_format, of "r0 + n - 1"]
-      using \<open>r0 + n \<le> 2018\<close> `n \<ge> 1008`
+      using \<open>r0 + n \<le> 2018\<close> \<open>n \<ge> 1008\<close>
       by simp
 
     ultimately
@@ -839,15 +839,15 @@ proof (rule ccontr)
       by simp
 
     have "length ([r0..< (r0 + n - 1) + 1]) = n"
-      using `n \<ge> 1008`
+      using \<open>n \<ge> 1008\<close>
       by auto
 
     have "n * (2 * 2018 + n + 1) div 2 \<ge> 1008 * (2*2018 + 1008 + 1) div 2 "
     proof-
       have "n * (2 * 2018 + n + 1) \<ge> 1008 * (2*2018 + 1008 + 1)"
-        using `n \<ge> 1008`
+        using \<open>n \<ge> 1008\<close>
         by (metis Suc_eq_plus1 add_Suc mult_le_mono nat_add_left_cancel_le)
-      thus ?thesis
+      then show ?thesis
         using div_le_mono
         by blast
     qed
@@ -858,7 +858,7 @@ proof (rule ccontr)
           (\<Sum>r'\<leftarrow>[r0..<(r0 + n - 1) + 1]. nat (f r' (ar r')))"
     proof (rule sum_list_distinct_lb)
       have "\<forall>r'\<in>set [r0..<(r0 + n - 1) + 1]. 2018 < f r' (ar r')"
-        using `\<forall> r. r0 \<le> r \<and> r < r0 + n \<longrightarrow> f r (ar r) > 2018` `n \<ge> 1008`
+        using \<open>\<forall> r. r0 \<le> r \<and> r < r0 + n \<longrightarrow> f r (ar r) > 2018\<close> \<open>n \<ge> 1008\<close>
         by simp
       then show "\<forall>r'\<in>set [r0..<(r0 + n - 1)+ 1]. 2018 < nat (f r' (ar r'))"
         by auto
@@ -872,9 +872,9 @@ proof (rule ccontr)
           assume "r1 \<in> set [r0..<(r0 + n - 1) + 1]" "r2 \<in> set [r0..<(r0 + n - 1) + 1]"
                  "nat (f r1 (ar r1)) = nat (f r2 (ar r2))"
           have "(r1, ar r1) \<in> triangle r0 c0 n" "(r2, ar r2) \<in> triangle r0 c0 n"
-            using `r1 \<in> set [r0..<(r0 + n - 1) + 1]` `r2 \<in> set [r0..<(r0 + n - 1) + 1]`
-            using `\<forall> r. r0 \<le> r \<and> r < r0 + n \<longrightarrow> (r, ar r) \<in> triangle r0 c0 n`
-            using `n \<ge> 1008`
+            using \<open>r1 \<in> set [r0..<(r0 + n - 1) + 1]\<close> \<open>r2 \<in> set [r0..<(r0 + n - 1) + 1]\<close>
+            using \<open>\<forall> r. r0 \<le> r \<and> r < r0 + n \<longrightarrow> (r, ar r) \<in> triangle r0 c0 n\<close>
+            using \<open>n \<ge> 1008\<close>
             by force+
 
           then have "(r1, ar r1) \<in> triangle 0 0 2018" "(r2, ar r2) \<in> triangle 0 0 2018"
@@ -889,8 +889,8 @@ proof (rule ccontr)
           moreover
 
           have "f r1 (a r1) = f r2 (a r2)"
-            using `(r1, ar r1) \<in> triangle 0 0 2018` `(r2, ar r2) \<in> triangle 0 0 2018`
-            using `nat (f r1 (ar r1)) = nat (f r2 (ar r2))`
+            using \<open>(r1, ar r1) \<in> triangle 0 0 2018\<close> \<open>(r2, ar r2) \<in> triangle 0 0 2018\<close>
+            using \<open>nat (f r1 (ar r1)) = nat (f r2 (ar r2))\<close>
             using \<open>(r1, ar r1) \<in> triangle r0 c0 n\<close> 
             using \<open>\<forall> p \<in> triangle r0 c0 n. 2018 < uncurry f p\<close>
             using \<open>inj_on (uncurry f) (triangle 0 0 2018)\<close> 
@@ -899,7 +899,7 @@ proof (rule ccontr)
           ultimately
 
           show "r1 = r2"
-            using `inj_on (uncurry f) (triangle 0 0 2018)`
+            using \<open>inj_on (uncurry f) (triangle 0 0 2018)\<close>
             using \<open>(r1, ar r1) \<in> triangle r0 c0 n\<close>
                   \<open>\<forall>p\<in>triangle r0 c0 n. 2018 < uncurry f p\<close>
                   \<open>nat (f r1 (ar r1)) = nat (f r2 (ar r2))\<close>
@@ -911,7 +911,7 @@ proof (rule ccontr)
     ultimately
 
     have "(\<Sum>r'\<leftarrow>[r0..<(r0 + n - 1) + 1]. nat (f r' (ar r'))) \<ge> 1008 * (2*2018 + 1008 + 1) div 2"
-      using `length ([r0..< (r0 + n - 1) + 1]) = n`
+      using \<open>length ([r0..< (r0 + n - 1) + 1]) = n\<close>
       by simp
 
     moreover
@@ -919,7 +919,7 @@ proof (rule ccontr)
     have "(\<Sum>r'\<leftarrow>[r0..<(r0 + n - 1) + 1]. nat (f r' (ar r'))) = nat ((\<Sum>r'\<leftarrow>[r0..<(r0 + n - 1) + 1]. f r' (ar r')))"
     proof (rule sum_list_nat)
       show "\<forall>r'\<in>set [r0..<(r0 + n - 1) + 1]. 0 \<le> f r' (ar r')"
-        using `\<forall> r. r0 \<le> r \<and> r < r0 + n \<longrightarrow> f r (ar r) > 2018` `n \<ge> 1008`
+        using \<open>\<forall> r. r0 \<le> r \<and> r < r0 + n \<longrightarrow> f r (ar r) > 2018\<close> \<open>n \<ge> 1008\<close>
         by auto
     qed
 
@@ -958,19 +958,19 @@ proof (rule ccontr)
             then show "max (a (2017 - r)) (b (2017 - r)) \<le> ?r"
             proof (induction r)
               case 0
-              thus ?case
+              then show ?case
                 by simp
             next
               case (Suc r)
-              thus ?case
+              then show ?case
                 using max_max *(1-2)
                 by (smt Suc_diff_Suc Suc_lessD add_diff_cancel_left' diff_Suc_Suc diff_less_Suc max.boundedE max.orderE one_plus_numeral plus_1_eq_Suc semiring_norm(4) semiring_norm(5) zero_less_diff)
             qed
           qed
-          thus ?thesis
+          then show ?thesis
             by (metis Suc_leI add_le_cancel_left diff_diff_cancel diff_less_Suc one_plus_numeral plus_1_eq_Suc semiring_norm(4) semiring_norm(5))
         qed
-        thus ?thesis
+        then show ?thesis
           unfolding triangle_def
           by auto
       qed
@@ -1012,32 +1012,32 @@ proof (rule ccontr)
             then show "?l - (2017 - (2017 - r)) \<le> min (a (2017 - r)) (b (2017 - r))"
             proof (induction r)
               case 0
-              thus ?case
+              then show ?case
                 by simp
             next
               case (Suc r)
               have "min (a 2017) (b 2017) - (2017 - (2017 - Suc r)) = min (a 2017) (b 2017) - r - 1"
-                using `Suc r < 2018`
+                using \<open>Suc r < 2018\<close>
                 by auto
               also have "... \<le>  min (a (2017 - r)) (b (2017 - r)) - 1"
                 using Suc
                 by (smt Suc_lessD diff_Suc_Suc diff_diff_cancel diff_le_mono le_less one_plus_numeral plus_1_eq_Suc semiring_norm(4) semiring_norm(5) zero_less_diff)
               also have "... \<le> min (a (2017 - r - 1)) (b (2017 - r - 1))"
-                using min_min[rule_format, of "2017 - r"] `Suc r < 2018`
+                using min_min[rule_format, of "2017 - r"] \<open>Suc r < 2018\<close>
                 by simp
               finally
               show ?case
                 by simp
             qed
           qed
-          thus ?thesis
+          then show ?thesis
             by (smt diff_diff_cancel diff_less_Suc le_less less_Suc_eq one_plus_numeral plus_1_eq_Suc semiring_norm(4) semiring_norm(5))
         qed
-        thus ?thesis
+        then show ?thesis
           by (auto simp add: triangle_def)
       qed
     qed
   qed
 qed
 
-end                                                         
+end

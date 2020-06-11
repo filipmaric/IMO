@@ -42,11 +42,11 @@ next
   show ?case
   proof (cases "m \<le> n")
     case True
-    hence "sum ((^) q) {m..<Suc n} = (q ^ n - q ^ m) div (q - 1) + q^n"
+    then have "sum ((^) q) {m..<Suc n} = (q ^ n - q ^ m) div (q - 1) + q^n"
       using Suc
       by simp
     also have "... = ((q ^ n - q ^ m) + (q - 1) * q^n) div (q - 1)"
-      using `q > 1`
+      using \<open>q > 1\<close>
       by auto
     also have "... = ((q ^ n - q ^ m) + (q^(n+1) - q^n)) div (q - 1)"
       by (simp add: algebra_simps)
@@ -56,7 +56,7 @@ next
       by simp
   next
     case False
-    hence "m = n + 1"
+    then have "m = n + 1"
       using Suc(3)
       by auto
     then show ?thesis
@@ -83,10 +83,10 @@ proof-
     assume "ka \<in> {1..<n}" "kb \<in> {1..<n}" "(3::nat)^ka = 2*3^kb"
     have "odd ((3::nat)^ka)" "even (2*3^kb)"
       by simp_all
-    hence False
-      using `(3::nat)^ka = 2*3^kb`
+    then have False
+      using \<open>(3::nat)^ka = 2*3^kb\<close>
       by simp
-    thus "3^ka \<in> {}"
+    then show "3^ka \<in> {}"
       by simp
   qed
 
@@ -98,19 +98,19 @@ proof-
     have "3 dvd ((3::nat) ^ n + 9) div 2"
     proof-
       have "(3::nat) ^ n + 9 = (3^2) * (3::nat)^(n-2) + 9"
-        using `n \<ge> 3`
+        using \<open>n \<ge> 3\<close>
         by (metis One_nat_def add_leD2 le_add_diff_inverse numeral_3_eq_3 one_add_one plus_1_eq_Suc power_add)
-      hence "(3::nat) ^ n + 9 = 9*(3^(n-2) + 1)"
+      then have "(3::nat) ^ n + 9 = 9*(3^(n-2) + 1)"
         by simp
-      hence "((3::nat) ^ n + 9) div 2 = (9 * (3^(n-2) + 1)) div 2"
+      then have "((3::nat) ^ n + 9) div 2 = (9 * (3^(n-2) + 1)) div 2"
         by auto
-      hence "((3::nat) ^ n + 9) div 2 = 9 * ((3^(n-2) + 1) div 2)"
+      then have "((3::nat) ^ n + 9) div 2 = 9 * ((3^(n-2) + 1) div 2)"
         by (metis One_nat_def div_mult_swap dvd_mult_div_cancel even_add even_power even_succ_div_two num.distinct(1) numeral_3_eq_3 numeral_eq_one_iff one_add_one plus_1_eq_Suc)
-      thus ?thesis
+      then show ?thesis
         by simp
     qed
-    thus ?thesis
-      using `((3::nat) ^ n + 9) div 2 > 1`
+    then show ?thesis
+      using \<open>((3::nat) ^ n + 9) div 2 > 1\<close>
       by (meson dvd_diffD1 less_imp_le_nat nat_dvd_1_iff_1 numeral_eq_one_iff semiring_norm(86))
   qed
 
@@ -120,20 +120,20 @@ proof-
     proof safe
       fix k
       assume "k \<in> {1..<n}" "(3::nat) ^ k = 1"
-      thus "3 ^ k \<in> {}"
+      then show "3 ^ k \<in> {}"
         by simp
     next
       fix k
       assume "k \<in> {1..<n}" "(3::nat) ^ k = (3 ^ n + 9) div 2 - 1"
       moreover
       have "3 dvd (3::nat) ^ k"
-        using `k \<in> {1..<n}`
+        using \<open>k \<in> {1..<n}\<close>
         by auto
       ultimately
       have False
-        using `\<not> 3 dvd (3 ^ n + 9) div 2 - 1`
+        using \<open>\<not> 3 dvd (3 ^ n + 9) div 2 - 1\<close>
         by simp
-      thus "3 ^ k \<in> {}"
+      then show "3 ^ k \<in> {}"
         by simp
     qed
 
@@ -143,20 +143,20 @@ proof-
     proof safe
       fix k
       assume "k \<in> {1..<n}" "2 * (3::nat) ^ k = 1"
-      thus "2 * 3 ^ k \<in> {}"
+      then show "2 * 3 ^ k \<in> {}"
         by simp
     next
       fix k
       assume "k \<in> {1..<n}" "2 * (3::nat) ^ k = (3 ^ n + 9) div 2 - 1"
       moreover
       have "3 dvd 2 * (3::nat) ^ k"
-        using `k \<in> {1..<n}`
+        using \<open>k \<in> {1..<n}\<close>
         by auto
       ultimately
       have False
-        using `\<not> 3 dvd (3 ^ n + 9) div 2 - 1`
+        using \<open>\<not> 3 dvd (3 ^ n + 9) div 2 - 1\<close>
         by simp
-      thus "2 * 3 ^ k \<in> {}"
+      then show "2 * 3 ^ k \<in> {}"
         by simp
     qed
 
@@ -191,26 +191,26 @@ proof-
 
         ultimately
         show ?thesis
-          using `n \<ge> 3` card_Un_disjoint[of ?Sa ?Sb] `?Sa \<inter> ?Sb = {}` `finite ?Sa` `finite ?Sb`
+          using \<open>n \<ge> 3\<close> card_Un_disjoint[of ?Sa ?Sb] \<open>?Sa \<inter> ?Sb = {}\<close> \<open>finite ?Sa\<close> \<open>finite ?Sb\<close>
           by smt
       qed
 
       moreover
 
       have "card {1, ((3::nat)^n + 9) div 2 - 1} = 2"
-        using `1 < ((3::nat) ^ n + 9) div 2`
+        using \<open>1 < ((3::nat) ^ n + 9) div 2\<close>
         by auto
 
       ultimately
 
       show "card ?S = 2*n"
-        using `n \<ge> 3` card_Un_disjoint[of "?Sa \<union> ?Sb" ?Sc] `(?Sa \<union> ?Sb) \<inter> ?Sc = {}` `finite (?Sa \<union> ?Sb)` `finite ?Sc`
+        using \<open>n \<ge> 3\<close> card_Un_disjoint[of "?Sa \<union> ?Sb" ?Sc] \<open>(?Sa \<union> ?Sb) \<inter> ?Sc = {}\<close> \<open>finite (?Sa \<union> ?Sb)\<close> \<open>finite ?Sc\<close>
         by (smt Nat.add_diff_assoc2 Suc_1 Suc_eq_plus1 add_Suc_right card_infinite diff_add_inverse2 le_trans mult_2 nat.simps(3) one_le_numeral)
     qed
   next
     fix k
     assume "k \<in> {1..<n}"
-    thus "0 < (3::nat) ^ k" "0 < 2 * (3::nat) ^ k"
+    then show "0 < (3::nat) ^ k" "0 < 2 * (3::nat) ^ k"
       by simp_all
   next
     show "0 < ((3::nat) ^ n + 9) div 2 - 1"
@@ -224,11 +224,11 @@ proof-
     let ?Bm = "?S - ?Am"
 
     have "?Am' \<subseteq> ?Sb"
-      using `m \<le> n`
+      using \<open>m \<le> n\<close>
       by auto
 
     have "?Am'' \<subseteq> ?Sa"
-      using `m \<le> n` `2 \<le> m`
+      using \<open>m \<le> n\<close> \<open>2 \<le> m\<close>
       by force
 
 
@@ -247,9 +247,9 @@ proof-
     have "?Am \<union> ?Bm = ?S"
     proof-
       have "?Am \<subseteq> ?S"
-        using `?Am' \<subseteq> ?Sb` `?Am'' \<subseteq> ?Sa`
+        using \<open>?Am' \<subseteq> ?Sb\<close> \<open>?Am'' \<subseteq> ?Sa\<close>
         by blast
-      thus ?thesis
+      then show ?thesis
         by blast
     qed
                    
@@ -277,14 +277,14 @@ proof-
           have "inj_on (\<lambda> k. 2*(3::nat)^k) {n-m+1..<n}"
             unfolding inj_on_def
             by auto
-          thus ?thesis
+          then show ?thesis
             unfolding Setcompr_eq_image
             by (simp add: sum.reindex_cong)
         qed
         also have "... = 2 * (\<Sum>k\<in>{n-m+1..<n}. 3^k)"
           by (simp add: sum_distrib_left)
         also have "... = 3^n - 3^(n-m+1)"
-          using sum_geom_nat'[of 3 "n-m+1" n] `m \<ge> 2` `m \<le> n`
+          using sum_geom_nat'[of 3 "n-m+1" n] \<open>m \<ge> 2\<close> \<open>m \<le> n\<close>
           by simp
         finally
         have "\<Sum> ?Am' = 3^n - 3^(n-m+1)"
@@ -308,9 +308,9 @@ proof-
         also have "... = 3^n"
         proof-
           have "(3::nat)^(n-m+1) \<le> 3^n"
-            using `m \<le> n` `2 \<le> m`
+            using \<open>m \<le> n\<close> \<open>2 \<le> m\<close>
             by (metis Nat.le_diff_conv2 add.commute add_leD2 diff_diff_cancel diff_le_self one_le_numeral power_increasing)
-          thus ?thesis
+          then show ?thesis
             by simp
         qed
         finally show ?thesis
@@ -328,7 +328,7 @@ proof-
             have "inj_on ((^) (3::nat)) {1..<n}"
               unfolding inj_on_def
               by auto
-            thus ?thesis
+            then show ?thesis
               unfolding Setcompr_eq_image
               by (simp add: sum.reindex_cong)
           qed
@@ -341,8 +341,8 @@ proof-
             then have "\<Sum> ?Sa = (\<Sum> k \<in> {1..<n}. 3 ^ k)"
               unfolding Setcompr_eq_image
               by (simp add: sum.reindex_cong)
-            thus ?thesis
-              using sum_geom_nat'[of 3 1 n] `n \<ge> 3`
+            then show ?thesis
+              using sum_geom_nat'[of 3 1 n] \<open>n \<ge> 3\<close>
               by simp
           qed
 
@@ -363,13 +363,13 @@ proof-
               have "inj_on (\<lambda> k. (3::nat) ^ k) {1..<n}"
                 unfolding inj_on_def
                 by auto
-              thus ?thesis
+              then show ?thesis
                 unfolding Setcompr_eq_image
                 by (simp add: sum.reindex_cong)
             qed
             finally 
             show ?thesis
-              using `\<Sum> ?Sa = (3^n - 1) div 2 - 1`
+              using \<open>\<Sum> ?Sa = (3^n - 1) div 2 - 1\<close>
               by simp
           qed
 
@@ -381,8 +381,8 @@ proof-
           moreover
 
           have "\<Sum> ?S = \<Sum> ?Sa + \<Sum> ?Sb + \<Sum> ?Sc"
-            using `?Sa \<inter> ?Sb = {}` `(?Sa \<union> ?Sb) \<inter> ?Sc = {}`
-            using `finite ?Sa` `finite ?Sb` `finite ?Sc` `finite (?Sa \<union> ?Sb)`
+            using \<open>?Sa \<inter> ?Sb = {}\<close> \<open>(?Sa \<union> ?Sb) \<inter> ?Sc = {}\<close>
+            using \<open>finite ?Sa\<close> \<open>finite ?Sb\<close> \<open>finite ?Sc\<close> \<open>finite (?Sa \<union> ?Sb)\<close>
             using sum.union_disjoint
             by (metis (no_types, lifting))
 
@@ -399,7 +399,7 @@ proof-
             also have "... = 2*3^n"
             proof-
               have "9 \<le> (3::nat) * 3 ^ n"
-                using `n \<ge> 3`
+                using \<open>n \<ge> 3\<close>
                 by (smt Suc_1 \<open>(3 ^ n - 1) div 2 - 1 = (3 ^ n - 3) div 2\<close> calculation diff_add_inverse2 diff_diff_cancel diff_is_0_eq dvd_mult_div_cancel even_add even_power le_add1 le_add_same_cancel2 le_antisym le_trans linear mult_Suc numeral_3_eq_3 odd_two_times_div_two_succ plus_1_eq_Suc power_mult self_le_ge2_pow)
               then have "((3::nat)*3^n - 9) + (3^n + 9) = 4*3^n"
                 by simp
@@ -416,11 +416,11 @@ proof-
             by simp
         qed
         also have "\<Sum> ?S = \<Sum> ?Am + \<Sum> ?Bm"
-          using `?Am \<union> ?Bm = ?S` `?Am \<inter> ?Bm = {}` `finite ?Am` `finite ?Bm`
+          using \<open>?Am \<union> ?Bm = ?S\<close> \<open>?Am \<inter> ?Bm = {}\<close> \<open>finite ?Am\<close> \<open>finite ?Bm\<close>
           using sum.union_disjoint[of ?Am ?Bm id]
           by simp
-        thus ?thesis
-          using `\<Sum> ?Am = 3^n`
+        then show ?thesis
+          using \<open>\<Sum> ?Am = 3^n\<close>
           by (metis (no_types, lifting) add_left_cancel calculation mult_2)
       qed
 

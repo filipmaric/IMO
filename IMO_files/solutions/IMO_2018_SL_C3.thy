@@ -33,12 +33,12 @@ lemma card_Max:
   shows "card X \<le> Max X + 1"
 proof (cases "finite X")
   case True
-  thus ?thesis
+  then show ?thesis
     using subset_Max[of X]
     using subset_eq_atLeast0_lessThan_card by blast
 next
   case False
-  thus ?thesis
+  then show ?thesis
     by simp
 qed
 
@@ -48,7 +48,7 @@ lemma sum_length_parts:
   using assms
 proof (induction ps arbitrary: xs)
   case Nil
-  thus ?case
+  then show ?case
     by simp
 next
   case (Cons p ps)
@@ -62,21 +62,21 @@ next
     proof
       fix p'
       assume "p' \<in> set ps"
-      hence "set (filter p xs) \<inter> set (filter p' xs) = {}"
+      then have "set (filter p xs) \<inter> set (filter p' xs) = {}"
         using *
         by auto
       show "filter p' xs = filter p' ?xs'"
       proof (subst filter_filter, rule filter_cong)
         fix x
         assume "x \<in> set xs"
-        thus "p' x = (\<not> p x \<and> p' x)"
-          using `set (filter p xs) \<inter> set (filter p' xs) = {}`
+        then show "p' x = (\<not> p x \<and> p' x)"
+          using \<open>set (filter p xs) \<inter> set (filter p' xs) = {}\<close>
           by auto
       qed simp
     qed
     then have "\<forall> p \<in> set ps. length (filter p xs) = length (filter p ?xs')"
       by simp
-    thus ?thesis
+    then show ?thesis
       by (metis (no_types, lifting) map_eq_conv)
   qed
   moreover
@@ -84,10 +84,10 @@ next
   proof (rule Cons(1), safe)
     fix i j x
     assume "i < j" "j < length ps" "x \<in> set (filter (ps ! i) ?xs')"  "x \<in> set (filter (ps ! j) ?xs')"
-    hence False
+    then have False
       using Cons(2)[rule_format, of "i+1" "j+1"]
       by auto
-    thus "x \<in> {}"
+    then show "x \<in> {}"
       by simp
   qed
 
@@ -109,21 +109,21 @@ lemma hd_filter:
   using assms
 proof (induction xs)
   case Nil
-  thus ?case
+  then show ?case
     by simp
 next
   case (Cons x xs)
   show ?case
   proof (cases "P x")
     case True
-    thus ?thesis
+    then show ?thesis
       by auto
   next
     case False
     then obtain k where "k<length xs" "filter P xs ! 0 = xs ! k" "P (xs ! k)" "(\<forall>k'<k. \<not> P (xs ! k'))"
       using Cons
       by auto
-    thus ?thesis
+    then show ?thesis
       using False
       by (rule_tac x="k+1" in exI, simp add: nth_Cons')
   qed
@@ -155,7 +155,7 @@ proof-
   next
     fix k'
     assume "length xs - (k + 1) < k'" "k' < length xs" "P (xs ! k')"
-    thus False
+    then show False
       using *(1) *(4)[rule_format, of "length xs - (k' + 1)"]
       by (smt add.commute add_diff_cancel_right add_diff_cancel_right' add_diff_inverse_nat add_gr_0 diff_less diff_less_mono2 not_less_eq plus_1_eq_Suc rev_nth zero_less_one)
   qed    
@@ -186,17 +186,17 @@ proof (induction i arbitrary: xs)
   have "filter P (take (k1 + 1) xs) = [xs ! k1]"
   proof-
     have "filter P (take k1 xs) = []"
-      using `\<forall> k' < k1. \<not> P (xs ! k')` `k1 < length xs`
+      using \<open>\<forall> k' < k1. \<not> P (xs ! k')\<close> \<open>k1 < length xs\<close>
       using last_filter
       by force
     moreover
     have "take (k1 + 1) xs = take k1 xs @ [xs ! k1]"
-      using `k1 < length xs`
+      using \<open>k1 < length xs\<close>
       using take_Suc_conv_app_nth
       by auto
     ultimately 
     show ?thesis
-      using `P (xs ! k1)`
+      using \<open>P (xs ! k1)\<close>
       by simp
   qed
   then have "filter P ?xs \<noteq> []"
@@ -206,7 +206,7 @@ proof (induction i arbitrary: xs)
     using hd_filter[of P ?xs]
     by auto
   have "filter P xs ! 1 = xs ! (k1 + 1 + k2')"
-    using * `filter P (take (k1 + 1) xs) = [xs ! k1]` \<open>k1 < length xs\<close>
+    using * \<open>filter P (take (k1 + 1) xs) = [xs ! k1]\<close> \<open>k1 < length xs\<close>
     by (metis One_nat_def Suc_eq_plus1 Suc_leI append_take_drop_id filter_append length_Cons list.size(3) nth_append_length_plus nth_drop plus_1_eq_Suc)
   moreover
   have "P (xs ! (k1 + 1 + k2'))"
@@ -217,26 +217,26 @@ proof (induction i arbitrary: xs)
   proof safe
     fix k'
     assume "k1 < k'" "k' < k1 + 1 + k2'" "P (xs ! k')"
-    hence "k' - (k1 + 1) < k2'"
+    then have "k' - (k1 + 1) < k2'"
       by auto
-    hence "\<not> P (?xs ! (k' - (k1 + 1)))"
-      using `\<forall> k' < k2'. \<not> P (?xs ! k')`
+    then have "\<not> P (?xs ! (k' - (k1 + 1)))"
+      using \<open>\<forall> k' < k2'. \<not> P (?xs ! k')\<close>
       by simp
     then have "\<not> P (xs ! k')"
-      using `k2' < length ?xs`
+      using \<open>k2' < length ?xs\<close>
       using \<open>k1 < k'\<close>
       by auto
-    thus False
-      using `P (xs ! k')`
+    then show False
+      using \<open>P (xs ! k')\<close>
       by simp
   qed
   moreover
   have "k1 + 1 + k2' < length xs"
-    using `k2' < length ?xs`
+    using \<open>k2' < length ?xs\<close>
     by auto
   ultimately
   show ?case
-    using `P (xs ! k1)` `filter P xs ! 0 = xs ! k1`
+    using \<open>P (xs ! k1)\<close> \<open>filter P xs ! 0 = xs ! k1\<close>
     by (rule_tac x=k1 in exI, rule_tac x="k1+1+k2'" in exI, simp)
 next
   case (Suc i)
@@ -265,39 +265,39 @@ next
   show ?case
   proof (rule_tac x="k1+length ?t+1" in exI, rule_tac x="k2+length ?t+1" in exI, safe)
     show "k1 + length ?t + 1 < k2 + length ?t + 1"
-      using `k1 < k2`
+      using \<open>k1 < k2\<close>
       by simp
   next
     have "k2 + length ?t + 1 < length ?xs + 1 + length ?t"
-      using `k2 < length ?xs`
+      using \<open>k2 < length ?xs\<close>
       by simp
     then show "k2 + length ?t + 1 < length xs"
-      using `?xs \<noteq> []`
+      using \<open>?xs \<noteq> []\<close>
       by (metis One_nat_def Suc_eq_plus1 Suc_pred add.commute add_lessD1 length_append length_greater_0_conv length_tl less_diff_conv takeWhile_dropWhile_id)
   next
     show "P (xs ! (k1 + length ?t + 1))"
-      using `P (?xs ! k1)` `k1 < k2` `k2 < length ?xs` *
+      using \<open>P (?xs ! k1)\<close> \<open>k1 < k2\<close> \<open>k2 < length ?xs\<close> *
       by (metis Suc_eq_plus1 add.commute add_Suc_right hd_Cons_tl length_greater_0_conv length_tl list.size(3) not_less_zero nth_Cons_Suc nth_append_length_plus takeWhile_dropWhile_id zero_less_diff)
   next
     show "P (xs ! (k2 + length (takeWhile (\<lambda>x. \<not> P x) xs) + 1))"
-      using `P (?xs ! k2)` `k2 < length ?xs` *
+      using \<open>P (?xs ! k2)\<close> \<open>k2 < length ?xs\<close> *
       by (metis Suc_eq_plus1 add.commute add_Suc_right hd_Cons_tl length_greater_0_conv length_tl list.size(3) not_less_zero nth_Cons_Suc nth_append_length_plus takeWhile_dropWhile_id zero_less_diff)
   next
     fix k'
     assume "k1 + length ?t + 1 < k'" "k' < k2 + length ?t + 1" "P (xs ! k')"
     then have "k1 < k' - (length ?t + 1)" "k' - (length ?t + 1) < k2"
-      using `k1 < k2` `k2 < length ?xs`
+      using \<open>k1 < k2\<close> \<open>k2 < length ?xs\<close>
       by linarith+
     moreover
     have "length ?t + (k' - (length ?t + 1)) + 1 < length xs"
       using \<open>k2 < length (tl (dropWhile (\<lambda>x. \<not> P x) xs))\<close>
       by (smt  ab_semigroup_add_class.add_ac(1) add.commute add_lessD1 add_less_cancel_left calculation(2) length_append length_tl less_diff_conv less_trans_Suc plus_1_eq_Suc takeWhile_dropWhile_id)
     then have "P (?xs ! (k' - (length ?t + 1)))"
-      using *[rule_format, of "k' - (length ?t + 1)"] `P (xs ! k')`
+      using *[rule_format, of "k' - (length ?t + 1)"] \<open>P (xs ! k')\<close>
       by (metis Suc_eq_plus1 add_Suc add_diff_inverse_nat calculation(1) nat_diff_split not_less_zero)
     ultimately
     show False
-      using `\<forall>k'. k1 < k' \<and> k' < k2 \<longrightarrow> \<not> P (?xs ! k')`[rule_format, of "k' - (length ?t + 1)"] `k1 < k2` `k2 < length ?xs`
+      using \<open>\<forall>k'. k1 < k' \<and> k' < k2 \<longrightarrow> \<not> P (?xs ! k')\<close>[rule_format, of "k' - (length ?t + 1)"] \<open>k1 < k2\<close> \<open>k2 < length ?xs\<close>
       by simp
   next
     show "filter P xs ! (Suc i) = xs ! (k1 + length ?t + 1)"
@@ -305,11 +305,11 @@ next
       have "filter P xs ! (Suc i) = filter P ?d ! (Suc i)"
         by simp
       also have "... = filter P (tl ?d) ! i"
-        using `?xs \<noteq> []` \<open>i + 1 < length (filter P ?xs)\<close>
+        using \<open>?xs \<noteq> []\<close> \<open>i + 1 < length (filter P ?xs)\<close>
         by (metis  add_lessD1 filter_tl hd_dropWhile list.sel(2) nth_tl)
       finally
       show ?thesis
-        using `filter P ?xs ! i = ?xs ! k1` *
+        using \<open>filter P ?xs ! i = ?xs ! k1\<close> *
         using \<open>k1 < k2\<close> \<open>k2 < length ?xs\<close> 
         by (smt Suc_eq_plus1 add.commute add_Suc_right add_lessD1 add_less_cancel_left length_append length_tl less_diff_conv less_trans_Suc takeWhile_dropWhile_id)
     qed
@@ -319,11 +319,11 @@ next
       have "filter P xs ! (Suc i + 1) = filter P ?d ! (Suc i + 1)"
         by simp
       also have "... = filter P (tl ?d) ! (Suc i)"
-        using `?xs \<noteq> []` \<open>i + 1 < length (filter P ?xs)\<close>
+        using \<open>?xs \<noteq> []\<close> \<open>i + 1 < length (filter P ?xs)\<close>
         by (metis add.commute filter_tl hd_dropWhile nth_tl plus_1_eq_Suc tl_Nil)
       finally
       show ?thesis
-        using `filter P ?xs ! (i + 1) = ?xs ! k2` *
+        using \<open>filter P ?xs ! (i + 1) = ?xs ! k2\<close> *
         using \<open>k1 < k2\<close> \<open>k2 < length ?xs\<close> 
         by (smt Suc_eq_plus1 add.commute add_Suc_right add_lessD1 add_less_cancel_left length_append length_tl less_diff_conv less_trans_Suc takeWhile_dropWhile_id)
     qed
@@ -388,14 +388,14 @@ proof-
   then have "sum_list state > 0"
     using assms(1) valid_state_def
     by auto
-  hence "sum_list (state[p1 := state ! p1 - 1, p2 := state ! p2 + 1]) = sum_list state"
+  then have "sum_list (state[p1 := state ! p1 - 1, p2 := state ! p2 + 1]) = sum_list state"
     using * assms
     using sum_list_update[of p1 state "state ! p1 - 1"]
     using sum_list_update[of p2 "state[p1 := state ! p1 - 1]" "state ! p2 + 1"]
     unfolding valid_state_def
     by auto
-  thus ?thesis
-    using `valid_state n state` *
+  then show ?thesis
+    using \<open>valid_state n state\<close> *
     by (simp add: valid_state_def)
 qed
 
@@ -452,16 +452,16 @@ proof-
     using assms
     unfolding valid_state_def valid_move_def valid_move'_def Let_def move_def
     by (smt add.right_neutral add_Suc_right add_diff_cancel_left' le_SucI less_imp_Suc_add less_le_trans list_update_swap n_not_Suc_n nat.simps(3) nth_list_update_eq nth_list_update_neq plus_1_eq_Suc)
-  hence *: "\<exists>! p1. p1 \<le> n \<and> state ! p1 > 0 \<and> state' ! p1 = state ! p1 - 1"
-    using `length state = n + 1`
+  then have *: "\<exists>! p1. p1 \<le> n \<and> state ! p1 > 0 \<and> state' ! p1 = state ! p1 - 1"
+    using \<open>length state = n + 1\<close>
     by (metis Nat.le_diff_conv2 Suc_leI add.commute add_diff_cancel_right' le_add2 le_imp_less_Suc plus_1_eq_Suc)
 
   have "\<exists>! p2. p2 < length state \<and> state' ! p2 = state ! p2 + 1"
     using assms
     unfolding valid_state_def valid_move_def valid_move'_def Let_def move_def
     by (metis Groups.add_ac(2) diff_le_self le_imp_less_Suc length_list_update n_not_Suc_n nat_neq_iff nth_list_update_eq nth_list_update_neq plus_1_eq_Suc)
-  hence **: "\<exists>! p2. p2 \<le> n \<and> state' ! p2 = state ! p2 + 1"
-    using `length state = n + 1`
+  then have **: "\<exists>! p2. p2 \<le> n \<and> state' ! p2 = state ! p2 + 1"
+    using \<open>length state = n + 1\<close>
     by (simp add: discrete)
 
   obtain p1 p2 where "valid_move' n p1 p2 state state'"
@@ -471,7 +471,7 @@ proof-
   show ?thesis
   proof
     show "case (p1, p2) of (p1, p2) \<Rightarrow> valid_move' n p1 p2 state state'"
-      using `valid_move' n p1 p2 state state'`
+      using \<open>valid_move' n p1 p2 state state'\<close>
       by simp
   next
     fix x
@@ -479,7 +479,7 @@ proof-
     then obtain p1' p2' where "x = (p1', p2')" "valid_move' n p1' p2' state state'"
       by auto
     then show "x = (p1, p2)"
-      using `valid_move' n p1 p2 state state'` * **  \<open>length state = n + 1\<close>
+      using \<open>valid_move' n p1 p2 state state'\<close> * **  \<open>length state = n + 1\<close>
       unfolding valid_move'_def move_def Let_def
       by (metis Nat.add_0_right One_nat_def add_Suc_right le_imp_less_Suc le_less_trans length_list_update less_imp_le_nat nat_neq_iff nth_list_update_eq nth_list_update_neq)
   qed
@@ -498,7 +498,7 @@ proof-
   next
     fix x
     assume "let (p1', p2') = x in valid_move' (length state - 1) p1' p2' state state'"
-    thus "x = (p1, p2)"
+    then show "x = (p1, p2)"
       using move_positions_unique[of n state state'] assms
       unfolding valid_state_def valid_move_def
       by auto
@@ -568,7 +568,7 @@ lemma valid_labeled_state_final_labeled_state [simp]:
 proof-
   have "(replicate (Suc n) {})[n := {0..<n}] = (replicate n {}) @ [{0..<n}]"
     by (metis length_replicate list_update_length replicate_Suc replicate_append_same)
-  thus ?thesis
+  then show ?thesis
     unfolding valid_labeled_state_def final_labeled_state_def
     by (auto simp del: replicate_Suc simp add: nth_append)
 qed
@@ -589,13 +589,13 @@ proof-
     by auto
 
   have "stone \<notin> l_state ! p2" 
-    using `\<forall>i j. i < j \<and> j \<le> n \<longrightarrow> l_state ! i \<inter> l_state ! j = {}`  `stone \<in> l_state ! p1` 
-    using `p1 < p2` `p2 \<le> n`
+    using \<open>\<forall>i j. i < j \<and> j \<le> n \<longrightarrow> l_state ! i \<inter> l_state ! j = {}\<close>  \<open>stone \<in> l_state ! p1\<close> 
+    using \<open>p1 < p2\<close> \<open>p2 \<le> n\<close>
     by (metis Collect_mem_eq IntI empty_Collect_eq)
 
   have "\<forall> i \<le> n. i \<noteq> p1 \<longrightarrow> stone \<notin> l_state ! i"
-    using `\<forall>i j. i < j \<and> j \<le> n \<longrightarrow> l_state ! i \<inter> l_state ! j = {}`  `stone \<in> l_state ! p1` 
-    using `p1 < p2` `p2 \<le> n`
+    using \<open>\<forall>i j. i < j \<and> j \<le> n \<longrightarrow> l_state ! i \<inter> l_state ! j = {}\<close>  \<open>stone \<in> l_state ! p1\<close> 
+    using \<open>p1 < p2\<close> \<open>p2 \<le> n\<close>
     by (metis disjoint_iff_not_equal le_less_trans less_imp_le_nat nat_neq_iff)
 
   have "\<Union> (set l_state') = \<Union> (set l_state)"
@@ -603,34 +603,34 @@ proof-
     fix x X
     assume "x \<in> X" "X \<in> set l_state'"
     then obtain i where "x \<in> l_state' ! i" "i \<le> n" 
-      using `length l_state' = n+1`
+      using \<open>length l_state' = n+1\<close>
       by (metis One_nat_def add.right_neutral add_Suc_right in_set_conv_nth le_simps(2))
       
-    thus "x \<in> \<Union> (set l_state)"
-      using * `stone \<in> l_state ! p1` **
+    then show "x \<in> \<Union> (set l_state)"
+      using * \<open>stone \<in> l_state ! p1\<close> **
       by (smt Diff_iff One_nat_def Un_insert_right add.right_neutral add_Suc_right boolean_algebra_cancel.sup0 insertE le_imp_less_Suc le_less_trans less_imp_le_nat mem_simps(9) nth_mem)
   next
     fix x X
     assume "x \<in> X" "X \<in> set l_state"
     then obtain i where "i \<le> n" "x \<in> l_state ! i"
-      using `length l_state = n + 1`
+      using \<open>length l_state = n + 1\<close>
       by (metis add.commute in_set_conv_nth le_simps(2) plus_1_eq_Suc)
     show "x \<in> \<Union> (set l_state')"
     proof (cases "i = p1")
       case True              
-      hence "x \<in> l_state' ! p1 \<or> x \<in> l_state' ! p2"
-        using * `p1 < p2` `p2 \<le> n` `x \<in> l_state ! i`
+      then have "x \<in> l_state' ! p1 \<or> x \<in> l_state' ! p2"
+        using * \<open>p1 < p2\<close> \<open>p2 \<le> n\<close> \<open>x \<in> l_state ! i\<close>
         by auto
-      thus ?thesis
-        using `p1 < p2` `p2 \<le> n`
+      then show ?thesis
+        using \<open>p1 < p2\<close> \<open>p2 \<le> n\<close>
         using "*"(2) mem_simps(9) nth_mem
         by auto
     next
       case False
-      hence "x \<in> l_state' ! i"
-        using * `p1 < p2` `p2 \<le> n` `x \<in> l_state ! i`
+      then have "x \<in> l_state' ! i"
+        using * \<open>p1 < p2\<close> \<open>p2 \<le> n\<close> \<open>x \<in> l_state ! i\<close>
         using \<open>i \<le> n\<close> by auto
-      thus ?thesis
+      then show ?thesis
         by (metis "*"(2) One_nat_def Sup_upper \<open>i \<le> n\<close> add.right_neutral add_Suc_right le_imp_less_Suc nth_mem subsetD)
     qed
   qed
@@ -642,14 +642,14 @@ proof-
     fix i j x
     assume ***: "i < j" "j \<le> n" "x \<in> l_state' ! i" "x \<in> l_state' ! j"
     then have False
-      using * `\<forall>i j. i < j \<and> j \<le> n \<longrightarrow> l_state ! i \<inter> l_state ! j = {}`
-      using `stone \<in> l_state ! p1` `stone \<notin> l_state ! p2` `\<forall> i \<le> n. i \<noteq> p1 \<longrightarrow> stone \<notin> l_state ! i`
-      using `length l_state = n+1` `length l_state' = n+1` `p1 < p2` `p2 \<le> n` 
+      using * \<open>\<forall>i j. i < j \<and> j \<le> n \<longrightarrow> l_state ! i \<inter> l_state ! j = {}\<close>
+      using \<open>stone \<in> l_state ! p1\<close> \<open>stone \<notin> l_state ! p2\<close> \<open>\<forall> i \<le> n. i \<noteq> p1 \<longrightarrow> stone \<notin> l_state ! i\<close>
+      using \<open>length l_state = n+1\<close> \<open>length l_state' = n+1\<close> \<open>p1 < p2\<close> \<open>p2 \<le> n\<close> 
       apply (cases "j = p2")
       apply (smt Diff_insert_absorb Diff_subset IntI Un_insert_right boolean_algebra_cancel.sup0 empty_iff insertE less_imp_le_nat less_le_trans mk_disjoint_insert nat_neq_iff subsetD)
       apply (smt Un_insert_right boolean_algebra_cancel.sup0 disjoint_iff_not_equal insert_Diff insert_iff less_imp_le_nat less_le_trans)
       done
-    thus "x \<in> {}"
+    then show "x \<in> {}"
       by simp
   qed
 
@@ -706,7 +706,7 @@ proof-
     obtain p1' p2' stone' where x: "x = (p1', p2', stone')"
       by (cases x)
     assume "case x of (p1, p2, stone) \<Rightarrow> valid_labeled_move' n p1 p2 stone state state'"
-    hence **: "valid_labeled_move' n p1' p2' stone' state state'"
+    then have **: "valid_labeled_move' n p1' p2' stone' state state'"
       using x
       by simp
     have *: "p1 < p2" "p2 \<le> n" "stone < n" "stone \<in> state ! p1" "stone \<notin> state' ! p1"  "stone \<notin> state ! p2" "stone \<in> state' ! p2" 
@@ -731,7 +731,7 @@ proof-
       by auto
 
     have "p1 = p1'"
-      using *(4) **(4) `stone = stone'` *(1-2) **(1-2)
+      using *(4) **(4) \<open>stone = stone'\<close> *(1-2) **(1-2)
       using disj[rule_format, of p1 p1']
       using disj[rule_format, of p1' p1]
       by force
@@ -743,13 +743,13 @@ proof-
       by auto
 
     have "p2 = p2'"
-      using *(7) **(7) `stone = stone'` *(2) **(2)
+      using *(7) **(7) \<open>stone = stone'\<close> *(2) **(2)
       using disj'[rule_format, of p2 p2']
       using disj'[rule_format, of p2' p2]
       by force
 
     then show "x = (p1, p2, stone)"
-      using x `stone = stone'` `p1 = p1'` `p2 = p2'`
+      using x \<open>stone = stone'\<close> \<open>p1 = p1'\<close> \<open>p2 = p2'\<close>
       by auto
   qed
 qed
@@ -786,7 +786,7 @@ proof-
     using assms
     unfolding valid_labeled_state_def
     by (metis IntI Suc_eq_plus1 empty_iff le_simps(2) nat_neq_iff)
-  thus ?thesis
+  then show ?thesis
     using *
     by auto
 qed
@@ -862,8 +862,8 @@ proof safe
         using \<open>stone' < n\<close> assms(1-2) stone_position[of n l_state stone']
         unfolding valid_labeled_state_def
         by auto
-      thus ?thesis
-        using `stone' \<noteq> stone` `valid_labeled_move' n p1 p2 stone l_state l_state'`
+      then show ?thesis
+        using \<open>stone' \<noteq> stone\<close> \<open>valid_labeled_move' n p1 p2 stone l_state l_state'\<close>
         unfolding valid_labeled_move'_def labeled_move_def Let_def
         by (metis (no_types, lifting) Un_insert_right boolean_algebra_cancel.sup0 insert_Diff insert_iff length_list_update nth_list_update_eq nth_list_update_neq)
     qed
@@ -917,7 +917,7 @@ proof
         have "\<forall>i j. i < j \<and> j < length l_state \<longrightarrow> l_state ! i \<inter> l_state ! j = {}"
           using Cons(2)
           by (metis One_nat_def Suc_eq_plus1 Suc_less_eq list.size(4) nth_Cons_Suc)
-        hence "distinct (filter (\<lambda>y. card y \<noteq> 0) l_state)"
+        then have "distinct (filter (\<lambda>y. card y \<noteq> 0) l_state)"
           using Cons(1)
           by simp
         moreover
@@ -933,7 +933,7 @@ proof
           using Cons
           by auto
       qed
-      thus ?thesis
+      then show ?thesis
         using sum_list_distinct_conv_sum_set by blast
     qed
     also have "... = card (\<Union> (set ?s))"
@@ -953,7 +953,7 @@ proof
           unfolding valid_labeled_state_def
           by (metis Suc_eq_plus1 filter_is_subset in_set_conv_nth le_simps(2) subsetD)
         then show "id i \<inter> id j = {}"
-          using assms `i \<noteq> j`
+          using assms \<open>i \<noteq> j\<close>
           unfolding valid_labeled_state_def
           by (metis disjoint_iff_not_equal id_apply nat_neq_iff)
       qed
@@ -970,17 +970,17 @@ proof
         proof safe
           fix x X
           assume *: "x \<in> X" "X \<in> set l_state"
-          hence "card X \<noteq> 0"
+          then have "card X \<noteq> 0"
             using assms
             unfolding valid_labeled_state_def
             using Union_upper finite_subset
             by fastforce
-          thus "x \<in> \<Union> (set ?s)"
+          then show "x \<in> \<Union> (set ?s)"
             using *
             by auto
         qed
       qed auto
-      thus ?thesis
+      then show ?thesis
         by simp
     qed
     finally
@@ -1003,27 +1003,27 @@ proof-
     by auto
   
   have "finite (l_state ! p1) \<and> finite (l_state ! p2)"
-    using `\<Union> (set l_state) = {0..<n}`
-    using `length l_state = n + 1` `p1 < p2` `p2 \<le> n`
+    using \<open>\<Union> (set l_state) = {0..<n}\<close>
+    using \<open>length l_state = n + 1\<close> \<open>p1 < p2\<close> \<open>p2 \<le> n\<close>
     by (metis One_nat_def Union_upper add.right_neutral add_Suc_right finite_atLeastLessThan finite_subset le_imp_less_Suc le_less_trans less_imp_le_nat nth_mem)
 
   have "stone \<notin> l_state ! p2"
-    using `stone \<in> l_state ! p1` `\<forall>i j. i < j \<and> j \<le> n \<longrightarrow> l_state ! i \<inter> l_state ! j = {}`
-    using `length l_state = n + 1` `p1 < p2` `p2 \<le> n`
+    using \<open>stone \<in> l_state ! p1\<close> \<open>\<forall>i j. i < j \<and> j \<le> n \<longrightarrow> l_state ! i \<inter> l_state ! j = {}\<close>
+    using \<open>length l_state = n + 1\<close> \<open>p1 < p2\<close> \<open>p2 \<le> n\<close>
     by (metis Collect_empty_eq Collect_mem_eq IntI)
 
   have "card (l_state ! p1) > 0" "length l_state' = length l_state"
        "card (l_state' ! p1) = card (l_state ! p1) - 1"  "card (l_state' ! p2) = card (l_state ! p2) + 1"
        "\<forall> p. p \<le> n \<and> p \<noteq> p1 \<and> p \<noteq> p2 \<longrightarrow> card (l_state' ! p) = card (l_state ! p)"
-    using `finite (l_state ! p1) \<and> finite (l_state ! p2)` `stone \<in> l_state ! p1` 
-    using `stone \<notin> l_state ! p2` `l_state' = l_state[p1 := l_state ! p1 - {stone}, p2 := l_state ! p2 \<union> {stone}]`
-    using `length l_state = n + 1` `p1 < p2` `p2 \<le> n`
+    using \<open>finite (l_state ! p1) \<and> finite (l_state ! p2)\<close> \<open>stone \<in> l_state ! p1\<close> 
+    using \<open>stone \<notin> l_state ! p2\<close> \<open>l_state' = l_state[p1 := l_state ! p1 - {stone}, p2 := l_state ! p2 \<union> {stone}]\<close>
+    using \<open>length l_state = n + 1\<close> \<open>p1 < p2\<close> \<open>p2 \<le> n\<close>
     using card_0_eq
     by - (blast, simp+)
 
-  thus ?thesis
-    using `length l_state = n + 1` `p1 < p2` `p2 \<le> p1 + card (l_state ! p1)` `p2 \<le> n`
-    using `l_state' = l_state[p1 := l_state ! p1 - {stone}, p2 := l_state ! p2 \<union> {stone}]`
+  then show ?thesis
+    using \<open>length l_state = n + 1\<close> \<open>p1 < p2\<close> \<open>p2 \<le> p1 + card (l_state ! p1)\<close> \<open>p2 \<le> n\<close>
+    using \<open>l_state' = l_state[p1 := l_state ! p1 - {stone}, p2 := l_state ! p2 \<union> {stone}]\<close>
     unfolding unlabel_def valid_move'_def
     by (auto simp add: move_def map_update)
 qed
@@ -1080,7 +1080,7 @@ lemma valid_labeled_move_move_max_stone:
 proof-
   have "Max (l_state ! p1) \<in> l_state ! p1"
     by (metis (no_types, lifting) Max_in assms(1) assms(2) assms(3) card_empty card_infinite less_le_trans nat_neq_iff nth_map trans_less_add1 unlabel_def valid_labeled_state_def valid_move'_def)
-  thus ?thesis
+  then show ?thesis
     using assms
     by (metis (no_types, lifting) less_le_trans nth_map trans_less_add1 unlabel_def valid_labeled_move'_def valid_labeled_state_def valid_move'_def)
 qed  
@@ -1115,7 +1115,7 @@ next
   let ?l_state' = "labeled_move ?p1 ?p2 ?stone l_state"
 
   have "valid_state n ?state"
-    using `valid_labeled_state n l_state`
+    using \<open>valid_labeled_state n l_state\<close>
     by (simp add: unlabel_valid)
 
   have "valid_move n ?state state'"
@@ -1123,7 +1123,7 @@ next
     by (metis Groups.add_ac(2) One_nat_def add_diff_cancel_left' add_is_0 gr0I list.size(4) n_not_Suc_n nth_Cons_0 nth_Cons_Suc plus_1_eq_Suc valid_moves_def)
 
   have "valid_move' n ?p1 ?p2 ?state state'"
-    using `valid_state n ?state` `valid_move n ?state state'`
+    using \<open>valid_state n ?state\<close> \<open>valid_move n ?state state'\<close>
     by (simp add: move_positions_valid_move')
 
   have **: "valid_labeled_move' n ?p1 ?p2 ?stone l_state ?l_state'"
@@ -1139,7 +1139,7 @@ next
   qed simp
 
   have "move ?p1 ?p2 ?state = state'"
-    using `valid_move' n ?p1 ?p2 ?state state'`
+    using \<open>valid_move' n ?p1 ?p2 ?state state'\<close>
     unfolding valid_move'_def Let_def
     by simp
   then have *: "unlabel ?l_state' = state'"
@@ -1158,7 +1158,7 @@ next
       by blast
   next
     show "valid_moves n (unlabel ?l_state' # states)"
-      using Cons(3) `valid_move n (unlabel l_state) state'`
+      using Cons(3) \<open>valid_move n (unlabel l_state) state'\<close>
       using *
       by (metis (no_types, lifting) One_nat_def add_Suc_right diff_add_inverse2 group_cancel.add1 less_diff_conv list.size(4) nth_Cons_Suc plus_1_eq_Suc valid_moves_def)
   qed
@@ -1185,7 +1185,7 @@ next
   let ?l_state' = "labeled_move ?p1 ?p2 ?stone l_state"
 
   have "valid_state n ?state"
-    using `valid_labeled_state n l_state`
+    using \<open>valid_labeled_state n l_state\<close>
     by (simp add: unlabel_valid)
 
   have "valid_move n ?state state'"
@@ -1193,7 +1193,7 @@ next
     by (metis Groups.add_ac(2) One_nat_def add_diff_cancel_left' add_is_0 gr0I list.size(4) n_not_Suc_n nth_Cons_0 nth_Cons_Suc plus_1_eq_Suc valid_moves_def)
 
   have "valid_move' n ?p1 ?p2 ?state state'"
-    using `valid_state n ?state` `valid_move n ?state state'`
+    using \<open>valid_state n ?state\<close> \<open>valid_move n ?state state'\<close>
     by (simp add: move_positions_valid_move')
 
   have **: "valid_labeled_move' n ?p1 ?p2 ?stone l_state ?l_state'"
@@ -1209,7 +1209,7 @@ next
   qed simp
 
   have "move ?p1 ?p2 ?state = state'"
-    using `valid_move' n ?p1 ?p2 ?state state'`
+    using \<open>valid_move' n ?p1 ?p2 ?state state'\<close>
     unfolding valid_move'_def Let_def
     by simp
   then have *: "unlabel ?l_state' = state'"
@@ -1259,7 +1259,7 @@ next
   let ?l_state' = "labeled_move ?p1 ?p2 ?stone l_state"
 
   have "valid_state n ?state"
-    using `valid_labeled_state n l_state`
+    using \<open>valid_labeled_state n l_state\<close>
     by (simp add: unlabel_valid)
 
   have "valid_move n ?state state'"
@@ -1267,7 +1267,7 @@ next
     by (metis Groups.add_ac(2) One_nat_def add_diff_cancel_left' add_is_0 gr0I list.size(4) n_not_Suc_n nth_Cons_0 nth_Cons_Suc plus_1_eq_Suc valid_moves_def)
 
   have "valid_move' n ?p1 ?p2 ?state state'"
-    using `valid_state n ?state` `valid_move n ?state state'`
+    using \<open>valid_state n ?state\<close> \<open>valid_move n ?state state'\<close>
     by (simp add: move_positions_valid_move')
 
   have **: "valid_labeled_move' n ?p1 ?p2 ?stone l_state ?l_state'"
@@ -1283,7 +1283,7 @@ next
   qed simp
 
   have "move ?p1 ?p2 ?state = state'"
-    using `valid_move' n ?p1 ?p2 ?state state'`
+    using \<open>valid_move' n ?p1 ?p2 ?state state'\<close>
     unfolding valid_move'_def Let_def
     by simp
   then have *: "unlabel ?l_state' = state'"
@@ -1350,14 +1350,14 @@ proof-
   show ?thesis
   proof (rule nth_equalityI)
     show "length l_state = length (final_labeled_state n)"
-      using `length l_state = n + 1`
+      using \<open>length l_state = n + 1\<close>
       unfolding final_labeled_state_def
       by (simp del: replicate_Suc)
   next
     fix i
     assume "i < length l_state"
-    thus "l_state ! i = final_labeled_state n ! i"
-      using `\<forall> i < n. l_state ! i = {}` `l_state ! n = {0..<n}` `length l_state = n + 1`
+    then show "l_state ! i = final_labeled_state n ! i"
+      using \<open>\<forall> i < n. l_state ! i = {}\<close> \<open>l_state ! n = {0..<n}\<close> \<open>length l_state = n + 1\<close>
       unfolding final_labeled_state_def
       by (metis add.commute length_replicate less_Suc_eq nth_list_update_eq nth_list_update_neq nth_replicate plus_1_eq_Suc)
   qed
@@ -1377,14 +1377,14 @@ proof safe
   have "valid_moves n (unlabel (initial_labeled_state n) # tl states)"
     using assms
     by (metis Groups.add_ac(2) One_nat_def add_diff_cancel_left' hd_Cons_tl list.sel(2) list.size(3) list.size(4) n_not_Suc_n plus_1_eq_Suc unlabel_initial upt_0 upt_rec valid_game_def valid_moves_def)
-  hence *: "map unlabel ?l_states = (initial_state n) # tl states"
+  then have *: "map unlabel ?l_states = (initial_state n) # tl states"
     using unlabel_label_moves_max_stone[of n "initial_labeled_state n" "tl states"]
     by simp
 
   have "unlabel (hd ?l_states) = initial_state n"
     using *
     by auto
-  thus "hd ?l_states = initial_labeled_state n"
+  then show "hd ?l_states = initial_labeled_state n"
     by simp
 
   have "unlabel (last ?l_states) = final_state n"
@@ -1427,7 +1427,7 @@ lemma moved_from:
   using assms
 proof (induction l_states arbitrary: i j)
   case Nil
-  thus ?case
+  then show ?case
     by simp
 next
   case (Cons l_state l_states)
@@ -1461,14 +1461,14 @@ next
       using **
       using \<open>valid_labeled_state n ((l_state # l_states) ! i)\<close> valid_labeled_move'_stone_positions
       by blast
-    thus ?thesis
+    then show ?thesis
       using * Cons(4) True
       by (rule_tac x=i in exI, auto)
   next
     case False
     
     have "stone_position ((l_state # l_states) ! (i + 1)) stone = stone_position ((l_state # l_states) ! i) stone"
-      using valid_labeled_move'_stone_positions_other[OF *** **] `stone' \<noteq> stone` `stone < n`
+      using valid_labeled_move'_stone_positions_other[OF *** **] \<open>stone' \<noteq> stone\<close> \<open>stone < n\<close>
       by auto
    then have *: "stone_position (l_states ! i) stone \<noteq> stone_position (l_states ! (j - 1)) stone"
       using Cons(4) Cons(7)
@@ -1479,7 +1479,7 @@ next
       have "l_states \<noteq> []"
         using Cons(4) Cons(5) *
         by auto
-      thus ?thesis
+      then show ?thesis
         using Cons(2-3)
         by (meson hd_in_set list.set_intros(2) valid_labeled_moves_valid_labeled_states)
     qed
@@ -1496,15 +1496,15 @@ next
       by fastforce
     moreover
     have "j - 1 < length l_states"
-      using `i < j` Cons(5)
+      using \<open>i < j\<close> Cons(5)
       by auto
     ultimately
     obtain k where "i \<le> k" "k < j - 1"
          "let (p1, p2, stone') = labeled_move_positions (l_states ! k) (l_states ! (k + 1)) in 
           stone' = stone \<and> p1 = stone_position (l_states ! i) stone"
-      using Cons(1)[of "i" "j-1"] `stone < n`
+      using Cons(1)[of "i" "j-1"] \<open>stone < n\<close>
       by (auto simp add: nth_Cons)
-    thus ?thesis
+    then show ?thesis
       using \<open>stone_position ((l_state # l_states) ! (i + 1)) stone = stone_position ((l_state # l_states) ! i) stone\<close>
       by (rule_tac x="k+1" in exI) (auto simp add: Let_def nth_Cons)
   qed
@@ -1529,7 +1529,7 @@ proof-
   proof-
     have "map (\<lambda>x. x + 1) [0..<n] = [1..<n+1]"
       using map_add_upt by blast
-    thus ?thesis
+    then show ?thesis
       by (subst sum_list_comp, simp)
   qed
   also have "... \<le> (\<Sum> stone \<leftarrow> [0..<n]. int (length (?sstone stone)))"
@@ -1539,12 +1539,12 @@ proof-
     show "ceiling (n / (stone + 1)) \<le> int (length (?sstone stone))"
     proof (rule ccontr)
       assume "\<not> ?thesis"
-      hence "ceiling (n / (stone + 1)) > int (length (?sstone stone))"
+      then have "ceiling (n / (stone + 1)) > int (length (?sstone stone))"
         by simp
-      hence "int (length (?sstone stone)) * (stone + 1) < n"
+      then have "int (length (?sstone stone)) * (stone + 1) < n"
         using lt_ceiling_frac
         by simp
-      hence "length (?sstone stone) * (stone + 1) < n"
+      then have "length (?sstone stone) * (stone + 1) < n"
         by (metis (mono_tags, lifting) of_nat_less_imp_less of_nat_mult)
 
       obtain ss where ss: "ss = ?sstone stone"
@@ -1554,7 +1554,7 @@ proof-
       proof safe
         fix state p1 p2 stone' 
         assume "(state, p1, p2, stone') \<in> set ss"
-        hence "(state, p1, p2, stone') \<in> set ?ss"
+        then have "(state, p1, p2, stone') \<in> set ?ss"
           using ss
           by auto
         then obtain state' where
@@ -1563,16 +1563,16 @@ proof-
           by auto
         then obtain i where "i < length ((zip (butlast l_states) (tl l_states)))" "(zip (butlast l_states) (tl l_states)) ! i = (state, state')"
           by (meson in_set_conv_nth)
-        hence "i < length l_states - 1" "l_states ! i = state" "l_states ! (i + 1) = state'"
+        then have "i < length l_states - 1" "l_states ! i = state" "l_states ! (i + 1) = state'"
           using nth_butlast[of i l_states] nth_tl[of i l_states]
           by simp_all
-        hence "valid_labeled_move_max_stone n state state'"
-          using `valid_labeled_game_max_stone n l_states`
+        then have "valid_labeled_move_max_stone n state state'"
+          using \<open>valid_labeled_game_max_stone n l_states\<close>
           unfolding valid_labeled_game_max_stone_def valid_labeled_moves_max_stone_def
           by auto
         moreover 
         have "valid_labeled_state n state"
-          using `i < length l_states - 1` `l_states ! i = state`
+          using \<open>i < length l_states - 1\<close> \<open>l_states ! i = state\<close>
           by (meson add_lessD1 assms(1) less_diff_conv nth_mem valid_labeled_game_max_stone_valid_labeled_game valid_labeled_game_valid_labeled_states)          
         ultimately
         have *: "valid_labeled_move' n p1 p2 (Max (state ! p1)) state state'"
@@ -1583,14 +1583,14 @@ proof-
         show "stone' = Max (state ! p1)"
           using \<open>(state, p1, p2, stone') = (state, labeled_move_positions state state')\<close> \<open>valid_labeled_move' n p1 p2 (Max (state ! p1)) state state'\<close> \<open>valid_labeled_state n state\<close> labeled_move_positions by auto
 
-        thus "(\<exists> state'. valid_labeled_move' n p1 p2 stone' state state')"
+        then show "(\<exists> state'. valid_labeled_move' n p1 p2 stone' state state')"
           using *
           by blast
       qed
 
       have pos0: "stone_position (l_states ! 0) stone = 0"
-        using `stone \<in> set [0..<n]` `l_states \<noteq> []`
-        using `valid_labeled_game_max_stone n l_states`
+        using \<open>stone \<in> set [0..<n]\<close> \<open>l_states \<noteq> []\<close>
+        using \<open>valid_labeled_game_max_stone n l_states\<close>
         using stone_positionI[of n "l_states ! 0" stone 0]
         using hd_conv_nth[of l_states, symmetric]
         using valid_labeled_state_initial_labeled_state
@@ -1599,8 +1599,8 @@ proof-
 
       have posn: "stone_position (l_states ! (length l_states - 1)) stone = n"
         using stone_positionI[of n "l_states ! (length l_states - 1)" stone n]
-        using `stone \<in> set [0..<n]` `l_states \<noteq> []`
-        using `valid_labeled_game_max_stone n l_states`
+        using \<open>stone \<in> set [0..<n]\<close> \<open>l_states \<noteq> []\<close>
+        using \<open>valid_labeled_game_max_stone n l_states\<close>
         using last_conv_nth[of l_states, symmetric]
         using valid_labeled_state_final_labeled_state
         unfolding valid_labeled_game_max_stone_def final_labeled_state_def
@@ -1613,12 +1613,12 @@ proof-
       have "length ss \<ge> 1"
       proof (rule ccontr)
         assume "\<not> ?thesis"
-        hence "?sstone stone = []"
+        then have "?sstone stone = []"
           using ss
           by (metis One_nat_def Suc_leI length_greater_0_conv)
 
         have "valid_labeled_moves n l_states"
-          using `valid_labeled_game_max_stone n l_states`
+          using \<open>valid_labeled_game_max_stone n l_states\<close>
           unfolding valid_labeled_game_max_stone_def
           using assms valid_labeled_game_def valid_labeled_game_max_stone_valid_labeled_game
           by blast
@@ -1626,22 +1626,22 @@ proof-
         then obtain p2 k where "k < length l_states - 1"
              "(0, p2, stone) = labeled_move_positions (l_states ! k) (l_states ! (k + 1))"
           using moved_from[of n l_states 0 "length l_states - 1" stone]
-          using pos0 posn `n > 0` `stone \<in> set [0..<n]`
-          using `valid_labeled_game_max_stone n l_states`
+          using pos0 posn \<open>n > 0\<close> \<open>stone \<in> set [0..<n]\<close>
+          using \<open>valid_labeled_game_max_stone n l_states\<close>
           unfolding valid_labeled_game_max_stone_def
           by force
         moreover
         have "(l_states ! k, l_states ! (k+1)) \<in> set (zip (butlast l_states) (tl l_states))"
-          using `k < length l_states - 1` `length l_states \<ge> 2`
+          using \<open>k < length l_states - 1\<close> \<open>length l_states \<ge> 2\<close>
           by (metis (no_types, lifting) One_nat_def add.right_neutral add_Suc_right in_set_conv_nth length_butlast length_tl length_zip min_less_iff_conj nth_butlast nth_tl nth_zip)
         ultimately
         have "(l_states ! k, 0, p2, stone) \<in> set (?sstone stone)"
           by auto
-        thus False
-          using `?sstone stone = []`
+        then show False
+          using \<open>?sstone stone = []\<close>
           by auto
       qed
-      hence "ss \<noteq> []"
+      then have "ss \<noteq> []"
         by auto
 
       have "n = (\<Sum> (state, p1, p2, stone) \<leftarrow> ?sstone stone. p2 - p1)"
@@ -1673,9 +1673,9 @@ proof-
             using valid_moves'
             unfolding valid_labeled_move'_def Let_def
             by auto
-          hence "\<forall> (state, p1, p2, stone) \<in> set ss. int (p2 - p1) = int p2 - int p1"
+          then have "\<forall> (state, p1, p2, stone) \<in> set ss. int (p2 - p1) = int p2 - int p1"
             by auto
-          hence *: "map (\<lambda> (state, p1, p2, stone). int (p2 - p1)) ss = 
+          then have *: "map (\<lambda> (state, p1, p2, stone). int (p2 - p1)) ss = 
                  map (\<lambda> (state, p1, p2, stone). int p2 - int p1) ss"
             by auto
           show ?thesis
@@ -1688,9 +1688,9 @@ proof-
         proof-
           have "\<forall> i \<in> set [0..<length ss]. ?p2p1 i = ?p2 i - ?p1 i"
             by (auto split: prod.split)
-          hence "map ?p2p1 [0..<length ss] = map (\<lambda> i. ?p2 i - ?p1 i) [0..<length ss]"
+          then have "map ?p2p1 [0..<length ss] = map (\<lambda> i. ?p2 i - ?p1 i) [0..<length ss]"
             by auto
-          thus ?thesis
+          then show ?thesis
             unfolding Let_def
             by (subst sum_list_subtractf[symmetric], presburger)
         qed
@@ -1699,10 +1699,10 @@ proof-
         proof-
           have "[0..<length ss] = [0..<length ss-1] @ [length ss - 1]"
                "[0..<length ss] = [0] @ [1..<length ss]"
-            using `length ss \<ge> 1`
+            using \<open>length ss \<ge> 1\<close>
             by (metis le_add_diff_inverse plus_1_eq_Suc upt_Suc_append zero_le, 
                 metis (mono_tags, lifting) One_nat_def le_add_diff_inverse less_numeral_extra(4) upt_add_eq_append upt_rec zero_le_one zero_less_one)
-          thus ?thesis
+          then show ?thesis
             using sum_list_append
             by (smt list.map(1) list.map(2) map_append sum_list_simps(2))
         qed
@@ -1728,23 +1728,23 @@ proof-
                 "k1 < k2" "k2 < length ?ss"
                 "ss ! (i-1) = ?ss ! k1" "ss ! i = ?ss ! k2"
                 "?P (?ss ! k1)" "?P (?ss ! k2)" "\<forall> k'. k1 < k' \<and> k' < k2 \<longrightarrow> \<not> ?P (?ss ! k')"
-                using ss inside_filter[of "i-1" ?P ?ss] `0 < i` `i < length ss`
-                using `ss \<noteq> []` `length l_states \<ge> 2`
+                using ss inside_filter[of "i-1" ?P ?ss] \<open>0 < i\<close> \<open>i < length ss\<close>
+                using \<open>ss \<noteq> []\<close> \<open>length l_states \<ge> 2\<close>
                 by force
               have "k2 < length l_states"
-                using `k2 < length ?ss`
+                using \<open>k2 < length ?ss\<close>
                 by simp
               have "?ss ! k1 = (l_states ! k1, labeled_move_positions (l_states ! k1) (l_states ! (k1+1)))"
                    "?ss ! k2 = (l_states ! k2, labeled_move_positions (l_states ! k2) (l_states ! (k2+1)))"
-                using `k1 < k2` `k2 < length ?ss` `length l_states \<ge> 2`
+                using \<open>k1 < k2\<close> \<open>k2 < length ?ss\<close> \<open>length l_states \<ge> 2\<close>
                 by (auto simp add: nth_butlast nth_tl)
               then obtain p1a p2a p1b p2b where
                 "?ss ! k1 = (l_states ! k1, p1a, p2a, stone)" "labeled_move_positions (l_states ! k1) (l_states ! (k1+1)) = (p1a, p2a, stone)"
                 "?ss ! k2 = (l_states ! k2, p1b, p2b, stone)" "labeled_move_positions (l_states ! k2) (l_states ! (k2+1)) = (p1b, p2b, stone)"
-                using `?P (?ss ! k1)` `?P (?ss ! k2)`
+                using \<open>?P (?ss ! k1)\<close> \<open>?P (?ss ! k2)\<close>
                 by auto
               then have "p2a \<noteq> p1b"
-                using `?p1 i \<noteq> ?p2 (i-1)` `ss ! (i-1) = ?ss ! k1` `ss ! i = ?ss ! k2`
+                using \<open>?p1 i \<noteq> ?p2 (i-1)\<close> \<open>ss ! (i-1) = ?ss ! k1\<close> \<open>ss ! i = ?ss ! k2\<close>
                 by simp
 
               have "stone_position (l_states ! (k1 + 1)) stone \<noteq> stone_position (l_states ! k2) stone"
@@ -1753,7 +1753,7 @@ proof-
                   by (meson \<open>k1 < k2\<close> \<open>k2 < length l_states\<close> assms less_imp_le_nat less_le_trans nth_mem valid_labeled_game_max_stone_valid_labeled_game valid_labeled_game_valid_labeled_states)
                 moreover
                 then have "valid_labeled_move' n p1a p2a stone (l_states ! k1) (l_states ! (k1+1))"
-                  using `labeled_move_positions (l_states ! k1) (l_states ! (k1+1)) = (p1a, p2a, stone)`
+                  using \<open>labeled_move_positions (l_states ! k1) (l_states ! (k1+1)) = (p1a, p2a, stone)\<close>
                   using labeled_move_positions_valid_move'
                   using \<open>k1 < k2\<close> \<open>k2 < length l_states\<close> \<open>valid_labeled_moves n l_states\<close> valid_labeled_moves_def
                   by auto
@@ -1766,7 +1766,7 @@ proof-
                   by (meson \<open>k2 < length l_states\<close> assms less_imp_le_nat less_le_trans nth_mem valid_labeled_game_max_stone_valid_labeled_game valid_labeled_game_valid_labeled_states)
                 moreover
                 then have "valid_labeled_move' n p1b p2b stone (l_states ! k2) (l_states ! (k2+1))"
-                  using `labeled_move_positions (l_states ! k2) (l_states ! (k2+1)) = (p1b, p2b, stone)`
+                  using \<open>labeled_move_positions (l_states ! k2) (l_states ! (k2+1)) = (p1b, p2b, stone)\<close>
                   using labeled_move_positions_valid_move'
                   using \<open>k2 < length ?ss\<close>  \<open>valid_labeled_moves n l_states\<close> valid_labeled_moves_def
                   by (smt length_butlast length_map length_tl length_zip min_less_iff_conj)
@@ -1776,26 +1776,26 @@ proof-
                   by blast
 
                 show ?thesis
-                  using `stone_position (l_states ! k2) stone = p1b`
-                  using `stone_position (l_states ! (k1 + 1)) stone = p2a`
-                  using `p2a \<noteq> p1b`
+                  using \<open>stone_position (l_states ! k2) stone = p1b\<close>
+                  using \<open>stone_position (l_states ! (k1 + 1)) stone = p2a\<close>
+                  using \<open>p2a \<noteq> p1b\<close>
                   by simp
               qed
               then have "k1 + 1 < k2"
-                using `k1 < k2`
+                using \<open>k1 < k2\<close>
                 by (metis Suc_eq_plus1 Suc_leI nat_less_le)
               then obtain k' p1'' p2'' where "k1 + 1 \<le> k'" "k' < k2"
                 "(p1'', p2'', stone) = labeled_move_positions (l_states ! k') (l_states ! (k' + 1))"
-                using `stone_position (l_states ! (k1 + 1)) stone \<noteq> stone_position (l_states ! k2) stone`
-                using moved_from[of n l_states "k1+1" "k2" stone] `stone \<in> set [0..<n]`
-                using `length l_states \<ge> 2` `k1 < k2` `k2 < length l_states`
-                using `valid_labeled_moves n l_states` `valid_labeled_state n (hd l_states)`
+                using \<open>stone_position (l_states ! (k1 + 1)) stone \<noteq> stone_position (l_states ! k2) stone\<close>
+                using moved_from[of n l_states "k1+1" "k2" stone] \<open>stone \<in> set [0..<n]\<close>
+                using \<open>length l_states \<ge> 2\<close> \<open>k1 < k2\<close> \<open>k2 < length l_states\<close>
+                using \<open>valid_labeled_moves n l_states\<close> \<open>valid_labeled_state n (hd l_states)\<close>
                 by auto
               then have "?ss ! k' = (l_states ! k', p1'', p2'', stone)"
-                using `k2 < length ?ss`
+                using \<open>k2 < length ?ss\<close>
                 by (auto simp add: nth_butlast nth_tl)
-              thus False
-                using `\<forall> k'. k1 < k' \<and> k' < k2 \<longrightarrow> \<not> ?P (?ss ! k')`[rule_format, of k'] `k1 + 1 \<le> k'` `k' < k2`
+              then show False
+                using \<open>\<forall> k'. k1 < k' \<and> k' < k2 \<longrightarrow> \<not> ?P (?ss ! k')\<close>[rule_format, of k'] \<open>k1 + 1 \<le> k'\<close> \<open>k' < k2\<close>
                 by simp
             qed
           qed
@@ -1806,7 +1806,7 @@ proof-
           next
             fix i
             assume "i < length ?lhs"
-            thus "?lhs ! i = ?rhs ! i"
+            then show "?lhs ! i = ?rhs ! i"
               using *
               by simp
           qed
@@ -1820,26 +1820,26 @@ proof-
           obtain k where 
             "k < length ?ss" "ss ! (length ss - 1) = ?ss ! k" "?P (?ss ! k)" "\<forall> k'. k < k' \<and> k' < length ?ss \<longrightarrow>  \<not> ?P (?ss ! k')"
             using ss last_filter[of ?P ?ss]
-            using `ss \<noteq> []` `length l_states \<ge> 2`
+            using \<open>ss \<noteq> []\<close> \<open>length l_states \<ge> 2\<close>
             by auto
           have  "k < length l_states - 1"
-            using `k < length ?ss`
+            using \<open>k < length ?ss\<close>
             by simp
           have "?ss ! k = (l_states ! k, labeled_move_positions (l_states ! k) (l_states ! (k+1)))"
-            using `k < length ?ss` `length l_states \<ge> 2`
+            using \<open>k < length ?ss\<close> \<open>length l_states \<ge> 2\<close>
             by (auto simp add: nth_butlast nth_tl)
           then obtain p1' p2' where "?ss ! k = (l_states ! k, p1', p2', stone)" "labeled_move_positions (l_states ! k) (l_states ! (k+1)) = (p1', p2', stone)"
-            using `?P (?ss ! k)`
+            using \<open>?P (?ss ! k)\<close>
             by auto
           then have "p2' \<noteq> n"
-            using `?p2 (length ss - 1) \<noteq> n` `ss ! (length ss - 1) = ?ss ! k`
+            using \<open>?p2 (length ss - 1) \<noteq> n\<close> \<open>ss ! (length ss - 1) = ?ss ! k\<close>
             by auto
           have "stone_position (l_states ! (k + 1)) stone \<noteq> n"
           proof-
             have "stone_position (l_states ! (k + 1)) stone = p2'"
             proof-
               have "valid_labeled_move' n p1' p2' stone (l_states ! k) (l_states ! (k+1))"
-                using `labeled_move_positions (l_states ! k) (l_states ! (k+1)) = (p1', p2', stone)`
+                using \<open>labeled_move_positions (l_states ! k) (l_states ! (k+1)) = (p1', p2', stone)\<close>
                 using \<open>k < length l_states - 1\<close> \<open>valid_labeled_moves n l_states\<close> \<open>valid_labeled_state n (hd l_states)\<close> 
                 by (meson add_lessD1 labeled_move_positions_valid_move' less_diff_conv nth_mem valid_labeled_moves_def valid_labeled_moves_valid_labeled_states)
               moreover
@@ -1852,23 +1852,23 @@ proof-
                 using valid_labeled_move'_stone_positions
                 by blast
             qed
-            thus ?thesis
-              using `p2' \<noteq> n`
+            then show ?thesis
+              using \<open>p2' \<noteq> n\<close>
               by simp
           qed
-          hence "k + 1 < length l_states - 1"
+          then have "k + 1 < length l_states - 1"
             using posn \<open>k < length l_states - 1\<close>
             by (smt Nat.le_diff_conv2 Nat.le_imp_diff_is_add Suc_leI add.right_neutral add_Suc_right add_leD2 diff_diff_left nat_less_le one_add_one plus_1_eq_Suc)
           then obtain k' p1'' p2'' where "k' \<ge> k + 1" "k' < length l_states - 1" "(p1'', p2'', stone) = labeled_move_positions (l_states ! k') (l_states ! (k' + 1))"
             using moved_from[of n l_states "k+1" "length l_states - 1" stone] 
-            using posn `stone_position (l_states ! (k+1)) stone \<noteq> n` `stone \<in> set [0..<n]`
-            using `length l_states \<ge> 2`
-            using `valid_labeled_moves n l_states` `valid_labeled_state n (hd l_states)`
+            using posn \<open>stone_position (l_states ! (k+1)) stone \<noteq> n\<close> \<open>stone \<in> set [0..<n]\<close>
+            using \<open>length l_states \<ge> 2\<close>
+            using \<open>valid_labeled_moves n l_states\<close> \<open>valid_labeled_state n (hd l_states)\<close>
             by force
           then have "?ss ! k' = (l_states ! k', p1'', p2'', stone)"
             by (simp add: nth_butlast nth_tl)
-          thus False
-            using `\<forall> k'. k < k' \<and> k' < length ?ss \<longrightarrow> \<not> ?P (?ss ! k')`[rule_format, of k'] `k' \<ge> k + 1` `k' < length l_states - 1`
+          then show False
+            using \<open>\<forall> k'. k < k' \<and> k' < length ?ss \<longrightarrow> \<not> ?P (?ss ! k')\<close>[rule_format, of k'] \<open>k' \<ge> k + 1\<close> \<open>k' < length l_states - 1\<close>
             by auto
         qed
         moreover
@@ -1878,19 +1878,19 @@ proof-
           obtain k where 
             "k < length ?ss" "ss ! 0 = ?ss ! k" "?P (?ss ! k)" "\<forall> k' < k. \<not> ?P (?ss ! k')"
             using ss hd_filter[of ?P ?ss]
-            using `ss \<noteq> []` `length l_states \<ge> 2`
+            using \<open>ss \<noteq> []\<close> \<open>length l_states \<ge> 2\<close>
             by auto
           have  "k < length l_states - 1"
-            using `k < length ?ss`
+            using \<open>k < length ?ss\<close>
             by simp
           have "?ss ! k = (l_states ! k, labeled_move_positions (l_states ! k) (l_states ! (k+1)))"
-            using `k < length ?ss` `length l_states \<ge> 2`
+            using \<open>k < length ?ss\<close> \<open>length l_states \<ge> 2\<close>
             by (auto simp add: nth_butlast nth_tl)
           then obtain p1' p2' where "?ss ! k = (l_states ! k, p1', p2', stone)" "labeled_move_positions (l_states ! k) (l_states ! (k+1)) = (p1', p2', stone)"
-            using `?P (?ss ! k)`
+            using \<open>?P (?ss ! k)\<close>
             by auto
           then have "p1' \<noteq> 0"
-            using `?p1 0 \<noteq> 0` `ss ! 0 = ?ss ! k`
+            using \<open>?p1 0 \<noteq> 0\<close> \<open>ss ! 0 = ?ss ! k\<close>
             by auto
           have "stone_position (l_states ! k) stone \<noteq> 0"
           proof-
@@ -1898,34 +1898,34 @@ proof-
               by (meson \<open>k < length l_states - 1\<close> add_lessD1 assms less_diff_conv nth_mem valid_labeled_game_max_stone_valid_labeled_game valid_labeled_game_valid_labeled_states)
             moreover
             then have "valid_labeled_move' n p1' p2' stone (l_states ! k) (l_states ! (k+1))"
-              using `labeled_move_positions (l_states ! k) (l_states ! (k+1)) = (p1', p2', stone)`
+              using \<open>labeled_move_positions (l_states ! k) (l_states ! (k+1)) = (p1', p2', stone)\<close>
               using \<open>k < length l_states - 1\<close> \<open>valid_labeled_moves n l_states\<close> labeled_move_positions_valid_move' valid_labeled_moves_def
               by blast
             ultimately
             have "stone_position (l_states ! k) stone = p1'"
               using valid_labeled_move'_stone_positions
               by blast
-            thus ?thesis
-              using `p1' \<noteq> 0`
+            then show ?thesis
+              using \<open>p1' \<noteq> 0\<close>
               by simp
           qed
-          hence "k > 0"
+          then have "k > 0"
             using pos0
             using neq0_conv
             by blast
           have "k < length l_states"
-            using `k < length l_states - 1` `length l_states \<ge> 2` 
+            using \<open>k < length l_states - 1\<close> \<open>length l_states \<ge> 2\<close> 
             by auto
           then obtain k' p2'' where "k' < k" "labeled_move_positions (l_states ! k') (l_states ! (k' + 1)) = (0, p2'', stone)"
-            using moved_from[of n l_states 0 k stone] pos0 `stone_position (l_states ! k) stone \<noteq> 0`
-            using `valid_labeled_state n (hd l_states)` `valid_labeled_moves n l_states` `k > 0` `stone \<in> set [0..<n]`
+            using moved_from[of n l_states 0 k stone] pos0 \<open>stone_position (l_states ! k) stone \<noteq> 0\<close>
+            using \<open>valid_labeled_state n (hd l_states)\<close> \<open>valid_labeled_moves n l_states\<close> \<open>k > 0\<close> \<open>stone \<in> set [0..<n]\<close>
             by auto
           then have "?ss ! k' = (l_states ! k', 0, p2'', stone)"
-            using `k' < k` `k < length l_states - 1`
-            using `k < length ?ss` `length l_states \<ge> 2`
+            using \<open>k' < k\<close> \<open>k < length l_states - 1\<close>
+            using \<open>k < length ?ss\<close> \<open>length l_states \<ge> 2\<close>
             by (auto simp add: nth_butlast nth_tl)
-          thus False
-            using `\<forall> k' < k. \<not> ?P (?ss ! k')`[rule_format, of k'] `k' < k`
+          then show False
+            using \<open>\<forall> k' < k. \<not> ?P (?ss ! k')\<close>[rule_format, of k'] \<open>k' < k\<close>
             by simp
         qed
         ultimately
@@ -1939,7 +1939,7 @@ proof-
         obtain state p1 p2 stone' where x: "x = (state, p1, p2, stone')"
           by (cases x)
         assume "x \<in> set (?sstone stone)"
-        hence "x \<in> set ss"
+        then have "x \<in> set ss"
           using ss
           by auto
         then obtain state' where "stone' = Max (state ! p1)" "valid_labeled_move' n p1 p2 (Max (state ! p1)) state state'"
@@ -1958,7 +1958,7 @@ proof-
 
         show "(case x of (state, p1, p2, stone) \<Rightarrow> p2 - p1) \<le> 
               (case x of (state, p1, p2, stone) \<Rightarrow> stone + 1)"
-          using x `stone' = Max (state ! p1)`
+          using x \<open>stone' = Max (state ! p1)\<close>
           by simp
       qed
       also have "... = (\<Sum> x \<leftarrow> ?sstone stone. stone + 1)"
@@ -1966,14 +1966,14 @@ proof-
         have "map (\<lambda> (state, p1, p2, stone). stone + 1) (?sstone stone) = 
               map (\<lambda> x. stone + 1) (?sstone stone)"
           by auto
-        thus ?thesis
+        then show ?thesis
           by presburger
       qed
       also have "... = length (?sstone stone) * (stone + 1)"
         by (simp add: sum_list_triv)
       finally
       show False
-        using `length (?sstone stone) * (stone + 1) < n`
+        using \<open>length (?sstone stone) * (stone + 1) < n\<close>
         by simp
     qed
   qed
@@ -1993,7 +1993,7 @@ proof-
     by simp
   moreover
   have "length ?ss + 1 = length l_states"
-    using `l_states \<noteq> []`
+    using \<open>l_states \<noteq> []\<close>
     by simp
   ultimately
   show ?thesis

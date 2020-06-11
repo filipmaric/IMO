@@ -21,12 +21,12 @@ lemma not_perfect_square_15:
   shows "q^2 \<noteq> 15"
 proof (rule ccontr)
   assume "\<not> ?thesis"
-  hence "3^2 < (abs q)^2" "(abs q)^2 < 4^2"
+  then have "3^2 < (abs q)^2" "(abs q)^2 < 4^2"
     by auto
-  hence "3 < abs q" "abs q < 4"
+  then have "3 < abs q" "abs q < 4"
     using abs_ge_zero power_less_imp_less_base zero_le_numeral
     by blast+
-  thus False
+  then show False
     by simp
 qed
 
@@ -35,12 +35,12 @@ lemma not_perfect_square_12:
   shows "q^2 \<noteq> 12"
 proof (rule ccontr)
   assume "\<not> ?thesis"
-  hence "3^2 < (abs q)^2" "(abs q)^2 < 4^2"
+  then have "3^2 < (abs q)^2" "(abs q)^2 < 4^2"
     by auto
-  hence "3 < abs q" "abs q < 4"
+  then have "3 < abs q" "abs q < 4"
     using abs_ge_zero power_less_imp_less_base zero_le_numeral
     by blast+
-  thus False
+  then show False
     by simp
 qed
 
@@ -49,12 +49,12 @@ lemma not_perfect_square_8:
   shows "q^2 \<noteq> 8"
 proof (rule ccontr)
   assume "\<not> ?thesis"
-  hence "2^2 < (abs q)^2" "(abs q)^2 < 3^2"
+  then have "2^2 < (abs q)^2" "(abs q)^2 < 3^2"
     by auto
-  hence "2 < abs q" "abs q < 3"
+  then have "2 < abs q" "abs q < 3"
     using abs_ge_zero power_less_imp_less_base zero_le_numeral
     by blast+
-  thus False
+  then show False
     by simp
 qed
 
@@ -63,12 +63,12 @@ lemma not_perfect_square_7:
   shows "q^2 \<noteq> 7"
 proof (rule ccontr)
   assume "\<not> ?thesis"
-  hence "2^2 < (abs q)^2" "(abs q)^2 < 3^2"
+  then have "2^2 < (abs q)^2" "(abs q)^2 < 3^2"
     by auto
-  hence "2 < abs q" "abs q < 3"
+  then have "2 < abs q" "abs q < 3"
     using abs_ge_zero power_less_imp_less_base zero_le_numeral
     by blast+
-  thus False
+  then show False
     by simp
 qed
 
@@ -77,12 +77,12 @@ lemma not_perfect_square_5:
   shows "q^2 \<noteq> 5"
 proof (rule ccontr)
   assume "\<not> ?thesis"
-  hence "2^2 < (abs q)^2" "(abs q)^2 < 3^2"
+  then have "2^2 < (abs q)^2" "(abs q)^2 < 3^2"
     by auto
-  hence "2 < abs q" "abs q < 3"
+  then have "2 < abs q" "abs q < 3"
     using abs_ge_zero power_less_imp_less_base zero_le_numeral
     by blast+
-  thus False
+  then show False
     by simp
 qed
 
@@ -91,12 +91,12 @@ lemma not_perfect_square_3:
   shows "q^2 \<noteq> 3"
 proof (rule ccontr)
   assume "\<not> ?thesis"
-  hence "1^2 < (abs q)^2" "(abs q)^2 < 2^2"
+  then have "1^2 < (abs q)^2" "(abs q)^2 < 2^2"
     by auto
-  hence "1 < abs q" "abs q < 2"
+  then have "1 < abs q" "abs q < 2"
     using abs_ge_zero power_less_imp_less_base zero_le_numeral
     by blast+
-  thus False
+  then show False
     by simp
 qed
 
@@ -111,11 +111,11 @@ proof-
     by simp
 
   have "d > 0"
-    using `2 * s = d^2 - b^2` `s > 0` `d \<ge> 0`
+    using \<open>2 * s = d^2 - b^2\<close> \<open>s > 0\<close> \<open>d \<ge> 0\<close>
     by (smt pos_imp_zdiv_neg_iff zero_less_power2)
 
   have "a > 0"
-    using `2 * s = a^2 - c^2` `s > 0` `a \<ge> 0`
+    using \<open>2 * s = a^2 - c^2\<close> \<open>s > 0\<close> \<open>a \<ge> 0\<close>
     by (smt pos_imp_zdiv_neg_iff zero_less_power2)
 
   have "b > 0"
@@ -123,40 +123,40 @@ proof-
     by auto
 
   have "d^2 > c^2"
-    using \<open>2 * s = d\<^sup>2 - b\<^sup>2\<close> `c \<le> b` `0 < s`  `c \<ge> 0`
+    using \<open>2 * s = d\<^sup>2 - b\<^sup>2\<close> \<open>c \<le> b\<close> \<open>0 < s\<close>  \<open>c \<ge> 0\<close>
     by (smt power_mono)
 
-  hence "d^2 > s^2 div 2"
-    using `s^2 = c^2 + d^2`
+  then have "d^2 > s^2 div 2"
+    using \<open>s^2 = c^2 + d^2\<close>
     by presburger
 
-  hence "2*s^2 < 4*d^2"
+  then have "2*s^2 < 4*d^2"
     by simp
 
   have "b < d"
-    using `2*s = d^2 - b^2` `s > 0` `d > 0` `b > 0`
+    using \<open>2*s = d^2 - b^2\<close> \<open>s > 0\<close> \<open>d > 0\<close> \<open>b > 0\<close>
     by (smt power_mono_iff zero_less_numeral)
 
   have "even b \<longleftrightarrow> even d"
-    using `2*s = d^2 - b^2`
+    using \<open>2*s = d^2 - b^2\<close>
     by (metis add_uminus_conv_diff dvd_minus_iff even_add even_mult_iff even_numeral power2_eq_square)
 
   then have "b \<le> d - 2"
-    using `b < d`
+    using \<open>b < d\<close>
     by (smt even_two_times_div_two odd_two_times_div_two_succ)
 
   then have "2*s \<ge> d^2 - (d-2)^2"
-    using `2*s = d^2 - b^2` `d > 0` `b > 0`
+    using \<open>2*s = d^2 - b^2\<close> \<open>d > 0\<close> \<open>b > 0\<close>
     by auto
   then have "s \<ge> 2*(d - 1)"
     by (simp add: algebra_simps power2_eq_square)
   then have "2*d \<le> s + 2"
     by simp
   then have "4*d^2 \<le> (s + 2)^2"
-    using abs_le_square_iff[of "2*d" "s + 2"] `d > 0` `s > 0`
+    using abs_le_square_iff[of "2*d" "s + 2"] \<open>d > 0\<close> \<open>s > 0\<close>
     by auto
   then have "2*s^2 < (s+2)^2"
-    using `2*s^2 < 4*d^2`
+    using \<open>2*s^2 < 4*d^2\<close>
     by simp
   then have "(s - 2)^2 < 8"
     by (simp add: power2_eq_square algebra_simps)
@@ -168,7 +168,7 @@ proof-
   then have "s \<le> 4"
     by simp
   then have "s = 1 \<or> s = 2 \<or> s = 3 \<or> s = 4"
-    using `s > 0`
+    using \<open>s > 0\<close>
     by auto
   moreover
   have "\<And> p q :: int. \<lbrakk>16 = p^2 + q^2; p \<ge> 0; q \<ge> 0\<rbrakk> \<Longrightarrow> p = 0 \<or> q = 0"
@@ -178,23 +178,23 @@ proof-
     have "p \<le> 4"
     proof (rule ccontr)
       assume "\<not> ?thesis"
-      hence "p \<ge> 5"
+      then have "p \<ge> 5"
         by simp
-      hence "p^2 \<ge> 25"
+      then have "p^2 \<ge> 25"
         using power_mono[of 5 p 2]
         by simp
-      hence "p^2 + q^2 \<ge> 25"
+      then have "p^2 + q^2 \<ge> 25"
         using zero_le_power2[of q]
         by linarith
-      thus False
-        using `16 = p^2 + q^2`
+      then show False
+        using \<open>16 = p^2 + q^2\<close>
         by auto
     qed
-    hence "p = 0 \<or> p = 1 \<or> p = 2 \<or> p = 3 \<or> p = 4"
-      using `0 \<le> p`
+    then have "p = 0 \<or> p = 1 \<or> p = 2 \<or> p = 3 \<or> p = 4"
+      using \<open>0 \<le> p\<close>
       by auto
-    thus "p = 0 \<or> q = 0"
-      using `16 = p^2 + q^2` not_perfect_square_15 not_perfect_square_12 not_perfect_square_7
+    then show "p = 0 \<or> q = 0"
+      using \<open>16 = p^2 + q^2\<close> not_perfect_square_15 not_perfect_square_12 not_perfect_square_7
       by auto
   qed
   moreover
@@ -205,23 +205,23 @@ proof-
     have "p \<le> 3"
     proof (rule ccontr)
       assume "\<not> ?thesis"
-      hence "p \<ge> 4"
+      then have "p \<ge> 4"
         by simp
-      hence "p^2 \<ge> 16"
+      then have "p^2 \<ge> 16"
         using power_mono[of 4 p 2]
         by simp
-      hence "p^2 + q^2 \<ge> 16"
+      then have "p^2 + q^2 \<ge> 16"
         using zero_le_power2[of q]
         by linarith
-      thus False
-        using `9 = p^2 + q^2`
+      then show False
+        using \<open>9 = p^2 + q^2\<close>
         by auto
     qed
-    hence "p = 0 \<or> p = 1 \<or> p = 2 \<or> p = 3"
-      using `0 \<le> p`
+    then have "p = 0 \<or> p = 1 \<or> p = 2 \<or> p = 3"
+      using \<open>0 \<le> p\<close>
       by auto
-    thus "p = 0 \<or> q = 0"
-      using `9 = p^2 + q^2` not_perfect_square_8 not_perfect_square_5
+    then show "p = 0 \<or> q = 0"
+      using \<open>9 = p^2 + q^2\<close> not_perfect_square_8 not_perfect_square_5
       by auto
   qed
   moreover
@@ -232,23 +232,23 @@ proof-
     have "p \<le> 2"
     proof (rule ccontr)
       assume "\<not> ?thesis"
-      hence "p \<ge> 3"
+      then have "p \<ge> 3"
         by simp
-      hence "p^2 \<ge> 9"
+      then have "p^2 \<ge> 9"
         using power_mono[of 3 p 2]
         by simp
-      hence "p^2 + q^2 \<ge> 9"
+      then have "p^2 + q^2 \<ge> 9"
         using zero_le_power2[of q]
         by linarith
-      thus False
-        using `4 = p^2 + q^2`
+      then show False
+        using \<open>4 = p^2 + q^2\<close>
         by auto
     qed
-    hence "p = 0 \<or> p = 1 \<or> p = 2"
-      using `0 \<le> p`
+    then have "p = 0 \<or> p = 1 \<or> p = 2"
+      using \<open>0 \<le> p\<close>
       by auto
-    thus "p = 0 \<or> q = 0"
-      using `4 = p^2 + q^2` not_perfect_square_3
+    then show "p = 0 \<or> q = 0"
+      using \<open>4 = p^2 + q^2\<close> not_perfect_square_3
       by auto
   qed
   moreover
@@ -256,14 +256,14 @@ proof-
     by (smt one_le_power)
   moreover
   have "a \<noteq> 0" "d \<noteq> 0"
-    using `a > 0` `d > 0`
+    using \<open>a > 0\<close> \<open>d > 0\<close>
     by auto
   ultimately
   have "c = 0" "b = 0"
-    using `s^2 = c^2 + d^2` `d \<ge> 0` `c \<ge> 0` `s^2 = a^2 + b^2` `a \<ge> 0` `b \<ge> 0`
+    using \<open>s^2 = c^2 + d^2\<close> \<open>d \<ge> 0\<close> \<open>c \<ge> 0\<close> \<open>s^2 = a^2 + b^2\<close> \<open>a \<ge> 0\<close> \<open>b \<ge> 0\<close>
     by fastforce+
-  thus False
-    using `b > 0 \<or> c > 0`
+  then show False
+    using \<open>b > 0 \<or> c > 0\<close>
     by auto
 qed
 
@@ -303,7 +303,7 @@ proof (rule ccontr)
       by simp
   next
     case False
-    hence "even (x + y)" "even (z + t)"
+    then have "even (x + y)" "even (z + t)"
       using eq(2)
       by auto
 
@@ -313,27 +313,27 @@ proof (rule ccontr)
     have "?s ^ 2 = a ^ 2 + ?b ^ 2"
     proof-
       have "a^2 + ?b^2 = (x+y)^2 div 4"
-        using `even (x+y)` div_power[of 2 "abs (x - y)" 2] `x*y = a*a`
+        using \<open>even (x+y)\<close> div_power[of 2 "abs (x - y)" 2] \<open>x*y = a*a\<close>
         by (simp add: power2_eq_square algebra_simps)
-      thus ?thesis
+      then show ?thesis
         by (metis False div_power mult_2_right numeral_Bit0 power2_eq_square)
     qed
 
     have "?s ^ 2 = c ^ 2 + ?d ^ 2"
     proof-
       have "c^2 + ?d^2 = (z+t)^2 div 4"
-        using `even (z+t)` div_power[of 2 "abs (z - t)" 2] `z*t = c*c`
+        using \<open>even (z+t)\<close> div_power[of 2 "abs (z - t)" 2] \<open>z*t = c*c\<close>
         by (simp add: power2_eq_square algebra_simps)
-      thus ?thesis
+      then show ?thesis
         by (metis eq(2) False div_power mult_2_right numeral_Bit0 power2_eq_square)
     qed
 
     have "2*?s = a^2 - c^2"
-      using `even (x + y)` `x*y = a*a` `z*t = c*c` eq(1)
+      using \<open>even (x + y)\<close> \<open>x*y = a*a\<close> \<open>z*t = c*c\<close> eq(1)
       by (simp add: power2_eq_square)
 
     have "?s > 0"
-      using `x > 0` `y > 0`
+      using \<open>x > 0\<close> \<open>y > 0\<close>
       by auto
 
     have "?b \<ge> 0" "?d \<ge> 0"
@@ -342,19 +342,19 @@ proof (rule ccontr)
     show ?thesis
     proof (cases "?b \<ge> c")
       case True
-      thus False
+      then show False
         using IMO2018SL_N5_lemma[of "?s" a ?b c ?d]
-        using `?s^2 = a^2 + ?b^2` `?s^2 = c^2 + ?d^2` `2*?s = a^2 - c^2`
-        using `a > 0` `c > 0` `?s > 0` `?d \<ge> 0`
+        using \<open>?s^2 = a^2 + ?b^2\<close> \<open>?s^2 = c^2 + ?d^2\<close> \<open>2*?s = a^2 - c^2\<close>
+        using \<open>a > 0\<close> \<open>c > 0\<close> \<open>?s > 0\<close> \<open>?d \<ge> 0\<close>
         by simp
     next
       case False
-      hence "c \<ge> ?b"
+      then have "c \<ge> ?b"
         by simp
-      thus False
+      then show False
         using IMO2018SL_N5_lemma[of "?s" ?d c ?b a]
-        using `?s^2 = a^2 + ?b^2` `?s^2 = c^2 + ?d^2` `2*?s = a^2 - c^2`
-        using `a > 0` `c > 0` `?s > 0` `?b \<ge> 0` `?d \<ge> 0`
+        using \<open>?s^2 = a^2 + ?b^2\<close> \<open>?s^2 = c^2 + ?d^2\<close> \<open>2*?s = a^2 - c^2\<close>
+        using \<open>a > 0\<close> \<open>c > 0\<close> \<open>?s > 0\<close> \<open>?b \<ge> 0\<close> \<open>?d \<ge> 0\<close>
         by simp
     qed
   qed
