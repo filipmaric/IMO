@@ -1,12 +1,24 @@
 session IMO_files = HOL +
   options [document = pdf, document_output = "output"]
 
-  sessions "HOL-Library"
+  sessions "HOL-Library" "Tutorial" "HOL-ex"
 
   directories "statements" "solutions"
 
   (* directory "statements" *)
   theories [quick_and_dirty]
+
+  "IMO_2006_SL_statements"
+  "IMO_2006_SL_A1"
+  "IMO_2006_SL_A2"
+  "IMO_2006_SL_A3"
+  "IMO_2006_SL_A4"
+  "IMO_2006_SL_A5"
+  "IMO_2006_SL_A6"
+
+  "IMO_2008_SL_statements"
+  "IMO_2008_SL_A1" 
+  (*  "IMO_2008_SL_A2" *)
 
   "IMO_2018_SL_statements"
   "IMO_2018_SL_A1"

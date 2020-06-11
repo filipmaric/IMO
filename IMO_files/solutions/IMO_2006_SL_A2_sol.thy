@@ -6,6 +6,8 @@ theory IMO_2006_SL_A2_sol
 imports Complex_Main
 begin
 
+declare [[smt_timeout = 20]]
+
 lemma sum_remove_zero:
   fixes n :: nat
   assumes "n > 0"
