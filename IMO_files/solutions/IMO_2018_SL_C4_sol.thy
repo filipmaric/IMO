@@ -1,6 +1,6 @@
 subsection \<open>IMO 2018 SL - C4\<close>
 
-theory IMO_2018_SL_C4
+theory IMO_2018_SL_C4_sol
   imports Main "HOL-Library.Permutation"
 begin
 

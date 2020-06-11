@@ -2,7 +2,7 @@ section \<open>Algebra problems\<close>
 
 subsection \<open>IMO 2018 SL - A2\<close>
 
-theory IMO_2018_SL_A2
+theory IMO_2018_SL_A2_sol
 imports Complex_Main
 begin
 

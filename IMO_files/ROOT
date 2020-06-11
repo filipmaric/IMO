@@ -9,9 +9,12 @@ session IMO_files = HOL +
   theories [quick_and_dirty]
 
   "IMO_2018_SL_statements"
+  "IMO_2018_SL_A1"
+  "IMO_2018_SL_A2"
   "IMO_2018_SL_A3"
+  "IMO_2018_SL_A4"
   "IMO_2018_SL_A5"
-  "IMO_2018_SL_A5"
+  (*  "IMO_2018_SL_A6" *)
   "IMO_2018_SL_A7"
 
 
@@ -19,16 +22,16 @@ session IMO_files = HOL +
   theories
 
   "IMO_2006_SL_solutions"
-  "IMO_2006_SL_A2"
+  "IMO_2006_SL_A2_sol"
 
   "IMO_2018_SL_solutions"
-  "IMO_2018_SL_A2"
-  "IMO_2018_SL_A4"
-  "IMO_2018_SL_C1"
-  "IMO_2018_SL_C2"
-  "IMO_2018_SL_C3"
-  "IMO_2018_SL_C4"
-  "IMO_2018_SL_N5"
+  "IMO_2018_SL_A2_sol"
+  "IMO_2018_SL_A4_sol"
+  "IMO_2018_SL_C1_sol"
+  "IMO_2018_SL_C2_sol"
+  "IMO_2018_SL_C3_sol"
+  "IMO_2018_SL_C4_sol"
+  "IMO_2018_SL_N5_sol"
   
 
   document_files

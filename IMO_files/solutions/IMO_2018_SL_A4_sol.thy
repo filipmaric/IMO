@@ -1,6 +1,6 @@
 subsection \<open>IMO 2018 SL - A4\<close>
 
-theory IMO_2018_SL_A4
+theory IMO_2018_SL_A4_sol
 imports Complex_Main
 begin
 
