@@ -1,6 +1,6 @@
 subsection \<open>IMO 2018 SL - C3\<close>
 
-theory IMO_2018_SL_C3
+theory IMO_2018_SL_C3_sol
   imports Complex_Main
 begin
 

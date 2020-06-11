@@ -2,7 +2,7 @@ section \<open>Combinatorics problems\<close>
 
 subsection \<open>IMO 2018 SL - C1\<close>
 
-theory IMO_2018_SL_C1
+theory IMO_2018_SL_C1_sol
 imports Complex_Main
 begin
 

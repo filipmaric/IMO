@@ -9,6 +9,7 @@ text\<open>Shortlisted problems with solutions from \emph{59-th International Ma
 
 File with problem statements and solutions can be found at:
 @{url \<open>https://www.imo-official.org/problems/IMO2018SL.pdf\<close>}
+
 \<close>
 
 end

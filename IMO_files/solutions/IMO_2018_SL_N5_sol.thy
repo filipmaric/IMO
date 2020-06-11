@@ -2,7 +2,7 @@ section \<open>Number theory problems\<close>
 
 subsection \<open>IMO 2018 SL - N5\<close>
 
-theory IMO_2018_SL_N5
+theory IMO_2018_SL_N5_sol
 imports Main
 begin
 
