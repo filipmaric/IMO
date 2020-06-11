@@ -18,41 +18,41 @@ theorem IMO_2006_SL_A2:
   assumes "a 0 = -1" "\<forall> n \<ge> 1. (\<Sum> k < Suc n. a (n - k) / (k + 1)) = 0" "n \<ge> 1"
   shows "a n > 0"
   using \<open>n \<ge> 1\<close>
-proof (induct n rule: less_induct)
+proof (induction n rule: less_induct)
   case (less n)
   show ?case
-  proof (cases "n = 1")
-    case True
-    then have "a 1 = 1/2"
-      using assms(1) assms(2)[rule_format, of n]
+  proof cases
+    assume "n = 1"
+    have "a 1 = 1/2"
+      using assms(1) assms(2)[rule_format, of 1]
       by simp
     then show ?thesis
       using \<open>n = 1\<close>
       by simp
   next
-    case False
+    assume "n \<noteq> 1"
     then have "n > 1"
       using \<open>n \<ge> 1\<close>
       by simp
-    then have "n - 1 \<ge> 1"
-      by simp
-    have "(\<Sum> k < n. a k / (n - k)) = 0" (is "?S1 = 0")
-      using assms(2)[rule_format, of "n - 1"] \<open>n > 1\<close> \<open>n - 1 \<ge> 1\<close> 
-      using sum.nat_diff_reindex[of "\<lambda> k. a k / (n - k)" "n"]
-      by simp
 
-    moreover
+    have "(n + 1) * (\<Sum> k < n + 1. a k / (n + 1 - k)) - n * (\<Sum> k < n. a k / (n - k)) = 0"
+    proof-
+      have "(\<Sum> k < n. a k / (n - k)) = 0"
+        using assms(2)[rule_format, of "n - 1"] \<open>n > 1\<close> 
+        using sum.nat_diff_reindex[of "\<lambda> k. a k / (n - k)" "n"]
+        by simp
 
-    have "(\<Sum> k < Suc n. a k / (n + 1 - k)) = 0" (is "?S2 = 0")
-      using assms(2)[rule_format, of "n"] \<open>n > 1\<close>
-      using sum.nat_diff_reindex[of "\<lambda> k. a k / (n + 1 - k)" "Suc n"]
-      by auto
+      moreover
 
-    ultimately
-    have "(n + 1)*?S2 - n*?S1 = 0"
-      by simp
-    then have "(n + 1) * (a n + (\<Sum> k < n. a k / (n + 1 - k))) = n * ?S1"
-      by (simp add: add.commute)
+      have "(\<Sum> k < n + 1. a k / (n + 1 - k)) = 0"
+        using assms(2)[rule_format, of "n"] \<open>n > 1\<close>
+        using sum.nat_diff_reindex[of "\<lambda> k. a k / (n + 1 - k)" "Suc n"]
+        by auto
+
+      ultimately
+      show ?thesis
+        by simp
+    qed
     then have "(n + 1) * a n = n * (\<Sum> k < n. a k / (n - k)) - (n + 1) * (\<Sum> k < n. a k / (n + 1 - k))"
       by (simp add: algebra_simps)
     also have "... = (\<Sum> k < n. n * a k / (n - k)) - (\<Sum> k < n. (n + 1) * a k / (n + 1 - k))"
@@ -81,37 +81,37 @@ proof (induct n rule: less_induct)
       assume "i \<in> {1..<n}"
       then have *: "1 \<le> i" "i < n"
         by auto
-      then have "(n / (n - i) - (n + 1) / (n + 1 - i)) > 0"
+      show "a i * (n / (n - i) - (n + 1) / (n + 1 - i)) > 0" (is "?a i * ?c > 0")
       proof-
-        let ?n = "real n" and ?i = "real i"
-        have "(?n / (?n - ?i) - (?n + 1) / (?n + 1 - ?i)) > 0"
+        have "a i > 0"
+          using less(1)[of i] \<open>1 \<le> i\<close> \<open>i < n\<close>
+          by simp
+
+        moreover
+
+        have "?c > 0"
         proof-
+          let ?n = "real n" and ?i = "real i"
           have "?n / (?n - ?i) - (?n + 1) / (?n + 1 - ?i) = ?i / ((?n - ?i) * (?n + 1 - ?i))"
             using *
             by (simp add: field_simps)
           then show ?thesis
             using *
-            by simp
+            by (simp add: add.commute of_nat_diff)
         qed
-        then show ?thesis
-          using *
-          by (simp add: add.commute of_nat_diff)
+
+        ultimately
+
+        show ?thesis
+          by simp
       qed
-      moreover
-      have "a i > 0"
-        using less(1)[of i] \<open>1 \<le> i\<close> \<open>i < n\<close>
-        by simp
-      ultimately
-      show "a i * (n / (n - i) - (n + 1) / (n + 1 - i)) > 0"
-        by simp
     qed
-    ultimately
+    finally
     have "(n + 1) * a n > 0"
       by simp
     then show ?thesis
       by (smt mult_nonneg_nonpos of_nat_0_le_iff)
-  qed                                      
+  qed                             
 qed
-
 
 end
