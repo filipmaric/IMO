@@ -1,7 +1,7 @@
 subsection \<open>IMO 2006 SL - A5\<close>
 
 theory IMO_2006_SL_A5
-  imports Complex_Main "HOL-ex.Sqrt"
+  imports Complex_Main 
 begin
 
 theorem IMO_2006_SL_A5:

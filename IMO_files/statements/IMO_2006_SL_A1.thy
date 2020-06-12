@@ -9,7 +9,7 @@ begin
 theorem IMO_2006_SL_A1:
   fixes a :: "nat \<Rightarrow> real"
   assumes "\<forall> i \<ge> 0. (a (i + 1) = floor (a i) * (a i - floor (a i)))"
-  shows "\<exists> j. a j = a (j + 2)"
+  shows "\<exists> i. a i = a (i + 2)"
   sorry
 
 end
