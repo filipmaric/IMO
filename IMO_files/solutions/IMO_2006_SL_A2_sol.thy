@@ -24,50 +24,40 @@ proof (induction n rule: less_induct)
   proof cases
     assume "n = 1"
     have "a 1 = 1/2"
-      using assms(1) assms(2)[rule_format, of 1]
-      by simp
-    then show ?thesis
-      using \<open>n = 1\<close>
+      using assms
+      by auto
+    with \<open>n = 1\<close> show ?thesis 
       by simp
   next
     assume "n \<noteq> 1"
-    then have "n > 1"
-      using \<open>n \<ge> 1\<close>
+    with \<open>n \<ge> 1\<close> have "n > 1"
       by simp
 
-    have "(n + 1) * (\<Sum> k < n + 1. a k / (n + 1 - k)) - n * (\<Sum> k < n. a k / (n - k)) = 0"
+    have "0 = (n + 1) * (\<Sum> k < n + 1. a k / (n + 1 - k)) - n * (\<Sum> k < n. a k / (n - k))"
     proof-
       have "(\<Sum> k < n. a k / (n - k)) = 0"
         using assms(2)[rule_format, of "n - 1"] \<open>n > 1\<close> 
-        using sum.nat_diff_reindex[of "\<lambda> k. a k / (n - k)" "n"]
+              sum.nat_diff_reindex[of "\<lambda> k. a k / (n - k)" "n"]
         by simp
 
       moreover
 
       have "(\<Sum> k < n + 1. a k / (n + 1 - k)) = 0"
         using assms(2)[rule_format, of "n"] \<open>n > 1\<close>
-        using sum.nat_diff_reindex[of "\<lambda> k. a k / (n + 1 - k)" "Suc n"]
-        by auto
+              sum.nat_diff_reindex[of "\<lambda> k. a k / (n + 1 - k)" "n + 1"]
+        by simp
 
       ultimately
       show ?thesis
         by simp
     qed
-    then have "(n + 1) * a n = n * (\<Sum> k < n. a k / (n - k)) - (n + 1) * (\<Sum> k < n. a k / (n + 1 - k))"
-      by (simp add: algebra_simps)
-    also have "... = (\<Sum> k < n. n * a k / (n - k)) - (\<Sum> k < n. (n + 1) * a k / (n + 1 - k))"
-      apply (subst sum_distrib_left)
-      apply (subst sum_distrib_left)
-      by simp
-    also have "... = (\<Sum> k < n. n * a k / (n - k) - (n + 1) * a k / (n + 1 - k))"
-      apply (subst sum_subtractf)
-      by simp
-    also have "... = (\<Sum> k < n. a k * (n / (n - k) - (n + 1) / (n + 1 - k)))"
-      by (simp add: algebra_simps)
-    also have "... = (\<Sum> k \<in> {1..<n}. a k * (n / (n - k) - (n + 1) / (n + 1 - k)))"
-      using \<open>n > 1\<close>
-      apply (subst sum_remove_zero[of "n"])
-      by auto
+    then have "(n + 1) * a n = - (\<Sum> k < n. ((n + 1) / (n + 1 - k) - n / (n - k)) * a k)"
+      by (simp add: algebra_simps sum_distrib_left sum_subtractf)
+    then have "(n + 1) * a n = (\<Sum> k < n. (n / (n - k) - (n + 1) / (n + 1 - k)) * a k)"
+      by (simp add: algebra_simps sum_negf[symmetric])
+    also have "... = (\<Sum> k \<in> {1..<n}. (n / (n - k) - (n + 1) / (n + 1 - k)) * a k)"
+      using \<open>n > 1\<close> 
+      by (subst sum_remove_zero, auto)
     also have "... > 0"
     proof (rule sum_pos)
       show "finite {1..<n}"
@@ -79,36 +69,25 @@ proof (induction n rule: less_induct)
     next
       fix i
       assume "i \<in> {1..<n}"
-      then have *: "1 \<le> i" "i < n"
-        by auto
-      show "a i * (n / (n - i) - (n + 1) / (n + 1 - i)) > 0" (is "?a i * ?c > 0")
+      show "(n / (n - i) - (n + 1) / (n + 1 - i)) * a i > 0" (is "?c * a i > 0")
       proof-
-        have "a i > 0"
-          using less(1)[of i] \<open>1 \<le> i\<close> \<open>i < n\<close>
-          by simp
+        have "a i > 0" using less \<open>i \<in> {1..<n}\<close> by simp
 
-        moreover
-
-        have "?c > 0"
+        moreover have "?c > 0"
         proof-
-          let ?n = "real n" and ?i = "real i"
-          have "?n / (?n - ?i) - (?n + 1) / (?n + 1 - ?i) = ?i / ((?n - ?i) * (?n + 1 - ?i))"
-            using *
-            by (simp add: field_simps)
+          have "?c = i / ((n - i) * (n + 1 - i))"
+            using \<open>i \<in> {1..<n}\<close>
+            by (simp add: field_simps of_nat_diff)
           then show ?thesis
-            using *
-            by (simp add: add.commute of_nat_diff)
+            using \<open>i \<in> {1..<n}\<close>
+            by simp
         qed
 
-        ultimately
-
-        show ?thesis
-          by simp
+        ultimately show ?thesis by simp
       qed
     qed
-    finally
-    have "(n + 1) * a n > 0"
-      by simp
+    finally have "(n + 1) * a n > 0"
+      .
     then show ?thesis
       by (smt mult_nonneg_nonpos of_nat_0_le_iff)
   qed                             
