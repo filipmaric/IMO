@@ -1,5 +1,3 @@
-section \<open>Algebra problems\<close>
-
 subsection \<open>IMO 2018 SL - A3\<close>
 
 theory IMO_2018_SL_A3
