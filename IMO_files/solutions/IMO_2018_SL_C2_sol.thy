@@ -1,3 +1,5 @@
+section \<open> Combinatorics problems \<close>
+
 subsection \<open>IMO 2018 SL - C2\<close>
 
 theory IMO_2018_SL_C2_sol
@@ -914,7 +916,8 @@ proof (subst finite_nat_set_iff_bounded_le)
   qed
 qed
 
-theorem "Max guaranteed_game_lengths = nat ((files * ranks) div 4)"
+theorem IMO2018SL_C2:
+  shows "Max guaranteed_game_lengths = nat ((files * ranks) div 4)"
 proof (rule Max_eqI)
   show "nat ((files * ranks) div 4) \<in> guaranteed_game_lengths"
     using guaranteed_game_lengths_geq
