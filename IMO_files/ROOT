@@ -18,7 +18,10 @@ session IMO_files = HOL +
 
   "IMO_2008_SL_statements"
   "IMO_2008_SL_A1" 
-  (*  "IMO_2008_SL_A2" *)
+  "IMO_2008_SL_A2" 
+
+  "IMO_2017_SL_statements"
+  "IMO_2017_SL_C1"
 
   "IMO_2018_SL_statements"
   "IMO_2018_SL_A1"
@@ -28,6 +31,10 @@ session IMO_files = HOL +
   "IMO_2018_SL_A5"
   (*  "IMO_2018_SL_A6" *)
   "IMO_2018_SL_A7"
+  "IMO_2018_SL_C2"
+  "IMO_2018_SL_C3"
+  "IMO_2018_SL_C4"
+  "IMO_2018_SL_N5"
 
 
   (* directory "solutions" *)
