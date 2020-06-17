@@ -36,6 +36,9 @@ session IMO_files = HOL +
   "IMO_2006_SL_solutions"
   "IMO_2006_SL_A2_sol"
 
+  "IMO_2017_SL_solutions"
+  "IMO_2017_SL_C1_sol"
+
   "IMO_2018_SL_solutions"
   "IMO_2018_SL_A2_sol"
   "IMO_2018_SL_A4_sol"

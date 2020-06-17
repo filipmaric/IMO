@@ -2,19 +2,14 @@ theory IMO_2017_SL_C1
   imports Complex_Main
 begin
 
-type_synonym square = "nat \<times> nat"
-
-fun green :: "square \<Rightarrow> bool" where
-  "green (x, y) \<longleftrightarrow> (x + y) mod 2 = 0"
-
-fun yellow :: "square \<Rightarrow> bool" where
-  "yellow (x, y) \<longleftrightarrow> (x + y) mod 2 \<noteq> 0"
-
 text \<open>A rectangle [x1, x2) \<times> [y1, y2) is given by a quadruple (x1, x2, y1, y2).\<close>
 type_synonym rect = "nat \<times> nat \<times> nat \<times> nat"
 
 fun valid_rect :: "rect \<Rightarrow> bool" where
   "valid_rect (x1, x2, y1, y2) \<longleftrightarrow> x1 < x2 \<and> y1 < y2"
+
+text \<open>A square is given by the coordinates of its lower-left corner\<close>
+type_synonym square = "nat \<times> nat"
 
 text \<open>All squares in a rectangle\<close>
 fun squares :: "rect \<Rightarrow> square set" where
@@ -40,16 +35,24 @@ text \<open>A rectangle is tiled by a set of non-overlapping, smaller rectangles
 definition tiles :: "rect set \<Rightarrow> rect \<Rightarrow> bool" where
   "tiles rs r \<longleftrightarrow> cover rs r \<and> non_overlapping rs"
 
+
+text \<open>Each square is colored either to green or yellow in a checkerboard pattern\<close>
+fun green :: "square \<Rightarrow> bool" where
+  "green (x, y) \<longleftrightarrow> (x + y) mod 2 = 0"
+
+fun yellow :: "square \<Rightarrow> bool" where
+  "yellow (x, y) \<longleftrightarrow> (x + y) mod 2 \<noteq> 0"
+
 text \<open>All green squares in a rectangle\<close>
-definition green_squares where
+definition green_squares :: "rect \<Rightarrow> square set" where
   "green_squares r = {(x, y) \<in> squares r. green (x, y)}"
 
 text \<open>All yellow squares in a rectangle\<close>
-definition yellow_squares where
+definition yellow_squares :: "rect \<Rightarrow> square set" where
   "yellow_squares r = {(x, y) \<in> squares r. yellow (x, y)}"
 
 text \<open>Corner squares of a rectangle\<close>
-fun corners :: "rect \<Rightarrow> (nat \<times> nat) set" where
+fun corners :: "rect \<Rightarrow> square set" where
   "corners (x1, x2, y1, y2) = {(x1, y1), (x1, y2-1), (x2-1, y1), (x2-1, y2-1)}"
 
 definition green_rect :: "rect \<Rightarrow> bool" where
@@ -411,7 +414,7 @@ qed
 
 lemma mixed_rect: 
   assumes "valid_rect (x1, x2, y1, y2)" "mixed_rect (x1, x2, y1, y2)"
-        shows "card (green_squares (x1, x2, y1, y2)) = card (yellow_squares (x1, x2, y1, y2))"
+  shows "card (green_squares (x1, x2, y1, y2)) = card (yellow_squares (x1, x2, y1, y2))"
 proof (cases "green (x1, y1)")
   case True
   then have "even ((x2 - x1) * (y2 - y1))"
@@ -466,7 +469,7 @@ lemma finite_tiles:
   assumes "tiles rs (x1, x2, y1, y2)" "\<forall> r \<in> rs. valid_rect r"
   shows "finite rs"
 proof (rule finite_subset)
-  show "rs \<subseteq> {0..x2} \<times> {0..x2} \<times> {0..y2} \<times> {0..y2}"
+  show "rs \<subseteq> {x1..x2} \<times> {x1..x2} \<times> {y1..y2} \<times> {y1..y2}"
   proof
     fix r :: rect
     obtain x1r x2r y1r y2r where r: "r = (x1r, x2r, y1r, y2r)"
@@ -479,65 +482,44 @@ proof (rule finite_subset)
       using assms(2) `r \<in> rs` r
       by auto
     ultimately
-    show "r \<in> {0..x2} \<times> {0..x2} \<times> {0..y2} \<times> {0..y2}"
+    show "r \<in> {x1..x2} \<times> {x1..x2} \<times> {y1..y2} \<times> {y1..y2}"
       using r times_subset_iff[of "{x1r..<x2r}" "{y1r..<y2r}" "{x1..<x2}" "{y1..<y2}"]
       by (auto simp add: inside_def)
   qed
 next
-  show "finite ({0..x2} \<times> {0..x2} \<times> {0..y2} \<times> {0..y2})"
+  show "finite ({x1..x2} \<times> {x1..x2} \<times> {y1..y2} \<times> {y1..y2})"
     by simp
 qed
 
 
 lemma green_tile:
-  assumes "green_rect (0, a, 0, b)" "a > 0" "b > 0"
-          "tiles rs (0, a, 0, b)" "\<forall> r \<in> rs. valid_rect r"
+  assumes "green_rect (x1, x2, y1, y2)" "valid_rect (x1, x2, y1, y2)"
+          "tiles rs (x1, x2, y1, y2)" "\<forall> r \<in> rs. valid_rect r"
   shows "\<exists> r \<in> rs. green_rect r"
 proof (rule ccontr)
   assume "\<not> ?thesis"
   hence *: "\<forall> r \<in> rs. yellow_rect r \<or> mixed_rect r"
     using mixed_rect_def by blast
+  then have **: "\<forall> r \<in> rs. card (green_squares r) \<le> card (yellow_squares r)"
+    using yellow_rect mixed_rect \<open>\<forall> r \<in> rs. valid_rect r\<close>
+    by (metis le_add1 order_refl prod_cases4)
 
-  have **: "\<forall> r \<in> rs. card (green_squares r) \<le> card (yellow_squares r)"
-  proof
-    fix r
-    assume "r \<in> rs"
-    obtain x1 x2 y1 y2 where r: "r = (x1, x2, y1, y2)"
-      by (cases r, auto)
-
-
-    have "yellow_rect r \<or> mixed_rect r"
-      using `r \<in> rs` *
-      by simp
-    thus "card (green_squares r) \<le> card (yellow_squares r)"
-    proof
-      assume "yellow_rect r"
-      thus ?thesis
-        using yellow_rect[of x1 x2 y1 y2] r assms(5) `r \<in> rs`
-        by auto
-    next
-      assume "mixed_rect r"
-      thus ?thesis
-        using mixed_rect[of x1 x2 y1 y2] r assms(5) `r \<in> rs`
-        by auto
-    qed
-  qed
-
-  have "card (green_squares (0, a, 0, b)) \<le> card (yellow_squares (0, a, 0, b))"
+  have "card (green_squares (x1, x2, y1, y2)) \<le> card (yellow_squares (x1, x2, y1, y2))"
   proof-
-    have "card (green_squares (0, a, 0, b)) = card (\<Union> (green_squares ` rs))"
+    have "card (green_squares (x1, x2, y1, y2)) = card (\<Union> (green_squares ` rs))"
     proof-
-      have "green_squares (0, a, 0, b) = \<Union> (green_squares ` rs)"
-        using `tiles rs (0, a, 0, b)`
+      have "green_squares (x1, x2, y1, y2) = \<Union> (green_squares ` rs)"
+        using `tiles rs (x1, x2, y1, y2)`
         unfolding tiles_def cover_def green_squares_def
         by blast
       thus ?thesis
         by simp
-    qed
+    qed                                 
     also have "... = (\<Sum> r \<in> rs. card (green_squares r))"
     proof (rule card_UN_disjoint)
       show "finite rs"
-        using assms(4) assms(5) finite_tiles by auto
+        using assms(3-4) finite_tiles
+        by auto
     next
       show "\<forall> r \<in> rs. finite (green_squares r)"
         by auto
@@ -547,7 +529,7 @@ proof (rule ccontr)
         fix r1 r2
         assume "r1 \<in> rs" "r2 \<in> rs" "r1 \<noteq> r2"
         then have "squares r1 \<inter> squares r2 = {}"
-          using `tiles rs (0, a, 0, b)`
+          using `tiles rs (x1, x2, y1, y2)`
           unfolding tiles_def non_overlapping_def overlap_def
           by auto
         then show "green_squares r1 \<inter> green_squares r2 = {}"
@@ -561,7 +543,7 @@ proof (rule ccontr)
     also have "... = card (\<Union> (yellow_squares ` rs))"
     proof (rule card_UN_disjoint[symmetric])
       show "finite rs"
-        using assms(4) assms(5) finite_tiles by auto
+        using assms(3-4) finite_tiles by auto
     next
       show "\<forall>r\<in>rs. finite (yellow_squares r)"
         by auto
@@ -571,7 +553,7 @@ proof (rule ccontr)
         fix r1 r2
         assume "r1 \<in> rs" "r2 \<in> rs" "r1 \<noteq> r2"
         then have "squares r1 \<inter> squares r2 = {}"
-          using `tiles rs (0, a, 0, b)`
+          using `tiles rs (x1, x2, y1, y2)`
           unfolding tiles_def non_overlapping_def overlap_def
           by auto
         then show "yellow_squares r1 \<inter> yellow_squares r2 = {}"
@@ -579,10 +561,10 @@ proof (rule ccontr)
           by auto
       qed
     qed
-    also have "... = card (yellow_squares (0, a, 0, b))"
+    also have "... = card (yellow_squares (x1, x2, y1, y2))"
     proof-
-      have "yellow_squares (0, a, 0, b) = \<Union> (yellow_squares ` rs)"
-        using `tiles rs (0, a, 0, b)`
+      have "yellow_squares (x1, x2, y1, y2) = \<Union> (yellow_squares ` rs)"
+        using `tiles rs (x1, x2, y1, y2)`
         unfolding tiles_def cover_def yellow_squares_def
         by blast
       thus ?thesis
@@ -595,9 +577,26 @@ proof (rule ccontr)
   qed
 
   thus False
-    using `green_rect (0, a, 0, b)` green_rect[of 0 a 0 b] `a > 0` `b > 0`
+    using `green_rect (x1, x2, y1, y2)` green_rect[of x1 x2 y1 y2] `valid_rect (x1, x2, y1, y2)`
     by auto
 qed
+
+lemma green_inside_green_distances:
+  assumes "green_rect (x1i, x2i, y1i, y2i)" "green_rect (x1o, x2o, y1o, y2o)" "valid_rect (x1i, x2i, y1i, y2i)"
+          "inside (x1i, x2i, y1i, y2i) (x1o, x2o, y1o, y2o)"
+  shows   "let ds = {x1i - x1o, x2o - x2i, y1i - y1o, y2o - y2i} 
+            in (\<forall> d \<in> ds. even d) \<or> (\<forall> d \<in> ds. odd d)"
+proof-
+  have "x1o \<le> x1i" "x1i < x2i" "x2i \<le> x2o"
+       "y1o \<le> y1i" "y1i < y2i" "y2i \<le> y2o"
+    using assms times_subset_iff[of "{x1i..<x2i}" "{y1i..<y2i}" "{x1o..<x2o}" "{y1o..<y2o}"]
+    unfolding Let_def inside_def     
+    by auto
+  thus ?thesis
+    using assms
+    by (auto simp add: green_rect_def)
+qed
+  
 
 theorem IMO_2017_SL_C1:
   fixes a b :: nat                                          
@@ -611,25 +610,13 @@ proof-
     unfolding green_rect_def
     by auto
   then obtain x1 x2 y1 y2 where 
-     *: "green_rect (x1, x2, y1, y2)" "(x1, x2, y1, y2) \<in> rs"
-    using green_tile[of a b rs] assms
+    "(x1, x2, y1, y2) \<in> rs" "valid_rect (x1, x2, y1, y2)" "green_rect (x1, x2, y1, y2)"
+    "inside (x1, x2, y1, y2) (0, a, 0, b)"
+    using assms green_tile[of 0 a 0 b rs] tiles_inside[of rs 0 a 0 b]
     by (auto simp add: odd_pos)
-
-  have **: "x1 < x2" "x2 \<le> a" "y1 < y2" "y2 \<le> b"
-    using tiles_inside[of rs 0 a 0 b "(x1, x2, y1, y2)"] assms(4) *(2) assms(3)
-      times_subset_iff[of "{x1..<x2}" "{y1..<y2}" "{0..<a}" "{0..<b}"]
-    by (auto simp add: inside_def)
-
-  show ?thesis
-  proof (rule_tac x="(x1, x2, y1, y2)" in bexI)
-    show "(x1, x2, y1, y2) \<in> rs"
-      by fact
-  next
-    show "case (x1, x2, y1, y2) of
-              (x1, x2, y1, y2) \<Rightarrow> let ds = {x1 - 0, a - x2, y1 - 0, b - y2} in (\<forall>d\<in>ds. even d) \<or> (\<forall>d\<in>ds. odd d)"
-      using `odd a` `odd b` ** `green_rect (x1, x2, y1, y2)`
-      by (auto simp add: Let_def green_rect_def)
-  qed
+  then show ?thesis
+    using `green_rect (0, a, 0, b)` green_inside_green_distances[of x1 x2 y1 y2 0 a 0 b]
+    by (rule_tac x="(x1, x2, y1, y2)" in bexI, auto)
 qed
 
 
