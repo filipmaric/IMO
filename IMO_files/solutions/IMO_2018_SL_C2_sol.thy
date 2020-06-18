@@ -1,5 +1,3 @@
-section \<open> Combinatorics problems \<close>
-
 subsection \<open>IMO 2018 SL - C2\<close>
 
 theory IMO_2018_SL_C2_sol

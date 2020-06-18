@@ -1,8 +1,12 @@
-theory IMO_2017_SL_C1
+section \<open>Combinatorics problems\<close>
+
+subsection \<open>IMO 2017 SL - C1\<close>
+
+theory IMO_2017_SL_C1_sol
   imports Complex_Main
 begin
 
-text \<open>A rectangle [x1, x2) \<times> [y1, y2) is given by a quadruple (x1, x2, y1, y2).\<close>
+text \<open>A rectangle with verticies [x1, x2) and [y1, y2) is given by a quadruple (x1, x2, y1, y2).\<close>
 type_synonym rect = "nat \<times> nat \<times> nat \<times> nat"
 
 fun valid_rect :: "rect \<Rightarrow> bool" where
