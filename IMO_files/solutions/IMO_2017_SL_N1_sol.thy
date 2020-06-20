@@ -1,4 +1,4 @@
-theory IMO_2017_SL_N1
+theory IMO_2017_SL_N1_sol
 imports Complex_Main
 begin
 
@@ -182,11 +182,95 @@ proof-
 qed
 
 
+
+definition eventually_periodic :: "(nat \<Rightarrow> 'a) \<Rightarrow> bool" where
+  "eventually_periodic a \<longleftrightarrow> (\<exists> p > 0. \<exists> n0. \<forall> n \<ge> n0. a (n + p) = a n)"
+
+lemma initial_condition:
+  fixes a :: "nat \<Rightarrow> 'a"
+  assumes "\<forall> n. a (n + 1) = f (a n)" "a n1 = a n2"
+  shows "a (n1 + k) = a (n2 + k)"
+  using assms
+  by (induction k) auto
+
+lemma two_same_periodic:
+  fixes a :: "nat \<Rightarrow> 'a"
+  assumes "\<forall> n. a (n + 1) = f (a n)" "n1 < n2" "a n1 = a n2"
+  shows "eventually_periodic a"
+proof-
+  have "\<forall>n\<ge>n1. a (n + (n2 - n1)) = a n"
+  proof safe
+    fix n
+    assume "n \<ge> n1"
+    then show "a (n + (n2 - n1)) = a n"
+      using initial_condition[of a f n2 n1 "n - n1"] assms \<open>n1 < n2\<close> \<open>a n1 = a n2\<close>
+      by (simp add: add.commute)
+  qed
+  then show "eventually_periodic a"
+    using \<open>n1 < n2\<close>
+    unfolding eventually_periodic_def
+    using zero_less_diff
+    by blast
+qed
+
+lemma eventually_periodic_repeats:        
+  fixes a :: "nat \<Rightarrow> 'a"
+  assumes "\<forall> n \<ge> n0. a (n + p) = a n"
+  shows "\<forall> k. a (n0 + k * p) = a n0"
+proof
+  fix k
+  show "a (n0 + k * p) = a n0"
+  proof (induction k)
+    case 0 then show ?case by simp
+  next
+    case (Suc k)
+    then show ?case
+      using \<open>\<forall> n \<ge> n0. a (n + p) = a n\<close>[rule_format, of "n0 + k * p"]
+      by (simp add: add.commute add.left_commute)
+  qed
+qed
+
+lemma infinite_periodic:
+  fixes a :: "nat \<Rightarrow> 'a"
+  assumes "\<forall> n. a (n + 1) = f (a n)"
+  shows "(\<exists> A. infinite {n. a n = A}) \<longleftrightarrow> eventually_periodic a"
+proof
+  assume "\<exists> A. infinite {n. a n = A}"
+  then obtain A where "infinite {n. a n = A}"
+    by auto
+  then obtain n1 n2 where "n1 < n2" "a n1 = A" "a n2 = A"
+    by (metis (full_types, lifting) bounded_nat_set_is_finite less_add_one mem_Collect_eq nat_neq_iff)
+  then show "eventually_periodic a"
+    using two_same_periodic[OF assms]
+    by simp
+next
+  assume "eventually_periodic a"
+  then obtain n0 p where "p > 0" "\<forall> n \<ge> n0. a (n + p) = a n"
+    unfolding eventually_periodic_def
+    by auto
+  show "\<exists>A. infinite {n. a n = A}"
+  proof (rule_tac x="a n0" in exI)
+    have "(\<lambda> k. n0 + k * p) ` {n::nat. True} \<subseteq> {n. a n = a n0}"
+      using eventually_periodic_repeats[OF `\<forall> n \<ge> n0. a (n + p) = a n`]
+      by auto
+    moreover
+    have "infinite {n::nat. True}"
+      by auto
+    moreover
+    have "inj_on (\<lambda> k. n0 + k * p) {n::nat. True}"
+      using \<open>p > 0\<close>
+      unfolding inj_on_def
+      by auto
+    ultimately
+    show "infinite {n. a n = a n0}"
+      using finite_subset[of "(\<lambda> k. n0 + k * p) ` {n::nat. True}" "{n. a n = a n0}"]
+      using finite_image_iff
+      by auto
+  qed
+qed
+
 definition eventually_increasing :: "(nat \<Rightarrow> nat) \<Rightarrow> bool" where
   "eventually_increasing a \<longleftrightarrow> (\<exists> n0. \<forall> n \<ge> n0. a n < a (n + 1))"
-
-definition eventually_periodic :: "(nat \<Rightarrow> nat) \<Rightarrow> bool" where
-  "eventually_periodic a \<longleftrightarrow> (\<exists> p > 0. \<exists> n0. \<forall> n \<ge> n0. a (n + p) = a n)"
 
 lemma eventually_increasing:
   shows "eventually_increasing a \<longleftrightarrow> (\<exists> n0. \<forall> i j. n0 \<le> i \<and> i < j \<longrightarrow> a i < a j)"
@@ -250,16 +334,6 @@ proof (rule ccontr)
     by (metis add.left_neutral le_add1 le_add2 less_add_eq_less less_irrefl_nat)
 qed
 
-lemma initial_condition:
-  fixes a :: "nat \<Rightarrow> nat"
-  assumes "\<forall> n. a (n + 1) = f (a n)" "a n1 = a n2"
-  shows "a (n1 + k) = a (n2 + k)"
-proof (induction k)
-  case 0 with assms show ?case by simp
-next
-  case (Suc k) with assms show ?case by auto
-qed
-
 definition sqrt_nat :: "nat \<Rightarrow> nat" where 
   "sqrt_nat x = (THE s. x = s * s)"
 
@@ -277,53 +351,19 @@ next
     by (metis le0 le_less_trans less_or_eq_imp_le mult_less_cancel2 nat_mult_less_cancel_disj nat_neq_iff)
 qed
 
-
-definition Min_nat :: "nat set \<Rightarrow> nat" where "Min_nat A = (THE x. x \<in> A \<and> (\<forall> y \<in> A. x \<le> y))"
-
-lemma ex_Min_nat:
+lemma Least_nat_in:
   fixes A :: "nat set"
   assumes "A \<noteq> {}"
-  shows "\<exists> x. x \<in> A \<and> (\<forall> y \<in> A. x \<le> y)"
-proof (rule ccontr)
-  assume *: "\<not> ?thesis"
-  have "\<forall> x. x \<notin> A"
-  proof
-    fix x
-    show "x \<notin> A"
-    proof (induction x rule: less_induct)
-      case (less x)
-      then show ?case
-        using *
-        by auto
-    qed
-  qed
-  then show False
-    using assms
-    by auto
-qed
-
-lemma ex1_Min_nat:
-  fixes A :: "nat set"
-  assumes "A \<noteq> {}"
-  shows "\<exists>! x. x \<in> A \<and> (\<forall> y \<in> A. x \<le> y)"
-  using ex_Min_nat[OF assms]
-  using le_antisym by blast
-
-lemma Min_nat_in:
-  assumes "A \<noteq> {}"
-  shows "Min_nat A \<in> A"
-  using assms the_equality[of "\<lambda> x. x \<in> A \<and> (\<forall> y \<in> A. x \<le> y)"] ex1_Min_nat
-  unfolding Min_nat_def
-  by (metis (no_types, lifting))
-
-lemma Min_nat_le:
-  assumes "A \<noteq> {}"
-  shows "\<forall> x \<in> A. Min_nat A \<le> x"
+  shows "(LEAST x. x \<in> A) \<in> A"
   using assms
-  using assms the_equality[of "\<lambda> x. x \<in> A \<and> (\<forall> y \<in> A. x \<le> y)"] ex1_Min_nat
-  unfolding Min_nat_def
-  by (metis (no_types, lifting))
+  using Inf_nat_def Inf_nat_def1
+  by auto
 
+lemma Least_nat_le:
+  fixes A :: "nat set"
+  assumes "A \<noteq> {}"
+  shows "\<forall> x \<in> A. (LEAST x. x \<in> A) \<le> x"
+  by (simp add: Least_le)
 
 theorem IMO_2017_SL_N1:
   fixes a :: "nat \<Rightarrow> nat"
@@ -331,7 +371,11 @@ theorem IMO_2017_SL_N1:
           "a 0 > 1"
   shows "(\<exists> A. infinite {n. a n = A}) \<longleftrightarrow> a 0 mod 3 = 0"
 proof-
-  have sqrt: "\<And> n x. a n = x * x \<Longrightarrow> a (n + 1) = x"
+  have perfect_square: "\<And> n s. a n = s * s \<Longrightarrow> a (n + 1) = s"
+    using sqrt_nat assms(1)
+    by auto
+
+  have not_perfect_square: "\<And> n. (\<nexists> s. a n = s * s) \<Longrightarrow> a (n + 1) = a n + 3"
     using sqrt_nat assms(1)
     by auto
 
@@ -348,12 +392,12 @@ proof-
         case True
         then obtain s where "a n = s * s" by auto
         then show ?thesis
-          using Suc.IH sqrt[of n s]
+          using Suc.IH perfect_square[of n s]
           by (metis One_nat_def Suc_lessI add.commute le_less_trans nat_0_less_mult_iff nat_1_eq_mult_iff plus_1_eq_Suc zero_le_one)
       next
         case False
         then show ?thesis
-          using Suc.IH assms(1)
+          using Suc.IH not_perfect_square
           by auto
       qed
     qed
@@ -376,8 +420,8 @@ proof-
       proof (cases "\<exists> s. a (n' - 1) = s * s")
         case False
         then have "a n' = a (n' - 1) + 3"
-          using assms(1) \<open>n' > 0\<close>
-          by (auto split: if_split_asm)
+          using not_perfect_square[of "n' - 1"] \<open>n' > 0\<close>
+          by auto
         then show ?thesis
           using \<open>a (n' - 1) mod 3 = 0\<close>
           by auto
@@ -386,7 +430,7 @@ proof-
         then obtain s where "a (n' - 1) = s * s"
           by auto
         then have "a n' = s"
-          using sqrt[of "n' - 1" s] \<open>n' > 0\<close>
+          using perfect_square[of "n' - 1" s] \<open>n' > 0\<close>
           by auto
         then show ?thesis
           using \<open>a (n' - 1) mod 3 = 0\<close> \<open>a (n' - 1) = s * s\<close> square_mod_3[of s]
@@ -414,7 +458,7 @@ proof-
         then obtain s where "a (n' - 1) = s * s"
           by auto
         then have "a n' = s"
-          using sqrt[of "n' - 1" s] \<open>n' > 0\<close>
+          using perfect_square[of "n' - 1" s] \<open>n' > 0\<close>
           by auto
         then show ?thesis
           using \<open>a (n' - 1) = s * s\<close> \<open>a (n' - 1) mod 3 \<noteq> 0\<close> square_mod_3[of s]
@@ -422,7 +466,7 @@ proof-
       next
         case False
         then have "a n' = a (n' - 1) + 3"
-          using assms(1)[rule_format, of "n' - 1"] \<open>n' > 0\<close>
+          using not_perfect_square[of "n' - 1"] \<open>n' > 0\<close>
           by auto
         then show ?thesis
           using \<open>a (n' - 1) mod 3 \<noteq> 0\<close>
@@ -431,75 +475,7 @@ proof-
     qed
   qed
 
-  have two_same_periodic: "\<exists> n1 n2. n1 < n2 \<and> a n1 = a n2 \<Longrightarrow> eventually_periodic a"
-  proof-
-    assume "\<exists> n1 n2. n1 < n2 \<and> a n1 = a n2"
-    then obtain n1 n2 where "n1 < n2" "a n1 = a n2"
-      by auto
-    have "\<forall>n\<ge>n1. a (n + (n2 - n1)) = a n"
-    proof safe
-      fix n
-      assume "n \<ge> n1"
-      then show "a (n + (n2 - n1)) = a n"
-        using initial_condition[of a "\<lambda> x. (if \<exists>s. x = s * s then sqrt_nat x else x + 3)" n2 n1 "n - n1"] assms \<open>n1 < n2\<close> \<open>a n1 = a n2\<close>
-        by (simp add: add.commute)
-    qed
-    then show "eventually_periodic a"
-      using \<open>n1 < n2\<close>
-      unfolding eventually_periodic_def
-      using zero_less_diff
-      by blast
-  qed
-
-  have infinite_periodic:  "(\<exists> A. infinite {n. a n = A}) \<longleftrightarrow> eventually_periodic a"
-  proof
-    assume "\<exists> A. infinite {n. a n = A}"
-    then obtain A where "infinite {n. a n = A}"
-      by auto
-    then obtain n1 n2 where "n1 < n2" "a n1 = A" "a n2 = A"
-      by (metis (full_types, lifting) bounded_nat_set_is_finite less_add_one mem_Collect_eq nat_neq_iff)
-    then show "eventually_periodic a"
-      using two_same_periodic
-      by force
-  next
-    assume "eventually_periodic a"
-    then obtain n0 p where "p > 0" "\<forall> n \<ge> n0. a (n + p) = a n"
-      unfolding eventually_periodic_def
-      by auto
-    show "\<exists>A. infinite {n. a n = A}"
-    proof (rule_tac x="a n0" in exI)
-      have "\<forall> k. a (n0 + k * p) = a n0"
-      proof
-        fix k
-        show "a (n0 + k * p) = a n0"
-        proof (induction k)
-          case 0 then show ?case by simp
-        next
-          case (Suc k)
-          then show ?case
-            using \<open>\<forall> n \<ge> n0. a (n + p) = a n\<close>[rule_format, of "n0 + k * p"]
-            by (simp add: add.commute add.left_commute)
-        qed
-      qed
-      then have "(\<lambda> k. n0 + k * p) ` {n::nat. True} \<subseteq> {n. a n = a n0}"
-        by auto
-      moreover
-      have "infinite {n::nat. True}"
-        by auto
-      moreover
-      have "inj_on (\<lambda> k. n0 + k * p) {n::nat. True}"
-        using \<open>p > 0\<close>
-        unfolding inj_on_def
-        by auto
-      ultimately
-      show "infinite {n. a n = a n0}"
-        using finite_subset[of "(\<lambda> k. n0 + k * p) ` {n::nat. True}" "{n. a n = a n0}"]
-        using finite_image_iff
-        by auto
-    qed
-  qed
-
-  have 1: "\<exists> n. a n mod 3 = 2 \<Longrightarrow> eventually_increasing a"
+  have Claim1: "\<exists> n. a n mod 3 = 2 \<Longrightarrow> \<not> eventually_periodic a"
   proof-
     assume "\<exists> n. a n mod 3 = 2"
     then obtain n where "a n mod 3 = 2"
@@ -513,26 +489,28 @@ proof-
       proof (induction k \<equiv> "m - n" arbitrary: m)
         case 0
         then show ?case
-          using square_mod_3_not_2 assms(1)
-          by auto
+          using square_mod_3_not_2 not_perfect_square[of m]
+          by force
       next
         case (Suc k)
         then have "(\<nexists>s. a (m - 1) = s * s) \<and> a (m - 1) mod 3 = 2"
           by auto
         then have "a m = a (m - 1) + 3" "a m mod 3 = 2"
-          using assms(1)[rule_format, of "m-1"] \<open>Suc k = m - n\<close>
+          using not_perfect_square[of "m-1"] \<open>Suc k = m - n\<close>
           by auto
         then show ?case
-          using square_mod_3_not_2 assms(1)[rule_format, of "m"]
+          using square_mod_3_not_2 not_perfect_square[of "m"]
           by metis
       qed
     qed
-    then show ?thesis
+    then have "eventually_increasing a"
       unfolding eventually_increasing_def
       by force
+    then show ?thesis
+      by (simp add: increasing_non_periodic)
   qed
 
-  have 2: "\<forall> n. a n mod 3 \<noteq> 2 \<and> a n > 9 \<longrightarrow> (\<exists> m > n. a m < a n)"
+  have Claim2: "\<forall> n. a n mod 3 \<noteq> 2 \<and> a n > 9 \<longrightarrow> (\<exists> m > n. a m < a n)"
   proof safe
     fix n
     assume "a n mod 3 \<noteq> 2" "a n > 9"
@@ -551,92 +529,95 @@ proof-
       using \<open>finite ?T\<close> \<open>3 \<in> ?T\<close>
       by auto
 
-    have ti: "\<And> t n i. \<lbrakk>t\<^sup>2 < a n; a n \<le> (t+1)\<^sup>2; i > 0; \<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (t + i')\<^sup>2 mod 3; a n mod 3 = (t + i)\<^sup>2 mod 3\<rbrakk> \<Longrightarrow> 
-                        (\<exists> k. \<forall> k' \<le> k. a (n + k') = a n + 3 * k' \<and> a (n + k) = (t + i)\<^sup>2)"
+    have "?t\<^sup>2 < a n"
+      using \<open>finite ?T\<close> \<open>3 \<in> ?T\<close> Max_in[of ?T]
+      by (metis (no_types, lifting) empty_iff mem_Collect_eq power2_eq_square)
+
+    have "a n \<le> (?t + 1)\<^sup>2"
+      using Max_ge[of ?T "?t + 1"] \<open>finite ?T\<close>
+      by (metis (no_types, lifting) add.right_neutral add_le_imp_le_left mem_Collect_eq not_less not_one_le_zero power2_eq_square)
+
+    have "\<exists> k. a (n + k) \<in> {(?t+1)\<^sup>2, (?t+2)\<^sup>2, (?t+3)\<^sup>2}"
     proof-
-      fix t n i
-      assume "a n mod 3 = (t + i)\<^sup>2 mod 3" "t\<^sup>2 < a n" "a n \<le> (t+1)\<^sup>2" "i > 0"
-             "\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (t + i')\<^sup>2 mod 3"
-      let ?k = "((t + i)\<^sup>2 - a n) div 3"
-      have "a n \<le> (t + i)\<^sup>2"
-        using \<open>a n \<le> (t + 1)\<^sup>2\<close> \<open>i > 0\<close>
-        by (metis add_le_imp_le_left gr_implies_not0 le_neq_implies_less le_trans less_one nat_le_linear power2_nat_le_eq_le)
+      {
+        fix t i
+        assume "t\<^sup>2 < a n" "a n \<le> (t+1)\<^sup>2" "i > 0"
+               "\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (t + i')\<^sup>2 mod 3"
+               "a n mod 3 = (t + i)\<^sup>2 mod 3" 
 
-      have "3 dvd ((t + i)\<^sup>2 - a n)"
-        using \<open>a n mod 3 = (t + i)\<^sup>2 mod 3\<close> \<open>a n \<le> (t + i)\<^sup>2\<close>
-        using mod_eq_dvd_iff_nat
-        by fastforce
-      then have "3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n"
-        by simp
+        let ?k = "((t + i)\<^sup>2 - a n) div 3"
 
-      have 1: "\<forall> k' \<le> ?k. a (n + k') = a n + 3 * k'"
-      proof safe
-        fix k'
-        assume "k' \<le> ?k"
-        then show "a (n + k') = a n + 3 * k'"
-        proof (induction k')
-          case 0 then show ?case by simp
-        next
-          case (Suc k')
-          then have "a (n + k') = a n + 3 * k'"
-            by auto
-          have "\<not> (\<exists> s. a (n + k') = s * s)"
-          proof (rule ccontr)
-            assume "\<not> ?thesis"
-            then obtain s where "a (n + k') = s * s" by auto
+        have "a n \<le> (t + i)\<^sup>2"
+          using \<open>a n \<le> (t + 1)\<^sup>2\<close> \<open>i > 0\<close>
+          by (metis add_le_imp_le_left gr_implies_not0 le_neq_implies_less le_trans less_one nat_le_linear power2_nat_le_eq_le)
 
-            have "3 * (k' + 1) \<le> (t + i)\<^sup>2 - a n"
-              using Suc(2)
-              using \<open>3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n\<close>
-              by simp
-            then have "a (n + k') < (t + i)\<^sup>2"
-              using \<open>a (n + k') = a n + 3 * k'\<close>
-              by simp
-            moreover 
-            have "a (n + k') > t\<^sup>2"
-              using \<open>a (n + k') = a n + 3 * k'\<close> \<open>a n > t\<^sup>2\<close>
-              by simp
-            ultimately
-            have "t\<^sup>2 < s\<^sup>2 \<and> s\<^sup>2 < (t + i)\<^sup>2"
-              using \<open>a (n + k') = s * s\<close>
-              by (simp add: power2_eq_square)
-            then have "t < s \<and> s < t + i"
-              using power_less_imp_less_base by blast
-            then obtain i' where "0 < i'" "i' < i"  "s = t + i'"
-              using less_imp_add_positive by auto
+        have "3 dvd ((t + i)\<^sup>2 - a n)"
+          using \<open>a n mod 3 = (t + i)\<^sup>2 mod 3\<close> \<open>a n \<le> (t + i)\<^sup>2\<close>
+          using mod_eq_dvd_iff_nat
+          by fastforce
+        then have "3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n"
+          by simp
 
-            moreover
+        have 1: "\<forall> k' \<le> ?k. a (n + k') = a n + 3 * k'"
+        proof safe
+          fix k'
+          assume "k' \<le> ?k"
+          then show "a (n + k') = a n + 3 * k'"
+          proof (induction k')
+            case 0 then show ?case by simp
+          next
+            case (Suc k')
+            then have "a (n + k') = a n + 3 * k'"
+              by auto
+            have "\<not> (\<exists> s. a (n + k') = s * s)"
+            proof (rule ccontr)
+              assume "\<not> ?thesis"
+              then obtain s where "a (n + k') = s * s" by auto
 
-            have "\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a (n + k') \<noteq> (t + i')\<^sup>2"
-              using \<open>a (n + k') = a n + 3 * k'\<close> \<open>\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (t + i')\<^sup>2 mod 3\<close>
-              by fastforce
+              have "3 * (k' + 1) \<le> (t + i)\<^sup>2 - a n"
+                using Suc(2)
+                using \<open>3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n\<close>
+                by simp
+              then have "a (n + k') < (t + i)\<^sup>2"
+                using \<open>a (n + k') = a n + 3 * k'\<close>
+                by simp
+              moreover 
+              have "a (n + k') > t\<^sup>2"
+                using \<open>a (n + k') = a n + 3 * k'\<close> \<open>a n > t\<^sup>2\<close>
+                by simp
+              ultimately
+              have "t\<^sup>2 < s\<^sup>2 \<and> s\<^sup>2 < (t + i)\<^sup>2"
+                using \<open>a (n + k') = s * s\<close>
+                by (simp add: power2_eq_square)
+              then have "t < s \<and> s < t + i"
+                using power_less_imp_less_base by blast
+              then obtain i' where "0 < i'" "i' < i"  "s = t + i'"
+                using less_imp_add_positive by auto
 
-            ultimately
+              moreover
 
-            show False
-              using \<open>a (n + k') = s * s\<close>
-              by (auto simp add: power2_eq_square)
+              have "\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a (n + k') \<noteq> (t + i')\<^sup>2"
+                using \<open>a (n + k') = a n + 3 * k'\<close> \<open>\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (t + i')\<^sup>2 mod 3\<close>
+                by fastforce
+
+              ultimately
+
+              show False
+                using \<open>a (n + k') = s * s\<close>
+                by (auto simp add: power2_eq_square)
+            qed
+            then show ?case
+              using not_perfect_square[of "n + k'"] \<open>a (n + k') = a n + 3 * k'\<close>
+              by auto
           qed
-          then show ?case
-            using assms(1)[rule_format, of "n + k'"] \<open>a (n + k') = a n + 3 * k'\<close>
-            by auto
         qed
-      qed
 
-      have 2: "a (n + ?k) = (t + i)\<^sup>2"
-        using 1[rule_format, of ?k] \<open>a n \<le> (t + i)\<^sup>2\<close> \<open>3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n\<close>
-        by simp
-        
-      show "\<exists> k. \<forall> k' \<le> k. a (n + k') = a n + 3 * k' \<and> a (n + k) = (t + i)\<^sup>2"
-        using 1 2
-        by blast
-    qed
-
-    have "\<exists> k. (\<forall> k' \<le> k. a (n + k') = a n + 3 * k') \<and> a (n + k) \<in> {(?t+1)\<^sup>2, (?t+2)\<^sup>2, (?t+3)\<^sup>2}"
-    proof-
-      have "a n > ?t\<^sup>2"
-        using \<open>finite ?T\<close> \<open>3 \<in> ?T\<close> Max_in[of ?T]
-        by (metis (no_types, lifting) empty_iff mem_Collect_eq power2_eq_square)
+        have "a (n + ?k) = (t + i)\<^sup>2"
+          using 1[rule_format, of ?k] \<open>a n \<le> (t + i)\<^sup>2\<close> \<open>3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n\<close>
+          by simp
+        then have "\<exists> k. a (n + k) = (t + i)\<^sup>2"
+          by blast
+      } note ti = this
 
       have "a n mod 3 = 0 \<or> a n mod 3 = 1"
         using \<open>a n mod 3 \<noteq> 2\<close>
@@ -645,15 +626,11 @@ proof-
         using consecutive_squares_mod_3[of ?t]
         by (smt empty_iff insert_iff)
 
-      have "a n \<le> (?t + 1)\<^sup>2"
-        using Max_ge[of ?T "?t + 1"] \<open>finite ?T\<close>
-        by (metis (no_types, lifting) add.right_neutral add_le_imp_le_left mem_Collect_eq not_less not_one_le_zero power2_eq_square)
-
       show ?thesis
       proof (cases "a n mod 3 = (?t+1)\<^sup>2 mod 3")
         case True
         then show ?thesis
-          using ti[of ?t n 1] \<open>?t\<^sup>2 < a n\<close> \<open>a n \<le> (?t + 1)\<^sup>2\<close>
+          using ti[of ?t 1] \<open>?t\<^sup>2 < a n\<close> \<open>a n \<le> (?t + 1)\<^sup>2\<close>
           by auto
       next
         case False
@@ -663,7 +640,7 @@ proof-
         proof (cases "a n mod 3 = (?t+2)\<^sup>2 mod 3")
           case True
           then show ?thesis
-            using ti[of ?t n 2] \<open>?t\<^sup>2 < a n\<close>  \<open>a n \<le> (?t + 1)\<^sup>2\<close> \<open>\<forall>i'. 0 < i' \<and> i' < 2 \<longrightarrow> a n mod 3 \<noteq> (?t + i')\<^sup>2 mod 3\<close>
+            using ti[of ?t 2] \<open>?t\<^sup>2 < a n\<close>  \<open>a n \<le> (?t + 1)\<^sup>2\<close> \<open>\<forall>i'. 0 < i' \<and> i' < 2 \<longrightarrow> a n mod 3 \<noteq> (?t + i')\<^sup>2 mod 3\<close>
             by auto
         next
           case False
@@ -677,21 +654,19 @@ proof-
             by (metis (mono_tags, lifting) One_nat_def Suc_1 linorder_neqE_nat not_less_eq numeral_3_eq_3)
           ultimately
           show ?thesis
-            using ti[of ?t n 3] \<open>?t\<^sup>2 < a n\<close> \<open>a n \<le> (?t + 1)\<^sup>2\<close>
+            using ti[of ?t 3] \<open>?t\<^sup>2 < a n\<close> \<open>a n \<le> (?t + 1)\<^sup>2\<close>
             by auto
         qed
       qed
     qed
-    then obtain k where "\<forall> k' \<le> k. a (n + k') = a n + 3 * k'" "a (n + k) \<in> {(?t+1)\<^sup>2, (?t+2)\<^sup>2, (?t+3)\<^sup>2}"
+    then obtain k where "a (n + k) \<in> {(?t+1)\<^sup>2, (?t+2)\<^sup>2, (?t+3)\<^sup>2}"
       by auto
     have "a (n + k + 1) \<le> ?t + 3"
     proof-
-      have "a (n + k) = (?t + 1) * (?t + 1) \<or> a (n + k) = (?t + 2) * (?t + 2) \<or> a (n + k) = (?t + 3) * (?t + 3)"
+      have "a (n + k + 1) = ?t + 1 \<or> a (n + k + 1) = ?t + 2 \<or> a (n + k + 1) = ?t + 3"
         using \<open>a (n + k) \<in> {(?t+1)\<^sup>2, (?t+2)\<^sup>2, (?t+3)\<^sup>2}\<close>
         unfolding power2_eq_square
-        by auto
-      then have "a (n + k + 1) = ?t + 1 \<or> a (n + k + 1) = ?t + 2 \<or> a (n + k + 1) = ?t + 3"
-        using *
+        using perfect_square
         by auto
       then show ?thesis
         by auto
@@ -725,7 +700,7 @@ proof-
       using add_lessD1 less_add_one by blast
   qed
 
-  have 31: "\<forall> n. a n mod 3 = 0 \<and> a n \<le> 9 \<longrightarrow> (\<exists> m > n. a m = 3)"
+  have Claim3_a: "\<forall> n. a n mod 3 = 0 \<and> a n \<le> 9 \<longrightarrow> (\<exists> m > n. a m = 3)"
   proof safe
     fix n
     assume "3 dvd a n" "a n \<le> 9"
@@ -735,18 +710,19 @@ proof-
     show "\<exists>m>n. a m = 3"
     proof-
       have "\<And> n. a n = 3 \<Longrightarrow> a (n + 1) = 6"
-        using assms(1) not_square_3
+        using not_perfect_square not_square_3
         by (auto split: if_split_asm)
 
       moreover
 
       have "\<And> n. a n = 6 \<Longrightarrow> a (n + 1) = 9"
-        using assms(1) not_square_6
+        using not_perfect_square not_square_6
         by (auto split: if_split_asm)
 
       moreover
+
       have "\<And> n. a n = 9 \<Longrightarrow> a (n + 1) = 3"
-        using *
+        using perfect_square
         by simp
 
       ultimately
@@ -756,7 +732,7 @@ proof-
     qed
   qed
 
-  have 3: "\<forall> n. a n mod 3 = 0 \<longrightarrow> (\<exists> m > n. a m = 3)"
+  have Claim3: "\<forall> n. a n mod 3 = 0 \<longrightarrow> (\<exists> m > n. a m = 3)"
   proof safe
     fix n
     assume "3 dvd a n"
@@ -764,23 +740,23 @@ proof-
     proof (cases "a n \<le> 9")
       case True
       then show ?thesis
-        using \<open>3 dvd a n\<close> 31
+        using \<open>3 dvd a n\<close> Claim3_a
         by auto
     next
       case False
-      let ?j = "SOME j. j > n \<and> a j = Min_nat (a ` {n+1..})"
-      have "\<exists> j. j > n \<and> a j = Min_nat (a ` {n+1..})"
-        using Min_nat_in[of "a ` {n+1..}"]
-        by (metis (mono_tags, lifting) atLeast_iff imageE image_is_empty less_add_one less_le_trans not_Ici_eq_empty)
-      then have "?j > n" "a ?j = Min_nat (a ` {n+1..})"
-        using someI_ex[of "\<lambda> j. j > n \<and> a j = Min_nat (a ` {n + 1..})"]
+      let ?m = "LEAST x. x \<in> (a ` {n+1..})"
+      let ?j = "SOME j. j > n \<and> a j = ?m"
+      have "\<exists> j. j > n \<and> a j = ?m"
+        using Least_nat_in[of "a ` {n+1..}"]
+        by (smt atLeast_iff imageE image_is_empty less_add_one less_le_trans not_Ici_eq_empty)
+      then have "?j > n" "a ?j = ?m"
+        using someI_ex[of "\<lambda> j. j > n \<and> a j = ?m"]
         by auto
-
       show ?thesis
       proof (cases "a ?j \<le> 9")
         case True
         then show ?thesis
-          using 31[rule_format, of "?j"] mod3[of n "?j"] \<open>?j > n\<close> \<open>3 dvd a n\<close>
+          using Claim3_a[rule_format, of "?j"] mod3[of n "?j"] \<open>?j > n\<close> \<open>3 dvd a n\<close>
           by (meson dvd_imp_mod_0 less_trans nat_less_le)
       next
         case False
@@ -788,13 +764,13 @@ proof-
           using \<open>3 dvd a n\<close> mod3[of n ?j] \<open>n < ?j\<close>
           by simp
         then obtain m where "m > ?j" "a m < a ?j"
-          using 2[rule_format, of ?j] False
+          using Claim2[rule_format, of ?j] False
           by auto
-        then have "m > n" "a m < Min_nat (a ` {n+1..})"
-          using \<open>n < ?j\<close> \<open>a ?j = Min_nat (a ` {n+1..})\<close>
+        then have "m > n" "a m < ?m"
+          using \<open>n < ?j\<close> \<open>a ?j = ?m\<close>
           by auto
         then have False
-          using Min_nat_le[of "a ` {n + 1..}", rule_format, of "a m"]
+          using Least_nat_le[of "a ` {n + 1..}", rule_format, of "a m"]
           by simp
         then show ?thesis
           by simp
@@ -802,7 +778,7 @@ proof-
     qed
   qed
 
-  have 41: "\<forall> n. a n mod 3 = 1 \<and> a n \<le> 9 \<longrightarrow> (\<exists> m > n. a m mod 3 = 2)"
+  have Claim4_a: "\<forall> n. a n mod 3 = 1 \<and> a n \<le> 9 \<longrightarrow> (\<exists> m > n. a m mod 3 = 2)"
   proof safe
     fix n
     assume "a n mod 3 = 1" "a n \<le> 9"
@@ -816,33 +792,33 @@ proof-
     proof
       assume "a n = 4"
       then have "a (n + 1) = 2"
-        using *[of n 2]
+        using perfect_square[of n 2]
         by simp
       then show ?thesis
         by force
     next
       assume "a n = 7"
       then have "a (n + 1) = 10"
-        using not_square_7 assms(1)
+        using not_square_7 not_perfect_square
         by auto
       then have "a (n + 2) = 13"
-        using not_square_10 assms(1)
+        using not_square_10 not_perfect_square
         by auto
       then have "a (n + 3) = 16"
         using not_square_13 assms(1)
         by (simp add: numeral_3_eq_3)
       then have "a (n + 4) = 4"
-        using *[of "n+3" 4]
+        using perfect_square[of "n+3" 4]
         by (auto simp add: add.commute)
       then have "a (n + 5) = 2"
-        using *[of "n+4" 2]
+        using perfect_square[of "n+4" 2]
         by (auto simp add: add.commute)
       then show ?thesis
         by (rule_tac x="n+5" in exI, simp)
     qed
   qed
 
-  have 4: "\<forall> n. a n mod 3 = 1 \<longrightarrow> (\<exists> m > n. a m mod 3 = 2)"
+  have Claim4: "\<forall> n. a n mod 3 = 1 \<longrightarrow> (\<exists> m > n. a m mod 3 = 2)"
   proof safe
     fix n
     assume "a n mod 3 = 1"
@@ -850,16 +826,17 @@ proof-
     proof (cases "a n < 10")
       case True
       then show ?thesis
-        using 41 \<open>a n mod 3 = 1\<close>
+        using Claim4_a \<open>a n mod 3 = 1\<close>
         by auto
     next
       case False
-      let ?j = "SOME j. j > n \<and> a j = Min_nat (a ` {n+1..})"
-      have "\<exists> j. j > n \<and> a j = Min_nat (a ` {n+1..})"
-        using Min_nat_in[of "a ` {n+1..}"]
-        by (metis (mono_tags, lifting) atLeast_iff imageE image_is_empty less_add_one less_le_trans not_Ici_eq_empty)
-      then have "?j > n" "a ?j = Min_nat (a ` {n+1..})"
-        using someI_ex[of "\<lambda> j. j > n \<and> a j = Min_nat (a ` {n + 1..})"]
+      let ?m = "LEAST x. x \<in> (a ` {n+1..})"
+      let ?j = "SOME j. j > n \<and> a j = ?m"
+      have "\<exists> j. j > n \<and> a j = ?m"
+        using Least_nat_in[of "a ` {n+1..}"]
+        by (smt atLeast_iff imageE image_is_empty less_add_one less_le_trans not_Ici_eq_empty)
+      then have "?j > n" "a ?j = ?m"
+        using someI_ex[of "\<lambda> j. j > n \<and> a j = ?m"]
         by auto
       {
         assume "a ?j mod 3 = 1"
@@ -867,20 +844,20 @@ proof-
         proof (cases "a ?j \<le> 9")
           case False
           then obtain m where "m > ?j" "a m < a ?j"
-            using 2[rule_format, of "?j"] \<open>a ?j mod 3 = 1\<close>
+            using Claim2[rule_format, of "?j"] \<open>a ?j mod 3 = 1\<close>
             by auto
-          then have "m > n" "a m < Min_nat (a ` {n+1..})"
-            using \<open>n < ?j\<close> \<open>a ?j = Min_nat (a ` {n+1..})\<close>
+          then have "m > n" "a m < ?m"
+            using \<open>n < ?j\<close> \<open>a ?j = ?m\<close>
             by auto
           then have False
-            using Min_nat_le[of "a ` {n + 1..}", rule_format, of "a m"]
+            using Least_nat_le[of "a ` {n + 1..}", rule_format, of "a m"]
             by simp
           then show ?thesis
             by simp
         next
           case True
           then show ?thesis
-            using 41[rule_format, of ?j] \<open>a ?j mod 3 = 1\<close> \<open>n < ?j\<close>
+            using Claim4_a[rule_format, of ?j] \<open>a ?j mod 3 = 1\<close> \<open>n < ?j\<close>
             using less_trans
             by blast
         qed
@@ -911,36 +888,32 @@ proof-
     qed
   qed
 
-  have 33: "\<exists> n. a n mod 3 = 0 \<Longrightarrow> eventually_periodic a"
-    using 3 two_same_periodic
-    by (metis mod_self)
-
   show ?thesis
   proof
     assume "a 0 mod 3 = 0"
     then have "eventually_periodic a"
-      using 33
-      by meson
+      using Claim3 two_same_periodic[OF assms(1)]
+      by (metis mod_self)
     then show "\<exists> A. infinite {n. a n = A}"
-      by (simp add: infinite_periodic)
+      by (simp add: infinite_periodic[OF assms(1)])
   next
     assume "\<exists> A. infinite {n. a n = A}"
     then have "eventually_periodic a"
-      by (simp add: infinite_periodic)
+      by (simp add: infinite_periodic[OF assms(1)])
     {
       assume "a 0 mod 3 = 1"
       then obtain m where "a m mod 3 = 2"
-        using 4
+        using Claim4
         by auto
       then have False
-        using 1 increasing_non_periodic[of a] \<open>eventually_periodic a\<close>
+        using Claim1 \<open>eventually_periodic a\<close>
         by force
     }
     moreover
     {
       assume "a 0 mod 3 = 2"
       then have False
-        using 1 increasing_non_periodic[of a] \<open>eventually_periodic a\<close>
+        using Claim1 \<open>eventually_periodic a\<close>
         by force
     }
     ultimately

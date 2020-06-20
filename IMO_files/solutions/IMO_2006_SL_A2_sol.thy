@@ -15,7 +15,7 @@ lemma sum_remove_zero:
 
 theorem IMO_2006_SL_A2:
   fixes a :: "nat \<Rightarrow> real"
-  assumes "a 0 = -1" "\<forall> n \<ge> 1. (\<Sum> k < Suc n. a (n - k) / (k + 1)) = 0" "n \<ge> 1"
+  assumes "a 0 = -1" "\<forall> n \<ge> 1. (\<Sum> k < n + 1. a (n - k) / (k + 1)) = 0" "n \<ge> 1"
   shows "a n > 0"
   using \<open>n \<ge> 1\<close>
 proof (induction n rule: less_induct)
