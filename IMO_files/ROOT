@@ -22,6 +22,7 @@ session IMO_files = HOL +
 
   "IMO_2017_SL_statements"
   "IMO_2017_SL_C1"
+  "IMO_2017_SL_N1"
 
   "IMO_2018_SL_statements"
   "IMO_2018_SL_A1"
