@@ -540,22 +540,25 @@ proof-
     have "\<exists> k. a (n + k) \<in> {(?t+1)\<^sup>2, (?t+2)\<^sup>2, (?t+3)\<^sup>2}"
     proof-
       {
-        fix t i
-        assume "t\<^sup>2 < a n" "a n \<le> (t+1)\<^sup>2" "i > 0"
-               "\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (t + i')\<^sup>2 mod 3"
-               "a n mod 3 = (t + i)\<^sup>2 mod 3" 
+        fix i
+        assume "i > 0"
+               "\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (?t + i')\<^sup>2 mod 3"
+               "a n mod 3 = (?t + i)\<^sup>2 mod 3" 
 
-        let ?k = "((t + i)\<^sup>2 - a n) div 3"
+        let ?k = "((?t + i)\<^sup>2 - a n) div 3"
 
-        have "a n \<le> (t + i)\<^sup>2"
-          using \<open>a n \<le> (t + 1)\<^sup>2\<close> \<open>i > 0\<close>
-          by (metis add_le_imp_le_left gr_implies_not0 le_neq_implies_less le_trans less_one nat_le_linear power2_nat_le_eq_le)
+        have "(?t + 1)\<^sup>2 \<le> (?t + i)\<^sup>2"
+          using \<open>i > 0\<close>
+          by auto
+        then have "a n \<le> (?t + i)\<^sup>2"
+          using \<open>a n \<le> (?t + 1)\<^sup>2\<close>
+          using le_trans by blast
 
-        have "3 dvd ((t + i)\<^sup>2 - a n)"
-          using \<open>a n mod 3 = (t + i)\<^sup>2 mod 3\<close> \<open>a n \<le> (t + i)\<^sup>2\<close>
+        have "3 dvd ((?t + i)\<^sup>2 - a n)"
+          using \<open>a n mod 3 = (?t + i)\<^sup>2 mod 3\<close> \<open>a n \<le> (?t + i)\<^sup>2\<close>
           using mod_eq_dvd_iff_nat
           by fastforce
-        then have "3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n"
+        then have "3 * (((?t + i)\<^sup>2 - a n) div 3) = (?t + i)\<^sup>2 - a n"
           by simp
 
         have 1: "\<forall> k' \<le> ?k. a (n + k') = a n + 3 * k'"
@@ -574,30 +577,30 @@ proof-
               assume "\<not> ?thesis"
               then obtain s where "a (n + k') = s * s" by auto
 
-              have "3 * (k' + 1) \<le> (t + i)\<^sup>2 - a n"
+              have "3 * (k' + 1) \<le> (?t + i)\<^sup>2 - a n"
                 using Suc(2)
-                using \<open>3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n\<close>
+                using \<open>3 * (((?t + i)\<^sup>2 - a n) div 3) = (?t + i)\<^sup>2 - a n\<close>
                 by simp
-              then have "a (n + k') < (t + i)\<^sup>2"
+              then have "a (n + k') < (?t + i)\<^sup>2"
                 using \<open>a (n + k') = a n + 3 * k'\<close>
                 by simp
               moreover 
-              have "a (n + k') > t\<^sup>2"
-                using \<open>a (n + k') = a n + 3 * k'\<close> \<open>a n > t\<^sup>2\<close>
+              have "a (n + k') > ?t\<^sup>2"
+                using \<open>a (n + k') = a n + 3 * k'\<close> \<open>a n > ?t\<^sup>2\<close>
                 by simp
               ultimately
-              have "t\<^sup>2 < s\<^sup>2 \<and> s\<^sup>2 < (t + i)\<^sup>2"
+              have "?t\<^sup>2 < s\<^sup>2 \<and> s\<^sup>2 < (?t + i)\<^sup>2"
                 using \<open>a (n + k') = s * s\<close>
                 by (simp add: power2_eq_square)
-              then have "t < s \<and> s < t + i"
+              then have "?t < s \<and> s < ?t + i"
                 using power_less_imp_less_base by blast
-              then obtain i' where "0 < i'" "i' < i"  "s = t + i'"
+              then obtain i' where "0 < i'" "i' < i"  "s = ?t + i'"
                 using less_imp_add_positive by auto
 
               moreover
 
-              have "\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a (n + k') \<noteq> (t + i')\<^sup>2"
-                using \<open>a (n + k') = a n + 3 * k'\<close> \<open>\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (t + i')\<^sup>2 mod 3\<close>
+              have "\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a (n + k') \<noteq> (?t + i')\<^sup>2"
+                using \<open>a (n + k') = a n + 3 * k'\<close> \<open>\<forall> i'. 0 < i' \<and> i' < i \<longrightarrow> a n mod 3 \<noteq> (?t + i')\<^sup>2 mod 3\<close>
                 by fastforce
 
               ultimately
@@ -612,10 +615,10 @@ proof-
           qed
         qed
 
-        have "a (n + ?k) = (t + i)\<^sup>2"
-          using 1[rule_format, of ?k] \<open>a n \<le> (t + i)\<^sup>2\<close> \<open>3 * (((t + i)\<^sup>2 - a n) div 3) = (t + i)\<^sup>2 - a n\<close>
+        have "a (n + ?k) = (?t + i)\<^sup>2"
+          using 1[rule_format, of ?k] \<open>a n \<le> (?t + i)\<^sup>2\<close> \<open>3 * (((?t + i)\<^sup>2 - a n) div 3) = (?t + i)\<^sup>2 - a n\<close>
           by simp
-        then have "\<exists> k. a (n + k) = (t + i)\<^sup>2"
+        then have "\<exists> k. a (n + k) = (?t + i)\<^sup>2"
           by blast
       } note ti = this
 
@@ -630,7 +633,7 @@ proof-
       proof (cases "a n mod 3 = (?t+1)\<^sup>2 mod 3")
         case True
         then show ?thesis
-          using ti[of ?t 1] \<open>?t\<^sup>2 < a n\<close> \<open>a n \<le> (?t + 1)\<^sup>2\<close>
+          using ti[of 1]
           by auto
       next
         case False
@@ -640,7 +643,7 @@ proof-
         proof (cases "a n mod 3 = (?t+2)\<^sup>2 mod 3")
           case True
           then show ?thesis
-            using ti[of ?t 2] \<open>?t\<^sup>2 < a n\<close>  \<open>a n \<le> (?t + 1)\<^sup>2\<close> \<open>\<forall>i'. 0 < i' \<and> i' < 2 \<longrightarrow> a n mod 3 \<noteq> (?t + i')\<^sup>2 mod 3\<close>
+            using ti[of 2] \<open>\<forall>i'. 0 < i' \<and> i' < 2 \<longrightarrow> a n mod 3 \<noteq> (?t + i')\<^sup>2 mod 3\<close>
             by auto
         next
           case False
@@ -654,7 +657,7 @@ proof-
             by (metis (mono_tags, lifting) One_nat_def Suc_1 linorder_neqE_nat not_less_eq numeral_3_eq_3)
           ultimately
           show ?thesis
-            using ti[of ?t 3] \<open>?t\<^sup>2 < a n\<close> \<open>a n \<le> (?t + 1)\<^sup>2\<close>
+            using ti[of 3]
             by auto
         qed
       qed
