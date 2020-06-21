@@ -1,3 +1,7 @@
+section \<open>Number theory problems\<close>
+
+subsection \<open>IMO 2017 SL - N1\<close>
+
 theory IMO_2017_SL_N1_sol
 imports Complex_Main
 begin
